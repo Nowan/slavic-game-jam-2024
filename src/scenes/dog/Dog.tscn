@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://mwmynyrns760"]
+[gd_scene load_steps=5 format=3 uid="uid://mwmynyrns760"]
 
 [ext_resource type="Texture2D" uid="uid://ljg8b5p34ome" path="res://assets/Dog/placeholder.png" id="1_1vi1y"]
+[ext_resource type="Script" path="res://src/scenes/dog/dog.gd" id="2_2pufu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_116tv"]
 radius = 96.0
@@ -13,6 +14,7 @@ radius = 505.585
 position = Vector2(-9.53674e-07, -1.90735e-06)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_1vi1y")
+script = ExtResource("2_2pufu")
 
 [node name="DogArea" type="Area2D" parent="."]
 
