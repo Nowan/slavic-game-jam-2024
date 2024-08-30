@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=7 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
+[ext_resource type="PackedScene" uid="uid://bfrr7ra767c2r" path="res://src/scenes/rock1/rock_1.tscn" id="4_ods2q"]
+[ext_resource type="PackedScene" uid="uid://c8k732tosm3hi" path="res://src/scenes/rock2/rock_2.tscn" id="5_o74at"]
+[ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="6_r3s50"]
+[ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="7_a2hia"]
 
 [node name="Main" type="Node2D"]
 
@@ -9,3 +13,19 @@
 position = Vector2(841, 309)
 
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
+
+[node name="Rock1" parent="." instance=ExtResource("4_ods2q")]
+position = Vector2(162, 418)
+scale = Vector2(0.5, 0.5)
+
+[node name="Rock2" parent="." instance=ExtResource("5_o74at")]
+position = Vector2(784, 1298)
+scale = Vector2(0.5, 0.5)
+
+[node name="Rock3" parent="." instance=ExtResource("6_r3s50")]
+position = Vector2(256, 1800)
+scale = Vector2(0.7, 0.7)
+
+[node name="Rock4" parent="." instance=ExtResource("7_a2hia")]
+position = Vector2(666, 2382)
+scale = Vector2(0.5, 0.5)

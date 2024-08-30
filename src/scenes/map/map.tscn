@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd7by2a23e60o"]
+
+[ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="1_22jor"]
+
+[node name="Map" type="Sprite2D"]
+position = Vector2(502, 1516)
+texture = ExtResource("1_22jor")
