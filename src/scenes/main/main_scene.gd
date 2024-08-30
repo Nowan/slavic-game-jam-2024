@@ -6,8 +6,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	$Dog/BarkTextPlaceholder.rotation = -$Dog.rotation
 	if Input.is_action_pressed("user_power"): show_power_text()
+	
+	
 	
 
 func show_power_text():

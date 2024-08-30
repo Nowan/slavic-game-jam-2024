@@ -11,8 +11,16 @@ config_version=5
 [application]
 
 config/name="Slavic Game Jam 2024"
+run/main_scene="res://src/scenes/main/MainScene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 
@@ -50,6 +58,12 @@ user_power={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="actors"
+2d_physics/layer_2="obstacles"
+2d_physics/layer_3="anchors"
 
 [physics]
 

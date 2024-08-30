@@ -2,10 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="Script" path="res://src/scenes/main/main_scene.gd" id="1_c10au"]
-[ext_resource type="PackedScene" uid="uid://bvillbq0e0oqg" path="res://src/scenes/sheep/Sheep.tscn" id="3_e26ju"]
+[ext_resource type="Texture2D" uid="uid://bna3ey7vrngk" path="res://assets/Main/level_0_loop.png" id="2_ym4gf"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c10au")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1000, 3052)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("2_ym4gf")
 
 [node name="Dog" parent="." instance=ExtResource("1_7h8kt")]
 position = Vector2(841, 309)
@@ -18,8 +26,8 @@ anchor_right = 0.654
 anchor_bottom = 0.949
 offset_left = 11.5271
 offset_top = 110.908
-offset_right = 6.35803
-offset_bottom = -284.626
+offset_right = 12.5271
+offset_bottom = 315.908
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 150
@@ -27,8 +35,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BarkTimer" type="Timer" parent="Dog"]
-
-[node name="Sheep" parent="." instance=ExtResource("3_e26ju")]
-position = Vector2(404, 305)
 
 [connection signal="timeout" from="Dog/BarkTimer" to="." method="_on_bark_timer_timeout"]
