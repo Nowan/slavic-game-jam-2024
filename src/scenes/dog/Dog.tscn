@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://mwmynyrns760"]
+[gd_scene load_steps=6 format=3 uid="uid://mwmynyrns760"]
 
 [ext_resource type="Texture2D" uid="uid://ljg8b5p34ome" path="res://assets/Dog/placeholder.png" id="1_1vi1y"]
 [ext_resource type="Script" path="res://src/scenes/dog/dog.gd" id="1_6p1qn"]
+[ext_resource type="PackedScene" uid="uid://7rah7setkpyi" path="res://src/scenes/camera/anchor_camera_2d.tscn" id="3_438hk"]
+[ext_resource type="PackedScene" uid="uid://bn2nkaasebek5" path="res://src/scenes/camera/anchor_detector_2d.tscn" id="4_eqaca"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_116tv"]
 radius = 37.0
@@ -17,3 +19,10 @@ texture = ExtResource("1_1vi1y")
 
 [node name="DogHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_116tv")
+
+[node name="AnchorCamera2D" parent="." instance=ExtResource("3_438hk")]
+
+[node name="AnchorDetector2D" parent="." instance=ExtResource("4_eqaca")]
+
+[connection signal="anchor_detached" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detached"]
+[connection signal="anchor_detected" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detected"]
