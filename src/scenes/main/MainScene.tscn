@@ -11,18 +11,20 @@ script = ExtResource("1_c10au")
 position = Vector2(841, 309)
 
 [node name="BarkTextPlaceholder" type="Label" parent="Dog"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.8333
-offset_top = -40.3333
-offset_right = 58.1667
-offset_bottom = -1.33334
+anchors_preset = -1
+anchor_left = 0.351
+anchor_top = 0.058
+anchor_right = 0.654
+anchor_bottom = 0.949
+offset_left = 11.5271
+offset_top = 110.908
+offset_right = 6.35803
+offset_bottom = -284.626
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 150
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BarkTimer" type="Timer" parent="Dog"]
 
