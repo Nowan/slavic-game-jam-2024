@@ -5,11 +5,11 @@
 [ext_resource type="Script" path="res://src/scenes/flock/ViewRadius.gd" id="3_nljcv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xtgww"]
-radius = 2.05486
-height = 4.10973
+radius = 47.8064
+height = 95.6128
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lov48"]
-radius = 65.0
+radius = 293.043
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_vrejd")
@@ -30,3 +30,6 @@ monitorable = false
 [node name="ViewRadius" type="CollisionShape2D" parent="FlockView"]
 shape = SubResource("CircleShape2D_lov48")
 script = ExtResource("3_nljcv")
+
+[connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
+[connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]
