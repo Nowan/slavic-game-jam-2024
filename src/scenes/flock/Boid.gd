@@ -57,6 +57,10 @@ func _physics_process(_delta):
 	var acceleration = cohesion_vector + align_vector + separation_vector + mouse_vector
 	
 	_velocity = (_velocity + acceleration).limit_length(max_speed)
+	look_at(position + _velocity)
+	rotate(-PI * 0.5)
+
+	#DebugDraw2d.line_vector(position, _velocity);
 	
 	set_velocity(_velocity)
 	move_and_slide()

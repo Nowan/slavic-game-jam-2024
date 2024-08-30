@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @export var boids: int = 20
 @export var Boid: PackedScene
 
