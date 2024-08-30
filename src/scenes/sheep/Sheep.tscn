@@ -11,7 +11,7 @@ height = 95.6128
 [sub_resource type="CircleShape2D" id="CircleShape2D_lov48"]
 radius = 293.043
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Sheep" type="CharacterBody2D" groups=["sheep"]]
 script = ExtResource("1_vrejd")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -27,9 +27,12 @@ shape = SubResource("CapsuleShape2D_xtgww")
 collision_layer = 0
 monitorable = false
 
-[node name="ViewRadius" type="CollisionShape2D" parent="FlockView"]
+[node name="ViewRadius" type="CollisionShape2D" parent="FlockView" groups=["sheep"]]
 shape = SubResource("CircleShape2D_lov48")
 script = ExtResource("3_nljcv")
 
+[node name="CalmDownTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
 [connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]
+[connection signal="timeout" from="CalmDownTimer" to="." method="_on_calm_down_timer_timeout"]

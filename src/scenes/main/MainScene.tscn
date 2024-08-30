@@ -10,7 +10,9 @@
 [node name="Main" type="Node2D"]
 
 [node name="Dog" parent="." instance=ExtResource("1_7h8kt")]
-position = Vector2(841, 309)
+position = Vector2(1232, 876)
+
+[node name="Camera2D" type="Camera2D" parent="Dog"]
 
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
 

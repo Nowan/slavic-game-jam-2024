@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://mwmynyrns760"]
+[gd_scene load_steps=4 format=3 uid="uid://mwmynyrns760"]
 
 [ext_resource type="Texture2D" uid="uid://ljg8b5p34ome" path="res://assets/Dog/placeholder.png" id="1_1vi1y"]
 [ext_resource type="Script" path="res://src/scenes/dog/dog.gd" id="1_6p1qn"]
@@ -7,10 +7,7 @@
 radius = 37.0
 height = 198.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2xfgp"]
-radius = 200.0
-
-[node name="DogArea" type="CharacterBody2D"]
+[node name="Dog" type="CharacterBody2D" groups=["dog"]]
 script = ExtResource("1_6p1qn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -20,7 +17,3 @@ texture = ExtResource("1_1vi1y")
 
 [node name="DogHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_116tv")
-
-[node name="DogScarebox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_2xfgp")
-disabled = true
