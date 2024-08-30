@@ -17,3 +17,7 @@ mono_crash.*.json
 
 # MacOS-specific ignores
 .DS_Store
+
+# syncthing
+.stignore
+.stfolder/
