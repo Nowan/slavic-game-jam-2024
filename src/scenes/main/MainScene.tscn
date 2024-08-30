@@ -16,7 +16,7 @@ position = Vector2(841, 309)
 position = Vector2(404, 305)
 
 [node name="Rock1" parent="." instance=ExtResource("4_ods2q")]
-position = Vector2(478, 888)
+position = Vector2(162, 418)
 scale = Vector2(0.5, 0.5)
 
 [node name="Rock2" parent="." instance=ExtResource("5_o74at")]
