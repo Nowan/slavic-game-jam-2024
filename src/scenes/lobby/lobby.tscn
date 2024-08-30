@@ -73,7 +73,7 @@ offset_right = 210.0
 offset_bottom = 68.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-text = "100.85.197.133"
+text = "188.245.152.157"
 
 [node name="HostButton" type="Button" parent="LobbyPanel"]
 layout_mode = 0

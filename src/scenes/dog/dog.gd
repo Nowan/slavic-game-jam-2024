@@ -9,9 +9,9 @@ var _velocity := Vector2.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if multiplayer.is_server():
-		set_multiplayer_authority(multiplayer.get_unique_id())
-	else:
 		set_multiplayer_authority(multiplayer.get_peers()[0])
+	else:
+		set_multiplayer_authority(multiplayer.get_unique_id())
 		
 	print("Unique id: ", multiplayer.get_unique_id())
 
@@ -43,11 +43,11 @@ func _physics_process(delta: float) -> void:
 
 @rpc("unreliable")
 func set_pos_and_motion(pos: Vector2, rot: float, direction: int, velocity: Vector2) -> void:
-	# print(pos)
-	# print(rot)
-	# print(direction)
-	# print(velocity)
-	print("set called!")
+	print(pos)
+	print(rot)
+	print(direction)
+	print(velocity)
+	# print("set called!")
 	position = pos
 	rotation = rot
 	_direction = direction

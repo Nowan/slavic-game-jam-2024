@@ -16,6 +16,14 @@ const DEFAULT_PORT = 8910
 var peer: ENetMultiplayerPeer
 
 func _ready() -> void:
+	if DisplayServer.get_name() == "headless":
+		# Run your server startup code here...
+		#
+		# Using this check, you can start a dedicated server by running
+		# a Godot binary (editor or export template) with the `--headless`
+		# command-line argument.
+		_on_host_pressed()
+		
 	# Connect all the callbacks related to networking.
 	multiplayer.peer_connected.connect(_player_connected)
 	multiplayer.peer_disconnected.connect(_player_disconnected)
