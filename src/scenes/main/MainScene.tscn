@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=18 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
@@ -11,12 +11,14 @@
 [ext_resource type="Script" path="res://src/scenes/main/player_camera.gd" id="9_imdsp"]
 [ext_resource type="PackedScene" uid="uid://d0wfoh36p2b2h" path="res://src/scenes/hud/hud.tscn" id="9_sfbme"]
 [ext_resource type="PackedScene" uid="uid://bnx0y2w4u6y05" path="res://src/scenes/hole1/hole1.tscn" id="10_ersv2"]
+[ext_resource type="Script" path="res://src/scenes/hole1/wall.gd" id="11_j7k2h"]
+[ext_resource type="AudioStream" uid="uid://rv6lsxk7hpbp" path="res://assets/music/SheepSongLevel1Loop.mp3" id="12_0f1y4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5psq"]
 size = Vector2(3804.59, 3112.12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twe1m"]
-size = Vector2(2067.64, 5942.88)
+size = Vector2(1997.41, 5942.88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yrqu1"]
 size = Vector2(2667.5, 1538)
@@ -43,7 +45,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(404, 4044)
 
 [node name="Player1" parent="." instance=ExtResource("1_7h8kt")]
-position = Vector2(1232, 876)
+position = Vector2(326, 198)
 move_right = "move_right_player1"
 move_left = "move_left_player1"
 move_up = "move_up_player1"
@@ -52,6 +54,7 @@ use_bark = "bark_player1"
 use_dash = "dash_player1"
 
 [node name="Player2" parent="." instance=ExtResource("1_7h8kt")]
+position = Vector2(604, 195)
 move_right = "move_right_player2"
 move_left = "move_left_player2"
 move_up = "move_up_player2"
@@ -60,7 +63,7 @@ use_bark = "bark_player2"
 use_dash = "dash_player2"
 
 [node name="Player3" parent="." instance=ExtResource("1_7h8kt")]
-position = Vector2(1657, 645)
+position = Vector2(460, 198)
 move_right = "move_right_player3"
 move_left = "move_left_player3"
 move_up = "move_up_player3"
@@ -120,24 +123,32 @@ scale = Vector2(7.48969, 0.51415)
 
 [node name="wall" type="StaticBody2D" parent="."]
 position = Vector2(1405, 2646)
+collision_layer = 25
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
 position = Vector2(0, -4204)
 shape = SubResource("RectangleShape2D_m5psq")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="wall"]
-position = Vector2(-2440, 275)
+position = Vector2(-2421.41, 275)
 shape = SubResource("RectangleShape2D_twe1m")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="wall"]
-position = Vector2(-72.75, 3443)
+position = Vector2(-55, 3398)
 shape = SubResource("RectangleShape2D_yrqu1")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="wall"]
 position = Vector2(2208, 154)
 shape = SubResource("RectangleShape2D_8d74r")
 
+[node name="wall2" type="StaticBody2D" parent="."]
+position = Vector2(2810, 5292)
+collision_layer = 25
+collision_mask = 17
+
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(1232, 876)
 zoom = Vector2(0.8, 0.8)
 limit_left = 0
@@ -145,3 +156,30 @@ limit_top = 0
 limit_right = 2650
 limit_bottom = 5300
 script = ExtResource("9_imdsp")
+zoom_speed = 0.2
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_0f1y4")
+autoplay = true
+parameters/looping = true
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("11_j7k2h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1399, -1540)
+shape = SubResource("RectangleShape2D_m5psq")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-947.705, 2964)
+shape = SubResource("RectangleShape2D_twe1m")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2737.25, 8735)
+shape = SubResource("RectangleShape2D_yrqu1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3554, 2821)
+shape = SubResource("RectangleShape2D_8d74r")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

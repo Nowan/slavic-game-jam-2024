@@ -4,19 +4,13 @@ extends Camera2D
 @export var zoom_speed = 0.05
 @export var min_zoom = 0.5
 @export var max_zoom = 0.8
-@export var margin = Vector2(300, 300)
+@export var margin = Vector2(-200, -200)
 @export var zoom_factor: int
 
 @onready var screen_size = get_viewport_rect().size
 
 func _ready() -> void:
 	zoom = Vector2.ONE * max_zoom
-
-#func add_player(player: Dog) -> void:
-	#players.append(player)
-	#
-#func remove_player(player: Dog) -> void:
-	#players.erase(player)
 
 func _process(delta):
 	var players = _get_players()
@@ -29,6 +23,7 @@ func _process(delta):
 	var r = Rect2(position, Vector2.ONE)
 	for player in players:
 		r = r.expand(player.position)
+	r.grow_individual(margin.x, margin.y, margin.x, margin.y)
 	
 	var z
 	if r.size.x > r.size.y * screen_size.aspect():
@@ -63,4 +58,4 @@ func _on_level_changed(level: TextureRect) -> void:
 	limit_bottom = level.size.y
 
 func _get_players():
-	return get_tree().get_nodes_in_group("players")
+	return get_tree().get_nodes_in_group("dog")
