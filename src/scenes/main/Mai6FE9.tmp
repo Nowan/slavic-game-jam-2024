@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=13 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
@@ -8,21 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="7_a2hia"]
 [ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="7_hvpbq"]
 [ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="8_24hfu"]
-[ext_resource type="PackedScene" uid="uid://d0wfoh36p2b2h" path="res://src/scenes/hud/hud.tscn" id="9_sfbme"]
-[ext_resource type="PackedScene" uid="uid://bnx0y2w4u6y05" path="res://src/scenes/hole1/hole1.tscn" id="10_ersv2"]
 [ext_resource type="Script" path="res://src/scenes/main/player_camera.gd" id="9_imdsp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m5psq"]
-size = Vector2(3804.59, 3112.12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esxmi"]
+size = Vector2(3386, 5291.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_twe1m"]
-size = Vector2(2067.64, 5942.88)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fmxe"]
+size = Vector2(317, 5297.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrqu1"]
-size = Vector2(2667.5, 1538)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i48sv"]
-size = Vector2(2884.36, 5497.38)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qk2so"]
+size = Vector2(345, 5297.5)
 
 [node name="Main" type="Node2D"]
 
@@ -40,7 +35,7 @@ stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Win Area" parent="." instance=ExtResource("8_24hfu")]
-position = Vector2(404, 4044)
+position = Vector2(1499, 3888)
 
 [node name="Player1" parent="." instance=ExtResource("1_7h8kt")]
 position = Vector2(1232, 876)
@@ -58,18 +53,10 @@ move_up = "move_up_player2"
 move_down = "move_down_player2"
 use_power = "use_power_player2"
 
-[node name="Player3" parent="." instance=ExtResource("1_7h8kt")]
-position = Vector2(1657, 645)
-move_right = "move_right_player3"
-move_left = "move_left_player3"
-move_up = "move_up_player3"
-move_down = "move_down_player3"
-use_power = "use_power_player3"
-
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
 
 [node name="Rock1" parent="." instance=ExtResource("4_ods2q")]
-position = Vector2(473, 560)
+position = Vector2(162, 418)
 scale = Vector2(0.5, 0.5)
 
 [node name="Rock2" parent="." instance=ExtResource("5_o74at")]
@@ -77,67 +64,42 @@ position = Vector2(1870, 1053)
 scale = Vector2(0.5, 0.5)
 
 [node name="Rock3" parent="." instance=ExtResource("6_r3s50")]
-position = Vector2(700, 2479)
-scale = Vector2(0.7, 0.7)
-
-[node name="Rock5" parent="." instance=ExtResource("6_r3s50")]
-position = Vector2(1721, 2674)
+position = Vector2(256, 1800)
 scale = Vector2(0.7, 0.7)
 
 [node name="Rock4" parent="." instance=ExtResource("7_a2hia")]
 position = Vector2(996, 1307)
 scale = Vector2(0.5, 0.5)
 
-[node name="HUD" parent="." instance=ExtResource("9_sfbme")]
-
-[node name="Hole1" parent="." instance=ExtResource("10_ersv2")]
-position = Vector2(2456, 853)
-
-[node name="Hole2" parent="." instance=ExtResource("10_ersv2")]
-position = Vector2(2452, 2655)
-
-[node name="Hole3" parent="." instance=ExtResource("10_ersv2")]
-position = Vector2(206, 2961)
-rotation = 3.14159
-
-[node name="Hole4" parent="." instance=ExtResource("10_ersv2")]
-position = Vector2(202, 4497)
-rotation = 3.14159
-
-[node name="fence1" parent="." instance=ExtResource("5_o74at")]
-position = Vector2(727.5, 4519.5)
-scale = Vector2(1.03265, 2.89365)
-
-[node name="fence2" parent="." instance=ExtResource("5_o74at")]
-position = Vector2(2116, 4533)
-scale = Vector2(1, 3.09777)
-
-[node name="fence3" parent="." instance=ExtResource("5_o74at")]
-position = Vector2(1422, 5175)
-scale = Vector2(7.48969, 0.51415)
-
 [node name="wall" type="StaticBody2D" parent="."]
-position = Vector2(1405, 2646)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
-position = Vector2(0, -4204)
-shape = SubResource("RectangleShape2D_m5psq")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="wall"]
-position = Vector2(-2440, 275)
-shape = SubResource("RectangleShape2D_twe1m")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="wall"]
-position = Vector2(-72.75, 3443)
-shape = SubResource("RectangleShape2D_yrqu1")
+position = Vector2(1425, 7947)
+shape = SubResource("RectangleShape2D_esxmi")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall"]
+position = Vector2(1369, -2653)
+shape = SubResource("RectangleShape2D_esxmi")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-520, 2534)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(3332, 114.25)
+shape = SubResource("RectangleShape2D_4fmxe")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(341, 115.25)
+shape = SubResource("RectangleShape2D_qk2so")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("players")]
 position = Vector2(1232, 876)
-zoom = Vector2(0.8, 0.8)
+zoom = Vector2(0.75, 0.75)
 limit_left = 0
 limit_top = 0
 limit_right = 2650
 limit_bottom = 5300
 script = ExtResource("9_imdsp")
+players = [NodePath("../Player1"), NodePath("../Player2")]
 
 [connection signal="level_changed" from="Win Area" to="Camera2D" method="_on_level_changed"]
