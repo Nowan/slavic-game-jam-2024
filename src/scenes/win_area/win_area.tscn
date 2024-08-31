@@ -4,18 +4,19 @@
 [ext_resource type="Script" path="res://src/scenes/win_area/win_area.gd" id="1_7kr7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vk7e"]
-size = Vector2(271.5, 465)
+size = Vector2(669, 1242)
 
 [node name="Win Area" type="Area2D"]
 collision_layer = 0
 script = ExtResource("1_7kr7e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(151.25, 150.5)
+position = Vector2(449.5, 524)
 shape = SubResource("RectangleShape2D_4vk7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(156, 162)
+position = Vector2(450.5, 550)
+scale = Vector2(2.21193, 2.59671)
 texture = ExtResource("1_4dmv0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
