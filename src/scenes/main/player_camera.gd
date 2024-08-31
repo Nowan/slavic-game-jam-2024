@@ -12,6 +12,12 @@ extends Camera2D
 func _ready() -> void:
 	zoom = Vector2.ONE * max_zoom
 
+#func add_player(player: Dog) -> void:
+	#players.append(player)
+	#
+#func remove_player(player: Dog) -> void:
+	#players.erase(player)
+
 func _process(delta):
 	var players = _get_players()
 	if !players:
@@ -30,7 +36,6 @@ func _process(delta):
 	else:
 		z = clamp(screen_size.y / r.size.y, min_zoom, max_zoom)
 	
-	print(z)
 	zoom = lerp(zoom, Vector2.ONE * z, zoom_speed)
 	
 func _calc_centroid(points: Array) -> Vector2:
@@ -40,8 +45,8 @@ func _calc_centroid(points: Array) -> Vector2:
 	
 	return centroid / points.size()
 	
-func _calc_furthest_distance(players: Array) -> int:
-	var furthest_distance: int
+func _calc_furthest_distance(players: Array) -> float:
+	var furthest_distance: float
 	
 	for player: Vector2 in players:
 		for other_player: Vector2 in players:
@@ -58,4 +63,4 @@ func _on_level_changed(level: TextureRect) -> void:
 	limit_bottom = level.size.y
 
 func _get_players():
-	return get_parent().get_children().filter(func(child): return "Player" in child.name)
+	return get_tree().get_nodes_in_group("players")

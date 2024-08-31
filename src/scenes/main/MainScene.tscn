@@ -24,7 +24,7 @@ size = Vector2(2667.5, 1538)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8d74r"]
 size = Vector2(1914.91, 5751.52)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["players"]]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -48,14 +48,16 @@ move_right = "move_right_player1"
 move_left = "move_left_player1"
 move_up = "move_up_player1"
 move_down = "move_down_player1"
-use_power = "use_power_player1"
+use_bark = "bark_player1"
+use_dash = "dash_player1"
 
 [node name="Player2" parent="." instance=ExtResource("1_7h8kt")]
 move_right = "move_right_player2"
 move_left = "move_left_player2"
 move_up = "move_up_player2"
 move_down = "move_down_player2"
-use_power = "use_power_player2"
+use_bark = "bark_player2"
+use_dash = "dash_player2"
 
 [node name="Player3" parent="." instance=ExtResource("1_7h8kt")]
 position = Vector2(1657, 645)
@@ -63,7 +65,8 @@ move_right = "move_right_player3"
 move_left = "move_left_player3"
 move_up = "move_up_player3"
 move_down = "move_down_player3"
-use_power = "use_power_player3"
+use_bark = "bark_player3"
+use_dash = "dash_player3"
 
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
 

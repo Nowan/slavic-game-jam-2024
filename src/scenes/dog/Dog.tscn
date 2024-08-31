@@ -35,5 +35,13 @@ color = Color(1, 1, 1, 0.266667)
 [node name="DogHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_116tv")
 
+[node name="DashDuration" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="DashCooldown" type="Timer" parent="."]
+wait_time = 8.0
+
 [connection signal="body_entered" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_entered"]
 [connection signal="body_exited" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_exited"]
+[connection signal="timeout" from="DashDuration" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
