@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://mwmynyrns760"]
+
+[ext_resource type="Script" path="res://src/scenes/dog/dog.gd" id="1_6p1qn"]
+[ext_resource type="Texture2D" uid="uid://cb4wu8f5epy43" path="res://assets/Dog/dog.png" id="2_ddmj3"]
+[ext_resource type="Script" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="3_ada1q"]
+[ext_resource type="AudioStream" uid="uid://d1xf26dnq0brb" path="res://assets/sfx/Dog1.wav" id="4_my7kk"]
+[ext_resource type="AudioStream" uid="uid://8ad7hhgaflbj" path="res://assets/sfx/Dog2.wav" id="5_7waih"]
+[ext_resource type="AudioStream" uid="uid://b7ae5lv08uaqs" path="res://assets/sfx/Dog3.wav" id="6_5cks4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_116tv"]
+radius = 37.0
+height = 198.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kambn"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("4_my7kk")
+stream_1/stream = ExtResource("5_7waih")
+stream_2/stream = ExtResource("6_5cks4")
+
+[node name="Dog" type="CharacterBody2D" groups=["dog"]]
+script = ExtResource("1_6p1qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, -1.90735e-06)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_ddmj3")
+
+[node name="BarkCone" type="Node2D" parent="Sprite2D" node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d")]
+position = Vector2(3.17891e-06, 6.35783e-06)
+scale = Vector2(3.33333, 3.33333)
+script = ExtResource("3_ada1q")
+angle_deg = 100
+ray_count = 10
+write_collision_polygon = NodePath("BarkConeArea/BarkConeCollider")
+write_polygon2d = NodePath("BarkConeRenderer")
+
+[node name="BarkConeArea" type="Area2D" parent="Sprite2D/BarkCone"]
+
+[node name="BarkConeCollider" type="CollisionPolygon2D" parent="Sprite2D/BarkCone/BarkConeArea"]
+
+[node name="BarkConeRenderer" type="Polygon2D" parent="Sprite2D/BarkCone"]
+color = Color(1, 1, 1, 0.266667)
+
+[node name="DogHitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_116tv")
+
+[node name="DashDuration" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="DashCooldown" type="Timer" parent="."]
+wait_time = 8.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_kambn")
+panning_strength = 2.65
+
+[connection signal="body_entered" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_entered"]
+[connection signal="body_exited" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_exited"]
+[connection signal="timeout" from="DashDuration" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
