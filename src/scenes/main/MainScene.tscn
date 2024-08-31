@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="8_24hfu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esxmi"]
-size = Vector2(3386, 3071)
+size = Vector2(3386, 5291.5)
 
 [node name="Main" type="Node2D"]
 
@@ -28,7 +28,7 @@ stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Win Area" parent="." instance=ExtResource("8_24hfu")]
-position = Vector2(927, 861)
+position = Vector2(1356, 4431)
 
 [node name="Dog" parent="." instance=ExtResource("1_7h8kt")]
 position = Vector2(1232, 876)
@@ -56,17 +56,17 @@ scale = Vector2(0.5, 0.5)
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-1703, 1525.5)
+position = Vector2(-1703, 2640.25)
 shape = SubResource("RectangleShape2D_esxmi")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1359, 3728)
+position = Vector2(1425, 7947)
 shape = SubResource("RectangleShape2D_esxmi")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1369, -1526)
+position = Vector2(1369, -2653)
 shape = SubResource("RectangleShape2D_esxmi")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(4350, 1546)
+position = Vector2(4346, 2644)
 shape = SubResource("RectangleShape2D_esxmi")
