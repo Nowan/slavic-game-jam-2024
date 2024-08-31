@@ -21,8 +21,8 @@ DebugDraw2d="*res://addons/debugdraw2d/DebugDraw2D.gd"
 
 [display]
 
-window/size/viewport_width=2000
-window/size/viewport_height=2000
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
@@ -100,32 +100,32 @@ dash_player2={
 ]
 }
 move_right_player3={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
 ]
 }
 move_left_player3={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
 ]
 }
 move_up_player3={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
 ]
 }
 move_down_player3={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
 ]
 }
 bark_player3={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
 dash_player3={
-"deadzone": 0.5,
+"deadzone": 0.1,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":4,"axis_value":1.0,"script":null)
 ]
 }
@@ -135,6 +135,9 @@ dash_player3={
 2d_physics/layer_1="actors"
 2d_physics/layer_2="obstacles"
 2d_physics/layer_3="anchors"
+2d_physics/size/mode=0
+2d_physics/size/viewport_height=2000
+2d_physics/size/viewport_width=2000
 
 [physics]
 

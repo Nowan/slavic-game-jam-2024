@@ -11,11 +11,11 @@ class_name Dog extends CharacterBody2D
 # Dog variables
 @export var bark_max_distance = 500.0
 @export var bark_min_distance = 200.0
-@export var bark_full_charge_time = 0.4
-@export var speed = 500
+@export var speed = 600.0
 @export var rotation_speed = 3.5
 
 var direction = Vector2.ZERO
+var bark_full_charge_time = 1.0
 
 var _bark_cone: VisionCone2D
 var _bark_cone_area: Area2D
@@ -45,7 +45,8 @@ func rotate_sprite(angle) -> void:
 func _physics_process(delta):
 	direction = get_input()
 	velocity = speed * direction
-	rotate_sprite(velocity.angle() - PI / 2)
+	if direction != Vector2.ZERO:
+		rotate_sprite(velocity.angle() - PI / 2)
 	
 	move_and_slide()
 	

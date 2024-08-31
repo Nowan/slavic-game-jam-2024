@@ -1,7 +1,7 @@
 class_name WinArea
 extends Area2D
 
-static var SHEEPS_INITIAL_NUMBER := 20
+static var SHEEPS_INITIAL_NUMBER := 70
 static var INITIAL_PLAYER_NUMBER := 2 # TODO for now
 
 static var deadPlayers := 0
@@ -36,3 +36,7 @@ func _on_body_exited(body: Node2D) -> void:
 	if (body.is_in_group("sheep")):
 		currentSheepsInWinArea -= 1
 		
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

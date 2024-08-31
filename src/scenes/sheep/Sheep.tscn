@@ -8,11 +8,11 @@
 [ext_resource type="AudioStream" uid="uid://bnim6uhatxe7l" path="res://assets/sfx/sheep_3.wav" id="6_h2qak"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xtgww"]
-radius = 47.8064
-height = 95.6128
+radius = 47.0
+height = 94.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lov48"]
-radius = 293.043
+radius = 600.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7lqkc"]
 random_pitch = 1.5
@@ -23,10 +23,11 @@ stream_1/stream = ExtResource("5_omlth")
 stream_2/stream = ExtResource("6_h2qak")
 
 [node name="Sheep" type="CharacterBody2D" groups=["sheep"]]
+collision_layer = 17
 script = ExtResource("1_vrejd")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0.0284538, -0.238901)
+position = Vector2(0, 10)
 scale = Vector2(0.251141, 0.251711)
 texture = ExtResource("2_m7w4x")
 
