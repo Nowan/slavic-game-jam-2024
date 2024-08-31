@@ -24,8 +24,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if (body.is_in_group("sheep")):
 		currentSheepsInWinArea += 1
 	if (currentSheepsInWinArea + deadSheeps == SHEEPS_INITIAL_NUMBER && currentPlayersInWinArea + deadPlayers == INITIAL_PLAYER_NUMBER):
-		print("SUCCESS")
-		#get_tree().change_scene_to_file("res://src/scenes/second/second.tscn")
+		get_tree().change_scene_to_file("res://src/scenes/second/second.tscn")
 
 
 func _on_body_exited(body: Node2D) -> void:

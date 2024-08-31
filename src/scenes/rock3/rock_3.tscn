@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://doyu0730pwqv4"]
 
-[ext_resource type="Texture2D" uid="uid://c7q3tjv8toxni" path="res://assets/Collisions/collision_03.png" id="1_p65dg"]
+[ext_resource type="Texture2D" uid="uid://c7q3tjv8toxni" path="res://assets/Rocks/collision_03.png" id="1_p65dg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_43787"]
 radius = 79.0

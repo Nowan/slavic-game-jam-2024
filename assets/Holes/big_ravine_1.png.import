@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpfteumgyy6vm"
-path="res://.godot/imported/collision_02.png-dae17c928a1c08bb1baf016bebe66ab9.ctex"
+uid="uid://d3h8rvpcjje0e"
+path="res://.godot/imported/big_ravine_1.png-cbb00aa4a6a58c729b34c9d63098e500.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Collisions/collision_02.png"
-dest_files=["res://.godot/imported/collision_02.png-dae17c928a1c08bb1baf016bebe66ab9.ctex"]
+source_file="res://assets/Holes/big_ravine_1.png"
+dest_files=["res://.godot/imported/big_ravine_1.png-cbb00aa4a6a58c729b34c9d63098e500.ctex"]
 
 [params]
 
