@@ -7,18 +7,16 @@ extends Camera2D
 @export var margin = Vector2(300, 300)
 @export var zoom_factor: int
 
-var players: Array[Node]
-
 @onready var screen_size = get_viewport_rect().size
 
 func _ready() -> void:
-	players = get_parent().get_children().filter(func(child): return "Player" in child.name)
 	zoom = Vector2.ONE * max_zoom
 
 func _process(delta):
+	var players = _get_players()
 	if !players:
 		return
-		
+	
 	var player_positions = players.map(func(player): return player.global_position)
 	global_position = lerp(position, _calc_centroid(player_positions), move_speed)
 	
@@ -58,3 +56,6 @@ func _calc_furthest_distance(players: Array) -> int:
 func _on_level_changed(level: TextureRect) -> void:
 	limit_right = level.size.x
 	limit_bottom = level.size.y
+
+func _get_players():
+	get_parent().get_children().filter(func(child): return "Player" in child.name)
