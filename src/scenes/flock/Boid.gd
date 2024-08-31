@@ -21,7 +21,7 @@ var _graze_target: Vector2 = Vector2.INF
 var _velocity: Vector2
 
 var _status: FlockTypes.BoidStatus
-var _dogs_fleeing_from: Array[Player] = []
+var _dogs_fleeing_from: Array[Dog] = []
 
 var _fleeing_stop_timer: Timer
 var _grazing_timer: Timer
@@ -55,7 +55,7 @@ func set_status(status: FlockTypes.BoidStatus):
 func get_status():
 	return _status
 
-func flee_from_bark(dog: Player):
+func flee_from_bark(dog: Dog):
 	_dogs_fleeing_from.append(dog)
 	set_status(FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK)
 

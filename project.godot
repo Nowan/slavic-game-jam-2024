@@ -21,8 +21,8 @@ DebugDraw2d="*res://addons/debugdraw2d/DebugDraw2D.gd"
 
 [display]
 
-window/size/viewport_width=2500
-window/size/viewport_height=1500
+window/size/viewport_width=1080
+window/size/viewport_height=720
 
 [editor_plugins]
 
