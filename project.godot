@@ -28,6 +28,10 @@ window/size/viewport_height=720
 
 enabled=PackedStringArray("res://addons/vision_cone_2d/plugin.cfg")
 
+[global_group]
+
+players="All players currently playing the game"
+
 [input]
 
 move_right_player1={

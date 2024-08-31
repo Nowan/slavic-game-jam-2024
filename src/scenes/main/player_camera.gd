@@ -12,13 +12,20 @@ var players: Array[Node]
 @onready var screen_size = get_viewport_rect().size
 
 func _ready() -> void:
-	players = get_parent().get_children().filter(func(child): return "Player" in child.name)
 	zoom = Vector2.ONE * max_zoom
 
+#func add_player(player: Dog) -> void:
+	#players.append(player)
+	#
+#func remove_player(player: Dog) -> void:
+	#players.erase(player)
+
 func _process(delta):
+	players = get_tree().get_nodes_in_group("players")
+	
 	if !players:
 		return
-		
+
 	var player_positions = players.map(func(player): return player.global_position)
 	global_position = lerp(position, _calc_centroid(player_positions), move_speed)
 	
