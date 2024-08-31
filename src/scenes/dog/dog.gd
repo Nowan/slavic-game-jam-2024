@@ -27,3 +27,5 @@ func _physics_process(delta):
 	rotate_sprite(velocity.angle() - PI / 2)
 	
 	move_and_slide()
+	
+	
