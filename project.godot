@@ -24,6 +24,10 @@ DebugDraw2d="*res://addons/debugdraw2d/DebugDraw2D.gd"
 window/size/viewport_width=2500
 window/size/viewport_height=1500
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/vision_cone_2d/plugin.cfg")
+
 [input]
 
 move_right={

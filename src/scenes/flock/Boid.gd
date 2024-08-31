@@ -1,7 +1,8 @@
-extends CharacterBody2D
+class_name Sheep extends CharacterBody2D
 
 @export var max_speed: = 200.0
-@export var fleeing_force: = -0.05
+@export var fleeing_dog_force: = 0.05
+@export var fleeing_dog_bark_force: = 0.15
 @export var grazing_force: = 0.1
 @export var staying_idle_time_range: = [4, 10]
 @export var grazing_time_range: = [2, 10]
@@ -15,12 +16,12 @@ extends CharacterBody2D
 var _width = ProjectSettings.get_setting("display/window/size/viewport_width")
 var _height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
-var _flock: Array = []
+var _flock: Array[Sheep] = []
 var _graze_target: Vector2 = Vector2.INF
 var _velocity: Vector2
 
 var _status: FlockTypes.BoidStatus
-var _dogs_fleeing_from: Array = []
+var _dogs_fleeing_from: Array[Player] = []
 
 var _fleeing_stop_timer: Timer
 var _grazing_timer: Timer
@@ -54,6 +55,9 @@ func set_status(status: FlockTypes.BoidStatus):
 func get_status():
 	return _status
 
+func flee_from_bark(dog: Dog):
+	_dogs_fleeing_from.append(dog)
+	set_status(FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK)
 
 func _physics_process(delta):
 	match _status:
@@ -61,7 +65,9 @@ func _physics_process(delta):
 			_physics_process_idle(delta)
 		FlockTypes.BoidStatus.GRAZING:
 			_physics_process_grazing(delta)
-		FlockTypes.BoidStatus.FLEEING:
+		FlockTypes.BoidStatus.FLEEING_FROM_DOG:
+			_physics_process_fleeing(delta)
+		FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK:
 			_physics_process_fleeing(delta)
 
 func _physics_process_idle(delta):
@@ -94,10 +100,11 @@ func _physics_process_grazing(delta):
 
 func _physics_process_fleeing(delta: float):
 	var fleeing_vector = Vector2.ZERO
+	var fleeing_force = fleeing_dog_force if _status == FlockTypes.BoidStatus.FLEEING_FROM_DOG else fleeing_dog_bark_force
 
 	if _dogs_fleeing_from.size() > 0:
 		var positions_fleeing_from = _dogs_fleeing_from.map(func(dog): return dog.position)
-		fleeing_vector = global_position.direction_to(_calc_centroid(positions_fleeing_from)) * max_speed * fleeing_force
+		fleeing_vector = global_position.direction_to(_calc_centroid(positions_fleeing_from)) * max_speed * fleeing_force * -1
 	
 	## get cohesion, alginment, and separation vectorsw
 	var vectors = get_flock_status(_flock)
@@ -157,7 +164,8 @@ func get_random_target():
 func _on_flock_view_body_entered(body: Node2D) -> void:
 	if body.is_in_group("dog"):
 		_dogs_fleeing_from.append(body)
-		set_status(FlockTypes.BoidStatus.FLEEING)
+		if (_status != FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK):
+			set_status(FlockTypes.BoidStatus.FLEEING_FROM_DOG)
 		_fleeing_stop_timer.stop()
 	elif body.is_in_group("sheep") && self != body:
 		_flock.append(body)
@@ -182,10 +190,8 @@ func _switch_idle_or_graze():
 	match _status:
 		FlockTypes.BoidStatus.IDLE:
 			set_status(FlockTypes.BoidStatus.GRAZING)
-			#_wait_and_graze()
 		FlockTypes.BoidStatus.GRAZING:
 			set_status(FlockTypes.BoidStatus.IDLE)
-			#_wait_and_stand()
 
 func _wait_and_graze():
 	_grazing_timer.stop()
@@ -194,8 +200,3 @@ func _wait_and_graze():
 func _wait_and_stand():
 	_grazing_timer.stop()
 	_grazing_timer.start(randf_range(grazing_time_range[0], grazing_time_range[1]))
-	
-func _graze_somewhere_else():
-	_grazing_timer.stop()
-	
-	_graze_target = get_random_target()
