@@ -29,12 +29,13 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/vision_cone_2d/plugin.cfg")
 
-[gui]
-
-theme/custom_font="res://assets/GROBOLD.ttf"
 [global_group]
 
 players="All players currently playing the game"
+
+[gui]
+
+theme/custom_font="res://assets/GROBOLD.ttf"
 
 [input]
 
