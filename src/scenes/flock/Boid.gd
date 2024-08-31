@@ -84,7 +84,7 @@ func _physics_process_grazing(delta):
 		look_at(position + _velocity)
 		rotate(-PI * 0.5)
 
-	DebugDraw2d.line_vector(position, _velocity);
+	#DebugDraw2d.line_vector(position, _velocity);
 	
 	set_velocity(_velocity)
 	move_and_slide()

@@ -11,5 +11,6 @@ func _ready():
 		randomize()
 		var boid = Boid.instantiate()
 		
-		boid.position = Vector2(randf_range(0, 100), randf_range(0, 100))
+		boid.position = Vector2(randf_range(500, 2300), randf_range(500, 2000))
+		boid.rotation = randf_range(0, PI * 2)
 		add_child(boid)
