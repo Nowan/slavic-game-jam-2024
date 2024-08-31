@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export var move_right = "ui_right"
@@ -22,6 +23,7 @@ func rotate_sprite(angle) -> void:
 	$DogHitbox.rotation = angle
 
 func _physics_process(delta):
+	print(WinArea.SHEEPS_INITIAL_NUMBER)
 	direction = get_input()
 	velocity = speed * direction
 	rotate_sprite(velocity.angle() - PI / 2)

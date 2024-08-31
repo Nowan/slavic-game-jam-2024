@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=13 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="7_a2hia"]
 [ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="7_hvpbq"]
 [ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="8_24hfu"]
+[ext_resource type="PackedScene" uid="uid://d0wfoh36p2b2h" path="res://src/scenes/hud/hud.tscn" id="9_sfbme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esxmi"]
 size = Vector2(3386, 5291.5)
@@ -34,7 +35,7 @@ stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Win Area" parent="." instance=ExtResource("8_24hfu")]
-position = Vector2(1499, 3888)
+position = Vector2(1119, 1816)
 
 [node name="Player1" parent="." instance=ExtResource("1_7h8kt")]
 position = Vector2(1232, 876)
@@ -93,3 +94,5 @@ shape = SubResource("RectangleShape2D_4fmxe")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(341, 115.25)
 shape = SubResource("RectangleShape2D_qk2so")
+
+[node name="HUD" parent="." instance=ExtResource("9_sfbme")]

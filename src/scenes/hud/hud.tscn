@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0wfoh36p2b2h"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_tt4ig"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_tt4ig")
+
+[node name="AliveSheeps" type="Label" parent="."]
+offset_right = 203.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 45
+
+[node name="WinSheeps" type="Label" parent="."]
+offset_left = 1.0
+offset_top = 54.0
+offset_right = 199.0
+offset_bottom = 117.0
+theme_override_font_sizes/font_size = 45
+
+[node name="AlivePlayers" type="Label" parent="."]
+offset_top = 107.0
+offset_right = 186.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 45
+
+[node name="WinPlayers" type="Label" parent="."]
+offset_top = 173.0
+offset_right = 237.0
+offset_bottom = 231.0
+theme_override_font_sizes/font_size = 45
