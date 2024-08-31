@@ -55,7 +55,7 @@ func set_status(status: FlockTypes.BoidStatus):
 func get_status():
 	return _status
 
-func flee_from_bark(dog: Dog):
+func flee_from_bark(dog: Player):
 	_dogs_fleeing_from.append(dog)
 	set_status(FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK)
 
