@@ -1,39 +1,144 @@
-[gd_scene load_steps=5 format=3 uid="uid://mwmynyrns760"]
+[gd_scene load_steps=16 format=3 uid="uid://mwmynyrns760"]
 
 [ext_resource type="Script" path="res://src/scenes/dog/dog.gd" id="1_6p1qn"]
-[ext_resource type="Texture2D" uid="uid://cb4wu8f5epy43" path="res://assets/Dog/dog.png" id="2_ddmj3"]
+[ext_resource type="Texture2D" uid="uid://ca4qs6lylo572" path="res://assets/Dog/body_back.png" id="2_ju28j"]
+[ext_resource type="Texture2D" uid="uid://0kmt35h00r2v" path="res://assets/Dog/legs1.png" id="2_qn5nq"]
 [ext_resource type="Script" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="3_ada1q"]
+[ext_resource type="Texture2D" uid="uid://b1uopo6pkqet5" path="res://assets/Dog/body_front.png" id="3_efu4x"]
+[ext_resource type="Texture2D" uid="uid://bk0spaehs6br0" path="res://assets/Dog/legs2.png" id="3_vgaov"]
+[ext_resource type="Texture2D" uid="uid://dgshpmgw6ngod" path="res://assets/Dog/head.png" id="4_dpl04"]
+[ext_resource type="Texture2D" uid="uid://dd3bfvle8x4rb" path="res://assets/Dog/legs3.png" id="4_ophvc"]
+[ext_resource type="Texture2D" uid="uid://dtihorygeyluf" path="res://assets/Dog/tail.png" id="5_356nm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_116tv"]
-radius = 37.0
-height = 198.0
+radius = 23.0
+height = 108.0
+
+[sub_resource type="Animation" id="Animation_d5apx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyParts/Scale/LegsSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodyParts:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodyParts/Scale/TailSprite:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qh6l8"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyParts/Scale/LegsSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_lj5rk"]
+resource_name = "run"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyParts/Scale/LegsSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 1, 0, 1, 2, 1, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodyParts:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.4, 0.533333, 0.633333, 0.8),
+"transitions": PackedFloat32Array(-2, 1, 1, 2, 1, 1, 2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1.03, 1.03), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1.03, 1.03), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodyParts/Scale/TailSprite:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3b1e3"]
+_data = {
+"RESET": SubResource("Animation_d5apx"),
+"idle": SubResource("Animation_qh6l8"),
+"run": SubResource("Animation_lj5rk")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yss7h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qn5nq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vgaov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ophvc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="Dog" type="CharacterBody2D" groups=["dog"]]
+collision_layer = 25
+collision_mask = 25
+platform_floor_layers = 4294901760
 script = ExtResource("1_6p1qn")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-9.53674e-07, -1.90735e-06)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_ddmj3")
-
-[node name="BarkCone" type="Node2D" parent="Sprite2D" node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d")]
-position = Vector2(3.17891e-06, 6.35783e-06)
-scale = Vector2(3.33333, 3.33333)
-script = ExtResource("3_ada1q")
-angle_deg = 100
-ray_count = 10
-write_collision_polygon = NodePath("BarkConeArea/BarkConeCollider")
-write_polygon2d = NodePath("BarkConeRenderer")
-
-[node name="BarkConeArea" type="Area2D" parent="Sprite2D/BarkCone"]
-
-[node name="BarkConeCollider" type="CollisionPolygon2D" parent="Sprite2D/BarkCone/BarkConeArea"]
-
-[node name="BarkConeRenderer" type="Polygon2D" parent="Sprite2D/BarkCone"]
-color = Color(1, 1, 1, 0.266667)
-
-[node name="DogHitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_116tv")
 
 [node name="DashDuration" type="Timer" parent="."]
 wait_time = 4.0
@@ -41,7 +146,59 @@ wait_time = 4.0
 [node name="DashCooldown" type="Timer" parent="."]
 wait_time = 8.0
 
-[connection signal="body_entered" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_entered"]
-[connection signal="body_exited" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_exited"]
+[node name="DogHitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_116tv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Body")
+libraries = {
+"": SubResource("AnimationLibrary_3b1e3")
+}
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="BarkCone" type="Node2D" parent="Body" node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d")]
+position = Vector2(-9.66338e-13, -9.09495e-13)
+scale = Vector2(0.999999, 0.999999)
+script = ExtResource("3_ada1q")
+angle_deg = 100
+ray_count = 10
+write_collision_polygon = NodePath("BarkConeArea/BarkConeCollider")
+write_polygon2d = NodePath("BarkConeRenderer")
+
+[node name="BarkConeArea" type="Area2D" parent="Body/BarkCone"]
+
+[node name="BarkConeCollider" type="CollisionPolygon2D" parent="Body/BarkCone/BarkConeArea"]
+
+[node name="BarkConeRenderer" type="Polygon2D" parent="Body/BarkCone"]
+color = Color(1, 1, 1, 0.266667)
+
+[node name="BodyParts" type="Node2D" parent="Body"]
+
+[node name="Scale" type="Node2D" parent="Body/BodyParts"]
+position = Vector2(0.2, 0)
+scale = Vector2(0.3, 0.3)
+
+[node name="LegsSprite" type="AnimatedSprite2D" parent="Body/BodyParts/Scale"]
+sprite_frames = SubResource("SpriteFrames_yss7h")
+frame = 1
+
+[node name="BodyBackSprite" type="Sprite2D" parent="Body/BodyParts/Scale"]
+texture = ExtResource("2_ju28j")
+
+[node name="BodyFrontSprite" type="Sprite2D" parent="Body/BodyParts/Scale"]
+texture = ExtResource("3_efu4x")
+
+[node name="HeadSprite" type="Sprite2D" parent="Body/BodyParts/Scale"]
+position = Vector2(0, 160)
+texture = ExtResource("4_dpl04")
+
+[node name="TailSprite" type="Sprite2D" parent="Body/BodyParts/Scale"]
+position = Vector2(-4, -236.667)
+scale = Vector2(-1, 1)
+texture = ExtResource("5_356nm")
+
 [connection signal="timeout" from="DashDuration" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="body_entered" from="Body/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_entered"]
+[connection signal="body_exited" from="Body/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_exited"]
