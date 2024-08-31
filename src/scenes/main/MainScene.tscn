@@ -9,10 +9,23 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="Dog" parent="." instance=ExtResource("1_7h8kt")]
+[node name="Player1" parent="." instance=ExtResource("1_7h8kt")]
 position = Vector2(1232, 876)
+move_right = "move_right_player1"
+move_left = "move_left_player1"
+move_up = "move_up_player1"
+move_down = "move_down_player1"
+use_power = "use_power_player1"
 
-[node name="Camera2D" type="Camera2D" parent="Dog"]
+[node name="Camera2D" type="Camera2D" parent="Player1"]
+
+[node name="Player2" parent="." instance=ExtResource("1_7h8kt")]
+position = Vector2(1230, 408)
+move_right = "move_right_player2"
+move_left = "move_left_player2"
+move_up = "move_up_player2"
+move_down = "move_down_player2"
+use_power = "use_power_player2"
 
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
 

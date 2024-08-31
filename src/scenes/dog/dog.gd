@@ -1,22 +1,29 @@
 extends CharacterBody2D
 
+@export var move_right = "ui_right"
+@export var move_left = "ui_left"
+@export var move_up = "ui_up"
+@export var move_down = "ui_down"
+@export var use_power = "ui_accept"
+
 @export var speed = 500
 @export var rotation_speed = 3.5
 
-var rotation_direction = 0
+var direction = Vector2.ZERO
+
+func get_input():
+	var input = Vector2.ZERO
+	input.x = Input.get_axis(move_left, move_right)
+	input.y = Input.get_axis(move_up, move_down)
+	return input.normalized()
+	
+func rotate_sprite(angle) -> void:
+	$Sprite2D.rotation = angle
+	$DogHitbox.rotation = angle
 
 func _physics_process(delta):
-	rotation_direction = Input.get_axis("move_left", "move_right")
-	velocity = transform.y * Input.get_axis("move_down", "move_up") * speed
-	rotation += rotation_direction * rotation_speed * delta
+	direction = get_input()
+	velocity = speed * direction
+	rotate_sprite(velocity.angle() - PI / 2)
+	
 	move_and_slide()
-
-
-#func _on_scare_area_body_entered(body: Node2D) -> void:
-	#if body.is_in_group("sheep"):
-		#print("entered", body.name, body.is_in_group("sheep"))
-#
-#
-#func _on_scare_area_body_exited(body: Node2D) -> void:
-	#if body.is_in_group("sheep"):
-		#print("exited", body.name, body.is_in_group("sheep"))

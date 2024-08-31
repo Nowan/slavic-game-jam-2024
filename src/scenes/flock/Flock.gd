@@ -17,5 +17,3 @@ func _ready():
 		boid.position = Vector2(randf_range(0, _width), randf_range(0, _height))
 		boid.set_status(FlockTypes.BoidStatus.IDLE)
 		add_child(boid)
-		
-		
