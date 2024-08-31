@@ -78,7 +78,7 @@ func _physics_process_grazing(delta):
 	var acceleration = cohesion_vector + align_vector + separation_vector
 	var grazing_progress = _grazing_timer.time_left / _grazing_timer.wait_time
 	
-	_velocity = (_velocity + acceleration * grazing_progress * 5).limit_length(max_speed)
+	_velocity = (_velocity + acceleration * sin(grazing_progress * PI) * 5).limit_length(max_speed)
 	
 	if _velocity.length() > 1:
 		look_at(position + _velocity)
