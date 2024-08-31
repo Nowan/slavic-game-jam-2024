@@ -13,7 +13,7 @@ var _velocity = Vector2.ZERO
 # Global position of an anchor area. If it's equal to `Vector2.ZERO`,
 # the camera doesn't have an anchor point and follows its owner.
 var _anchor_position := Vector2.ZERO
-var _target_zoom := 1.0
+var _target_zoom := 0.75
 
 
 func _ready() -> void:

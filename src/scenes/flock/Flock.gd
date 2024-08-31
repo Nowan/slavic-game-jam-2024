@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var boids: int = 20
+@export var boids: int = 100
 @export var Boid: PackedScene
 
 enum State {IDLE, FLEEING}
