@@ -21,12 +21,17 @@ DebugDraw2d="*res://addons/debugdraw2d/DebugDraw2D.gd"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=720
+window/size/viewport_width=2000
+window/size/viewport_height=2000
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/vision_cone_2d/plugin.cfg")
+
+[gui]
+
+theme/custom_font="res://assets/GROBOLD.ttf"
 
 [input]
 

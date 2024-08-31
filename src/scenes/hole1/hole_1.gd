@@ -17,3 +17,5 @@ func _on_body_entered(body: Node2D) -> void:
 		WinArea.deadPlayers += 1
 	elif (body.is_in_group("sheep")):
 		WinArea.deadSheeps += 1
+	if (WinArea.deadPlayers == WinArea.INITIAL_PLAYER_NUMBER):
+		get_tree().quit()

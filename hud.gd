@@ -12,5 +12,3 @@ func _process(delta: float) -> void:
 	$AliveSheeps.text = str(alive_sheeps + "/" + str(WinArea.SHEEPS_INITIAL_NUMBER))
 	$WinSheeps.text = str(str(WinArea.currentSheepsInWinArea) + "/" + alive_sheeps)
 	$DeadShips.text = str(WinArea.deadSheeps)
-	$AlivePlayers.text = str("Alive players: " + str(WinArea.INITIAL_PLAYER_NUMBER - WinArea.deadPlayers))
-	$WinPlayers.text = str("Win players: " + str(WinArea.currentPlayersInWinArea))

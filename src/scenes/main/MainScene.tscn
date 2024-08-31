@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=16 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
@@ -20,6 +20,9 @@ size = Vector2(2067.64, 5942.88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yrqu1"]
 size = Vector2(2667.5, 1538)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8d74r"]
+size = Vector2(1914.91, 5751.52)
 
 [node name="Main" type="Node2D"]
 
@@ -126,6 +129,10 @@ shape = SubResource("RectangleShape2D_twe1m")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="wall"]
 position = Vector2(-72.75, 3443)
 shape = SubResource("RectangleShape2D_yrqu1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall"]
+position = Vector2(2208, 154)
+shape = SubResource("RectangleShape2D_8d74r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1232, 876)
