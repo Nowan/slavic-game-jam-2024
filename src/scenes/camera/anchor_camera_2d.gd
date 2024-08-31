@@ -1,3 +1,4 @@
+class_name AnchorCamera2D
 extends Camera2D
 
 # Distance to the target in pixels below which the camera slows down.
@@ -5,25 +6,22 @@ const SLOW_RADIUS := 300.0
 
 # Maximum speed in pixels per second.
 @export var max_speed := 2000.0
-
 # Mass to slow down the camera's movement
-@export var mass := 2.0
+@export var mass := 1.0
 
 var _velocity = Vector2.ZERO
 # Global position of an anchor area. If it's equal to `Vector2.ZERO`,
 # the camera doesn't have an anchor point and follows its owner.
 var _anchor_position := Vector2.ZERO
-var _target_zoom := 1.0
+var _target_zoom := 0.75
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Setting a node as top-level makes it move independently of its parent.
 	set_as_top_level(true)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-# Every frame, we update the camera's zoom level and position
+# Every frame, we update the camera's zoom level and position.
 func _physics_process(delta: float) -> void:
 	update_zoom()
 
@@ -34,8 +32,10 @@ func _physics_process(delta: float) -> void:
 		owner.global_position
 		if _anchor_position.is_equal_approx(Vector2.ZERO)
 		else _anchor_position
-		)
+	)
+
 	arrive_to(target_position)
+
 
 # Entering in an `Anchor2D` we receive the anchor object and change our `_anchor_position` and
 # `_target_zoom`

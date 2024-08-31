@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpfteumgyy6vm"
-path="res://.godot/imported/collision_02.png-dae17c928a1c08bb1baf016bebe66ab9.ctex"
+uid="uid://b7ax3dkkl0ijq"
+path="res://.godot/imported/sheep_dead.png-8783db241013919960bb6efb994615b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Collisions/collision_02.png"
-dest_files=["res://.godot/imported/collision_02.png-dae17c928a1c08bb1baf016bebe66ab9.ctex"]
+source_file="res://assets/hud/sheep_dead.png"
+dest_files=["res://.godot/imported/sheep_dead.png-8783db241013919960bb6efb994615b8.ctex"]
 
 [params]
 

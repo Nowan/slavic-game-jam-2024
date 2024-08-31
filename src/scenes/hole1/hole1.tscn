@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnx0y2w4u6y05"]
+
+[ext_resource type="Texture2D" uid="uid://cy7numpyxmexd" path="res://assets/Holes/hole1.png" id="1_6x275"]
+[ext_resource type="Script" path="res://src/scenes/hole1/hole_1.gd" id="1_keum2"]
+
+[node name="Hole1" type="Area2D"]
+script = ExtResource("1_keum2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-104, 248)
+texture = ExtResource("1_6x275")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(194, 6, 137, 60, 94, 133, 50, 206, 16, 287, 7, 336, 39, 409, 63, 477, 90, 484, 103, 504, 115, 507, 136, 540, 159, 549, 178, 576, 178, 585, 199, 591)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
