@@ -1,4 +1,5 @@
-class_name Player extends CharacterBody2D
+class_name Dog
+extends CharacterBody2D
 
 @export var move_right = "ui_right"
 @export var move_left = "ui_left"

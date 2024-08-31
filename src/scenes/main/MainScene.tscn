@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="7_a2hia"]
 [ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="7_hvpbq"]
 [ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="8_24hfu"]
+[ext_resource type="Script" path="res://src/scenes/main/player_camera.gd" id="9_imdsp"]
 [ext_resource type="PackedScene" uid="uid://d0wfoh36p2b2h" path="res://src/scenes/hud/hud.tscn" id="9_sfbme"]
 [ext_resource type="PackedScene" uid="uid://bnx0y2w4u6y05" path="res://src/scenes/hole1/hole1.tscn" id="10_ersv2"]
 
@@ -19,9 +20,6 @@ size = Vector2(2067.64, 5942.88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yrqu1"]
 size = Vector2(2667.5, 1538)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i48sv"]
-size = Vector2(2884.36, 5497.38)
 
 [node name="Main" type="Node2D"]
 
@@ -49,16 +47,20 @@ move_up = "move_up_player1"
 move_down = "move_down_player1"
 use_power = "use_power_player1"
 
-[node name="Camera2D" type="Camera2D" parent="Player1"]
-zoom = Vector2(0.75, 0.75)
-
 [node name="Player2" parent="." instance=ExtResource("1_7h8kt")]
-position = Vector2(1230, 408)
 move_right = "move_right_player2"
 move_left = "move_left_player2"
 move_up = "move_up_player2"
 move_down = "move_down_player2"
 use_power = "use_power_player2"
+
+[node name="Player3" parent="." instance=ExtResource("1_7h8kt")]
+position = Vector2(1657, 645)
+move_right = "move_right_player3"
+move_left = "move_left_player3"
+move_up = "move_up_player3"
+move_down = "move_down_player3"
+use_power = "use_power_player3"
 
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
 
@@ -125,6 +127,11 @@ shape = SubResource("RectangleShape2D_twe1m")
 position = Vector2(-72.75, 3443)
 shape = SubResource("RectangleShape2D_yrqu1")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall"]
-position = Vector2(2694, 3)
-shape = SubResource("RectangleShape2D_i48sv")
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1232, 876)
+zoom = Vector2(0.8, 0.8)
+limit_left = 0
+limit_top = 0
+limit_right = 2650
+limit_bottom = 5300
+script = ExtResource("9_imdsp")
