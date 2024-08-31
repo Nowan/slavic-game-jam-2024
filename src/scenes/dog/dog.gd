@@ -1,54 +1,50 @@
-extends Sprite2D
+class_name Player extends CharacterBody2D
 
-var _angular_speed = PI
-var _dog_speed = 500.0
+@export var move_right = "ui_right"
+@export var move_left = "ui_left"
+@export var move_up = "ui_up"
+@export var move_down = "ui_down"
+@export var use_power = "ui_accept"
 
-var _direction := 0
-var _velocity := Vector2.ZERO
+@export var speed = 500
+@export var rotation_speed = 3.5
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	if multiplayer.is_server():
-		set_multiplayer_authority(multiplayer.get_peers()[0])
-	else:
-		set_multiplayer_authority(multiplayer.get_unique_id())
-		
-	print("Unique id: ", multiplayer.get_unique_id())
+var direction = Vector2.ZERO
+
+var _bark_cone: VisionCone2D
+var _sheep_in_bark_cone: Array[Sheep]
+
+func _ready():
+	_bark_cone = get_node("Sprite2D/BarkCone")
+
+func get_input():
+	var input = Vector2.ZERO
+	input.x = Input.get_axis(move_left, move_right)
+	input.y = Input.get_axis(move_up, move_down)
+	return input.normalized()
+
+func rotate_sprite(angle) -> void:
+	$Sprite2D.rotation = angle
+	$DogHitbox.rotation = angle
+
+func _physics_process(delta):
+	print(WinArea.SHEEPS_INITIAL_NUMBER)
+	direction = get_input()
+	velocity = speed * direction
+	rotate_sprite(velocity.angle() - PI / 2)
+
+	move_and_slide()
+
+	if Input.is_action_just_pressed(use_power):
+		for sheep in _sheep_in_bark_cone:
+			sheep.flee_from_bark(self)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
-	if is_multiplayer_authority():
-		print("I have authority!")
-		_direction = 0
-		if Input.is_action_pressed("move_left"):
-			_direction = -1
-		if Input.is_action_pressed("move_right"):
-			_direction = 1
-		
-		_velocity = Vector2.ZERO
-		
-		if Input.is_action_pressed("move_up"):
-			_velocity = Vector2.DOWN.rotated(rotation) * _dog_speed
-			
-		if Input.is_action_pressed("move_down"):
-			_velocity = Vector2.UP.rotated(rotation) * _dog_speed
-			
-		set_pos_and_motion.rpc(position, rotation, _direction, _velocity)
-	else:
-		print("I don't!")
+func _on_bark_cone_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("sheep"):
+		_sheep_in_bark_cone.append(body)
 
-	rotation += _angular_speed * _direction * delta
-	position += _velocity * delta
 
-@rpc("unreliable")
-func set_pos_and_motion(pos: Vector2, rot: float, direction: int, velocity: Vector2) -> void:
-	print(pos)
-	print(rot)
-	print(direction)
-	print(velocity)
-	# print("set called!")
-	position = pos
-	rotation = rot
-	_direction = direction
-	_velocity = velocity
+func _on_bark_cone_area_body_exited(body: Node2D) -> void:
+	if (body.is_in_group("sheep")):
+		_sheep_in_bark_cone.remove_at(_sheep_in_bark_cone.find(body))

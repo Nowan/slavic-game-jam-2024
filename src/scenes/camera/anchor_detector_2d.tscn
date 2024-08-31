@@ -1,19 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyxps5ubb6yi2"]
+[gd_scene load_steps=3 format=3 uid="uid://bn2nkaasebek5"]
 
-[ext_resource type="Script" path="res://src/scenes/camera/anchor_detector_2d.gd" id="1_r4tv4"]
+[ext_resource type="Script" path="res://src/scenes/camera/anchor_detector_2d.gd" id="1_ou84k"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_11d6s"]
-radius = 75.0
-height = 402.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bboa2"]
 
 [node name="AnchorDetector2D" type="Area2D"]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
-script = ExtResource("1_r4tv4")
+script = ExtResource("1_ou84k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_11d6s")
+shape = SubResource("CapsuleShape2D_bboa2")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc12g1frjraup"]
+
+[ext_resource type="Texture2D" uid="uid://ciptnvkh76kkj" path="res://assets/Collisions/collision_04.png" id="1_sivml"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_43787"]
+radius = 76.0
+height = 198.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l2r8i"]
+radius = 39.0
+height = 114.0
+
+[node name="Rock1" type="Sprite2D"]
+texture = ExtResource("1_sivml")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2, 52)
+shape = SubResource("CapsuleShape2D_43787")
+one_way_collision_margin = 28.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(10, -110)
+shape = SubResource("CapsuleShape2D_l2r8i")

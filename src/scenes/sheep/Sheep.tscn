@@ -1,24 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvillbq0e0oqg"]
+[gd_scene load_steps=6 format=3 uid="uid://bvillbq0e0oqg"]
 
-[ext_resource type="Texture2D" uid="uid://bd2q2iw2i61pf" path="res://assets/Sheep/placeholder.png" id="1_5bl67"]
+[ext_resource type="Script" path="res://src/scenes/flock/Boid.gd" id="1_vrejd"]
+[ext_resource type="Texture2D" uid="uid://b1ctic1gjet45" path="res://assets/Sheep/sheep.png" id="2_m7w4x"]
+[ext_resource type="Script" path="res://src/scenes/flock/ViewRadius.gd" id="3_nljcv"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ukvr5"]
-radius = 137.948
-height = 462.655
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xtgww"]
+radius = 47.8064
+height = 95.6128
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ga8hs"]
-radius = 563.816
+[sub_resource type="CircleShape2D" id="CircleShape2D_lov48"]
+radius = 293.043
 
-[node name="Sheep" type="Sprite2D"]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_5bl67")
+[node name="Sheep" type="CharacterBody2D" groups=["sheep"]]
+script = ExtResource("1_vrejd")
 
-[node name="SheepArea" type="Area2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0.0284538, -0.238901)
+scale = Vector2(0.251141, 0.251711)
+texture = ExtResource("2_m7w4x")
 
-[node name="SheepHitbox" type="CollisionShape2D" parent="SheepArea"]
-position = Vector2(-2.12227, -8.48908)
-shape = SubResource("CapsuleShape2D_ukvr5")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.19361)
+shape = SubResource("CapsuleShape2D_xtgww")
 
-[node name="SheepScarebox" type="CollisionShape2D" parent="SheepArea"]
-rotation = -1.79594
-shape = SubResource("CircleShape2D_ga8hs")
+[node name="FlockView" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="ViewRadius" type="CollisionShape2D" parent="FlockView" groups=["sheep"]]
+shape = SubResource("CircleShape2D_lov48")
+script = ExtResource("3_nljcv")
+
+[node name="FleeingStopTimer" type="Timer" parent="."]
+
+[node name="GrazingTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
+[connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]
+[connection signal="timeout" from="FleeingStopTimer" to="." method="_on_fleeing_stop_timer_timeout"]

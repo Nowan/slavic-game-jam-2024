@@ -1,36 +1,39 @@
-[gd_scene load_steps=7 format=3 uid="uid://mwmynyrns760"]
+[gd_scene load_steps=5 format=3 uid="uid://mwmynyrns760"]
 
-[ext_resource type="Texture2D" uid="uid://ljg8b5p34ome" path="res://assets/Dog/placeholder.png" id="1_1vi1y"]
-[ext_resource type="Script" path="res://src/scenes/dog/dog.gd" id="2_2pufu"]
-[ext_resource type="PackedScene" uid="uid://ctl7lacira7x7" path="res://src/scenes/camera/anchor_camera_2d.tscn" id="3_g3u46"]
-[ext_resource type="PackedScene" uid="uid://cyxps5ubb6yi2" path="res://src/scenes/camera/anchor_detector_2d.tscn" id="4_a6xw6"]
+[ext_resource type="Script" path="res://src/scenes/dog/dog.gd" id="1_6p1qn"]
+[ext_resource type="Texture2D" uid="uid://cb4wu8f5epy43" path="res://assets/Dog/dog.png" id="2_ddmj3"]
+[ext_resource type="Script" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="3_ada1q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_116tv"]
-radius = 96.0
-height = 648.0
+radius = 37.0
+height = 198.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2xfgp"]
-radius = 505.585
+[node name="Dog" type="CharacterBody2D" groups=["dog"]]
+script = ExtResource("1_6p1qn")
 
-[node name="Dog" type="Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-9.53674e-07, -1.90735e-06)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_1vi1y")
-script = ExtResource("2_2pufu")
+texture = ExtResource("2_ddmj3")
 
-[node name="DogArea" type="Area2D" parent="."]
+[node name="BarkCone" type="Node2D" parent="Sprite2D" node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d")]
+position = Vector2(3.17891e-06, 6.35783e-06)
+scale = Vector2(3.33333, 3.33333)
+script = ExtResource("3_ada1q")
+angle_deg = 100
+ray_count = 10
+write_collision_polygon = NodePath("BarkConeArea/BarkConeCollider")
+write_polygon2d = NodePath("BarkConeRenderer")
 
-[node name="DogHitbox" type="CollisionShape2D" parent="DogArea"]
+[node name="BarkConeArea" type="Area2D" parent="Sprite2D/BarkCone"]
+
+[node name="BarkConeCollider" type="CollisionPolygon2D" parent="Sprite2D/BarkCone/BarkConeArea"]
+
+[node name="BarkConeRenderer" type="Polygon2D" parent="Sprite2D/BarkCone"]
+color = Color(1, 1, 1, 0.266667)
+
+[node name="DogHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_116tv")
 
-[node name="DogScarebox" type="CollisionShape2D" parent="DogArea"]
-visible = false
-shape = SubResource("CircleShape2D_2xfgp")
-
-[node name="AnchorCamera2D" parent="." instance=ExtResource("3_g3u46")]
-visible = false
-
-[node name="AnchorDetector2D" parent="." instance=ExtResource("4_a6xw6")]
-
-[connection signal="anchor_detached" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detached"]
-[connection signal="anchor_detected" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detected"]
+[connection signal="body_entered" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_entered"]
+[connection signal="body_exited" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_exited"]
