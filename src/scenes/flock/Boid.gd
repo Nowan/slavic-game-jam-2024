@@ -22,6 +22,7 @@ var _velocity: Vector2
 
 var _status: FlockTypes.BoidStatus
 var _dogs_fleeing_from: Array[Dog] = []
+var _points_fleeting_from: Array[Vector2] = []
 
 var _fleeing_stop_timer: Timer
 var _grazing_timer: Timer
@@ -44,6 +45,7 @@ func set_status(status: FlockTypes.BoidStatus):
 	_status = status
 	match _status:
 		FlockTypes.BoidStatus.IDLE:
+			_points_fleeting_from.clear()
 			_wait_and_graze()
 		FlockTypes.BoidStatus.GRAZING:
 			_wait_and_stand()
@@ -55,7 +57,7 @@ func set_status(status: FlockTypes.BoidStatus):
 func get_status():
 	return _status
 
-func flee_from_bark(dog: Dog):
+func flee_from_bark(dog: Dog, bark_strength: float):
 	_dogs_fleeing_from.append(dog)
 	set_status(FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK)
 

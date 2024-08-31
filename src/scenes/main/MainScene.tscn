@@ -47,6 +47,11 @@ move_up = "move_up_player1"
 move_down = "move_down_player1"
 use_bark = "bark_player1"
 use_dash = "dash_player1"
+speed = 500
+rotation_speed = 3.5
+
+[node name="Camera2D" type="Camera2D" parent="Player1"]
+zoom = Vector2(0.75, 0.75)
 
 [node name="Player2" parent="." instance=ExtResource("1_7h8kt")]
 move_right = "move_right_player2"
@@ -64,6 +69,8 @@ move_up = "move_up_player3"
 move_down = "move_down_player3"
 use_bark = "bark_player3"
 use_dash = "dash_player3"
+speed = 500
+rotation_speed = 3.5
 
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
 
