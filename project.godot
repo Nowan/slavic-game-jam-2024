@@ -47,6 +47,12 @@ user_power={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="actors"
+2d_physics/layer_2="obstacles"
+2d_physics/layer_3="anchors"
+
 [physics]
 
 common/physics_interpolation=true
