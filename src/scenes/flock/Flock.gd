@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var boids: int = 20
+@export var boids: int = 100
 @export var Boid: PackedScene
 
 enum State {IDLE, FLEEING}
@@ -17,5 +17,3 @@ func _ready():
 		boid.position = Vector2(randf_range(0, _width), randf_range(0, _height))
 		boid.set_status(FlockTypes.BoidStatus.IDLE)
 		add_child(boid)
-		
-		
