@@ -1,12 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://mwmynyrns760"]
+[gd_scene load_steps=9 format=3 uid="uid://mwmynyrns760"]
 
 [ext_resource type="Script" path="res://src/scenes/dog/dog.gd" id="1_6p1qn"]
 [ext_resource type="Texture2D" uid="uid://cb4wu8f5epy43" path="res://assets/Dog/dog.png" id="2_ddmj3"]
 [ext_resource type="Script" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="3_ada1q"]
+[ext_resource type="AudioStream" uid="uid://d1xf26dnq0brb" path="res://assets/sfx/Dog1.wav" id="4_my7kk"]
+[ext_resource type="AudioStream" uid="uid://8ad7hhgaflbj" path="res://assets/sfx/Dog2.wav" id="5_7waih"]
+[ext_resource type="AudioStream" uid="uid://b7ae5lv08uaqs" path="res://assets/sfx/Dog3.wav" id="6_5cks4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_116tv"]
 radius = 37.0
 height = 198.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_kambn"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("4_my7kk")
+stream_1/stream = ExtResource("5_7waih")
+stream_2/stream = ExtResource("6_5cks4")
 
 [node name="Dog" type="CharacterBody2D" groups=["dog"]]
 script = ExtResource("1_6p1qn")
@@ -40,6 +50,10 @@ wait_time = 4.0
 
 [node name="DashCooldown" type="Timer" parent="."]
 wait_time = 8.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_kambn")
+panning_strength = 2.65
 
 [connection signal="body_entered" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_entered"]
 [connection signal="body_exited" from="Sprite2D/BarkCone/BarkConeArea" to="." method="_on_bark_cone_area_body_exited"]

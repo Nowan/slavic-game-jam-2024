@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=17 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://src/scenes/main/player_camera.gd" id="9_imdsp"]
 [ext_resource type="PackedScene" uid="uid://d0wfoh36p2b2h" path="res://src/scenes/hud/hud.tscn" id="9_sfbme"]
 [ext_resource type="PackedScene" uid="uid://bnx0y2w4u6y05" path="res://src/scenes/hole1/hole1.tscn" id="10_ersv2"]
+[ext_resource type="AudioStream" uid="uid://rv6lsxk7hpbp" path="res://assets/music/SheepSongLevel1Loop.mp3" id="12_0f1y4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5psq"]
 size = Vector2(3804.59, 3112.12)
@@ -145,3 +146,8 @@ limit_top = 0
 limit_right = 2650
 limit_bottom = 5300
 script = ExtResource("9_imdsp")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_0f1y4")
+autoplay = true
+parameters/looping = true

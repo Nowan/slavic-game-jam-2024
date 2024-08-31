@@ -72,6 +72,8 @@ func _physics_process(delta):
 		_bark_cone_area.monitoring = false
 		_bark_cone_area.monitorable = false
 		_bark_pressed_time = 0
+		$AudioStreamPlayer2D.play()
+		
 
 
 func _on_bark_cone_area_body_entered(body: Node2D) -> void:

@@ -63,6 +63,7 @@ func get_status():
 	return _status
 
 func flee_from_bark(dog: Dog, bark_strength: float):
+	$AudioStreamPlayer2D.play()
 	_barks_fleeting_from.append([dog.position, bark_strength, 0])
 	set_status(FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK)
 
