@@ -2,7 +2,9 @@ extends CharacterBody2D
 
 @export var max_speed: = 200.0
 @export var fleeing_force: = -0.05
-@export var calm_down_time: = 5
+@export var grazing_force: = 0.1
+@export var grazing_relocation_time_range: = [2, 5]
+@export var fleeing_stop_time: = 5
 @export var cohesion_force: = 0.05
 @export var algin_force: = 0.05
 @export var separation_force: = 0.05
@@ -13,37 +15,48 @@ var _width = ProjectSettings.get_setting("display/window/size/viewport_width")
 var _height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
 var _flock: Array = []
-var _mouse_target: Vector2
+var _graze_target: Vector2 = Vector2.INF
 var _velocity: Vector2
 
-var _status: FlockTypes.BoidStatus = FlockTypes.BoidStatus.IDLE
+var _status: FlockTypes.BoidStatus
 var _dogs_fleeing_from: Array = []
 
-var _calm_down_timer: Timer
+var _fleeing_stop_timer: Timer
+var _idle_relocation_timer: Timer
 
 func _ready():
 	randomize()
-	_calm_down_timer = get_node("CalmDownTimer")
-
+	_fleeing_stop_timer = get_node("FleeingStopTimer")
+	_idle_relocation_timer = get_node("IdleRelocationTimer")
+	
+	_fleeing_stop_timer.connect("timeout", set_status.bind(FlockTypes.BoidStatus.IDLE))
+	_idle_relocation_timer.connect("timeout", _graze_somewhere_else)
+	
+	set_status(FlockTypes.BoidStatus.IDLE)
+	_graze_target = get_random_target()
 	#mouse_follow_force = 0
 	#_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * max_speed
 	#_mouse_target = get_random_target()
 
 func set_status(status: FlockTypes.BoidStatus):
 	_status = status
-	#for f in _flock:
-		#if (f != self && f.get_status() != status):
-			#f.set_status(status)
+	match _status:
+		FlockTypes.BoidStatus.IDLE:
+			_wait_and_graze_somewhere_else()
+	# Uncomment to have sheep setting status of all other sheep in a flock recursively
+	# for f in _flock:
+		# if (f != self && f.get_status() != status):
+			# f.set_status(status)
 
 func get_status():
 	return _status
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.get_button_index() == MOUSE_BUTTON_LEFT:
-			_mouse_target = event.position
-		elif event.get_button_index() == MOUSE_BUTTON_RIGHT:
-			_mouse_target = get_random_target()
+#func _input(event):
+	#if event is InputEventMouseButton:
+		#if event.get_button_index() == MOUSE_BUTTON_LEFT:
+			#_graze_target = event.position
+		#elif event.get_button_index() == MOUSE_BUTTON_RIGHT:
+			#_graze_target = get_random_target()
 
 
 func _physics_process(delta):
@@ -54,17 +67,47 @@ func _physics_process(delta):
 			_physics_process_fleeing(delta)
 
 func _physics_process_idle(delta):
-	var mouse_vector = Vector2.ZERO
+	if (_graze_target != Vector2.INF):
+		var grazing_vector = Vector2.ZERO
+		if _graze_target != Vector2.INF:
+			grazing_vector = global_position.direction_to(_graze_target) * max_speed * grazing_force
+			
+			## get cohesion, alginment, and separation vectorsw
+		var vectors = get_flock_status(_flock)
+		
+		# steer towards vectors
+		var cohesion_vector = vectors[0] * cohesion_force * 0.5
+		var align_vector = vectors[1] * algin_force * 0.5
+		var separation_vector = vectors[2] * separation_force * 0.5
+
+		var acceleration = cohesion_vector + align_vector + separation_vector + grazing_vector
+		
+		_velocity = (_velocity + acceleration).limit_length(max_speed)
+		
+		look_at(position + _velocity)
+		rotate(-PI * 0.5)
+
+		DebugDraw2d.line_vector(position, _velocity);
+		
+		set_velocity(_velocity)
+		move_and_slide()
+		
+		if position.distance_to(_graze_target) < 10:
+			_velocity = Vector2.ZERO
+			_graze_target = Vector2.INF
+			_wait_and_graze_somewhere_else()
+		else:
+			_velocity = velocity
+	
 
 func _physics_process_fleeing(delta: float):
 	var fleeing_vector = Vector2.ZERO
-	#if _mouse_target != Vector2.INF:
-		#mouse_vector = global_position.direction_to(_mouse_target) * max_speed * fleeing_force
+
 	if _dogs_fleeing_from.size() > 0:
 		var positions_fleeing_from = _dogs_fleeing_from.map(func(dog): return dog.position)
 		fleeing_vector = global_position.direction_to(_calc_centroid(positions_fleeing_from)) * max_speed * fleeing_force
-	## get cohesion, alginment, and separation vectorsw
 	
+	## get cohesion, alginment, and separation vectorsw
 	var vectors = get_flock_status(_flock)
 	
 	# steer towards vectors
@@ -123,7 +166,7 @@ func _on_flock_view_body_entered(body: Node2D) -> void:
 	if body.is_in_group("dog"):
 		_dogs_fleeing_from.append(body)
 		set_status(FlockTypes.BoidStatus.FLEEING)
-		_calm_down_timer.stop()
+		_fleeing_stop_timer.stop()
 	elif body.is_in_group("sheep") && self != body:
 		_flock.append(body)
 
@@ -132,12 +175,7 @@ func _on_flock_view_body_exited(body: Node2D) -> void:
 	if body.is_in_group("dog"):
 		_dogs_fleeing_from.remove_at(_dogs_fleeing_from.find(body))
 
-		_calm_down_timer.start(calm_down_time)
-		#if _calm_down_timer:
-			#_calm_down_timer.cancel_free()
-		#_calm_down_timer = get_tree().create_timer(calm_down_time)
-		#_calm_down_timer.timeout.connect(set_status.bind(FlockTypes.BoidStatus.IDLE))
-		#set_status(FlockTypes.BoidStatus.IDLE)
+		_fleeing_stop_timer.start(fleeing_stop_time)
 	elif body.is_in_group("sheep") && self != body:
 		_flock.remove_at(_flock.find(body))
 
@@ -148,6 +186,12 @@ func _calc_centroid(points: Array) -> Vector2:
 	
 	return centroid / points.size()
 
+func _wait_and_graze_somewhere_else():
+	_idle_relocation_timer.stop()
+	_idle_relocation_timer.start(randi_range(grazing_relocation_time_range[0], grazing_relocation_time_range[1]))
 
-func _on_calm_down_timer_timeout() -> void:
-	set_status(FlockTypes.BoidStatus.IDLE)
+func _graze_somewhere_else():
+	print("graze somewhere else")
+	_idle_relocation_timer.stop()
+	
+	_graze_target = get_random_target()

@@ -31,8 +31,9 @@ monitorable = false
 shape = SubResource("CircleShape2D_lov48")
 script = ExtResource("3_nljcv")
 
-[node name="CalmDownTimer" type="Timer" parent="."]
+[node name="FleeingStopTimer" type="Timer" parent="."]
+
+[node name="IdleRelocationTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
 [connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]
-[connection signal="timeout" from="CalmDownTimer" to="." method="_on_calm_down_timer_timeout"]
