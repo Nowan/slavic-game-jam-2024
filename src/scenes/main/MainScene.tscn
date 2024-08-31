@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=10 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://bvillbq0e0oqg" path="res://src/scenes/sheep/Sheep.tscn" id="3_e26ju"]
@@ -6,8 +6,29 @@
 [ext_resource type="PackedScene" uid="uid://c8k732tosm3hi" path="res://src/scenes/rock2/rock_2.tscn" id="5_o74at"]
 [ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="6_r3s50"]
 [ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="7_a2hia"]
+[ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="7_hvpbq"]
+[ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="8_24hfu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esxmi"]
+size = Vector2(3386, 3071)
 
 [node name="Main" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 2654.0
+offset_bottom = 5319.0
+texture = ExtResource("7_hvpbq")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Win Area" parent="." instance=ExtResource("8_24hfu")]
+position = Vector2(927, 861)
 
 [node name="Dog" parent="." instance=ExtResource("1_7h8kt")]
 position = Vector2(841, 309)
@@ -20,7 +41,7 @@ position = Vector2(162, 418)
 scale = Vector2(0.5, 0.5)
 
 [node name="Rock2" parent="." instance=ExtResource("5_o74at")]
-position = Vector2(784, 1298)
+position = Vector2(1870, 1053)
 scale = Vector2(0.5, 0.5)
 
 [node name="Rock3" parent="." instance=ExtResource("6_r3s50")]
@@ -28,5 +49,23 @@ position = Vector2(256, 1800)
 scale = Vector2(0.7, 0.7)
 
 [node name="Rock4" parent="." instance=ExtResource("7_a2hia")]
-position = Vector2(666, 2382)
+position = Vector2(996, 1307)
 scale = Vector2(0.5, 0.5)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1703, 1525.5)
+shape = SubResource("RectangleShape2D_esxmi")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1359, 3728)
+shape = SubResource("RectangleShape2D_esxmi")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1369, -1526)
+shape = SubResource("RectangleShape2D_esxmi")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4350, 1546)
+shape = SubResource("RectangleShape2D_esxmi")
