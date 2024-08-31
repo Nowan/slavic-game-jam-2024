@@ -1,2 +1,2 @@
 class_name FlockTypes
-enum BoidStatus {IDLE, FLEEING}
+enum BoidStatus {IDLE, GRAZING, FLEEING}

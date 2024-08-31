@@ -33,7 +33,8 @@ script = ExtResource("3_nljcv")
 
 [node name="FleeingStopTimer" type="Timer" parent="."]
 
-[node name="IdleRelocationTimer" type="Timer" parent="."]
+[node name="GrazingTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
 [connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]
+[connection signal="timeout" from="FleeingStopTimer" to="." method="_on_fleeing_stop_timer_timeout"]

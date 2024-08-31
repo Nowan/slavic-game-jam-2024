@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var boids: int = 5
+@export var boids: int = 20
 @export var Boid: PackedScene
 
 var _width = ProjectSettings.get_setting("display/window/size/viewport_width")

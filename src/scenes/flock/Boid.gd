@@ -3,7 +3,8 @@ extends CharacterBody2D
 @export var max_speed: = 200.0
 @export var fleeing_force: = -0.05
 @export var grazing_force: = 0.1
-@export var grazing_relocation_time_range: = [2, 5]
+@export var staying_idle_time_range: = [4, 10]
+@export var grazing_time_range: = [2, 10]
 @export var fleeing_stop_time: = 5
 @export var cohesion_force: = 0.05
 @export var algin_force: = 0.05
@@ -22,15 +23,15 @@ var _status: FlockTypes.BoidStatus
 var _dogs_fleeing_from: Array = []
 
 var _fleeing_stop_timer: Timer
-var _idle_relocation_timer: Timer
+var _grazing_timer: Timer
 
 func _ready():
 	randomize()
 	_fleeing_stop_timer = get_node("FleeingStopTimer")
-	_idle_relocation_timer = get_node("IdleRelocationTimer")
+	_grazing_timer = get_node("GrazingTimer")
 	
 	_fleeing_stop_timer.connect("timeout", set_status.bind(FlockTypes.BoidStatus.IDLE))
-	_idle_relocation_timer.connect("timeout", _graze_somewhere_else)
+	_grazing_timer.connect("timeout", _switch_idle_or_graze)
 	
 	set_status(FlockTypes.BoidStatus.IDLE)
 	_graze_target = get_random_target()
@@ -42,7 +43,9 @@ func set_status(status: FlockTypes.BoidStatus):
 	_status = status
 	match _status:
 		FlockTypes.BoidStatus.IDLE:
-			_wait_and_graze_somewhere_else()
+			_wait_and_graze()
+		FlockTypes.BoidStatus.GRAZING:
+			_wait_and_stand()
 	# Uncomment to have sheep setting status of all other sheep in a flock recursively
 	# for f in _flock:
 		# if (f != self && f.get_status() != status):
@@ -51,53 +54,42 @@ func set_status(status: FlockTypes.BoidStatus):
 func get_status():
 	return _status
 
-#func _input(event):
-	#if event is InputEventMouseButton:
-		#if event.get_button_index() == MOUSE_BUTTON_LEFT:
-			#_graze_target = event.position
-		#elif event.get_button_index() == MOUSE_BUTTON_RIGHT:
-			#_graze_target = get_random_target()
-
 
 func _physics_process(delta):
 	match _status:
 		FlockTypes.BoidStatus.IDLE:
 			_physics_process_idle(delta)
+		FlockTypes.BoidStatus.GRAZING:
+			_physics_process_grazing(delta)
 		FlockTypes.BoidStatus.FLEEING:
 			_physics_process_fleeing(delta)
 
 func _physics_process_idle(delta):
-	if (_graze_target != Vector2.INF):
-		var grazing_vector = Vector2.ZERO
-		if _graze_target != Vector2.INF:
-			grazing_vector = global_position.direction_to(_graze_target) * max_speed * grazing_force
-			
-			## get cohesion, alginment, and separation vectorsw
-		var vectors = get_flock_status(_flock)
-		
-		# steer towards vectors
-		var cohesion_vector = vectors[0] * cohesion_force * 0.5
-		var align_vector = vectors[1] * algin_force * 0.5
-		var separation_vector = vectors[2] * separation_force * 0.5
+	pass # do nothing
+	
+func _physics_process_grazing(delta):
+	var vectors = get_flock_status(_flock)
+	
+	# steer towards vectors
+	var cohesion_vector = vectors[0] * cohesion_force * 0.2
+	var align_vector = vectors[1] * algin_force * 0.2
+	var separation_vector = vectors[2] * separation_force * 5
 
-		var acceleration = cohesion_vector + align_vector + separation_vector + grazing_vector
-		
-		_velocity = (_velocity + acceleration).limit_length(max_speed)
-		
+	var acceleration = cohesion_vector + align_vector + separation_vector
+	var grazing_progress = _grazing_timer.time_left / _grazing_timer.wait_time
+	
+	_velocity = (_velocity + acceleration * grazing_progress * 5).limit_length(max_speed)
+	
+	if _velocity.length() > 1:
 		look_at(position + _velocity)
 		rotate(-PI * 0.5)
 
-		DebugDraw2d.line_vector(position, _velocity);
-		
-		set_velocity(_velocity)
-		move_and_slide()
-		
-		if position.distance_to(_graze_target) < 10:
-			_velocity = Vector2.ZERO
-			_graze_target = Vector2.INF
-			_wait_and_graze_somewhere_else()
-		else:
-			_velocity = velocity
+	DebugDraw2d.line_vector(position, _velocity);
+	
+	set_velocity(_velocity)
+	move_and_slide()
+	
+	_velocity = velocity
 	
 
 func _physics_process_fleeing(delta: float):
@@ -186,12 +178,24 @@ func _calc_centroid(points: Array) -> Vector2:
 	
 	return centroid / points.size()
 
-func _wait_and_graze_somewhere_else():
-	_idle_relocation_timer.stop()
-	_idle_relocation_timer.start(randi_range(grazing_relocation_time_range[0], grazing_relocation_time_range[1]))
+func _switch_idle_or_graze():
+	match _status:
+		FlockTypes.BoidStatus.IDLE:
+			set_status(FlockTypes.BoidStatus.GRAZING)
+			#_wait_and_graze()
+		FlockTypes.BoidStatus.GRAZING:
+			set_status(FlockTypes.BoidStatus.IDLE)
+			#_wait_and_stand()
 
+func _wait_and_graze():
+	_grazing_timer.stop()
+	_grazing_timer.start(randf_range(staying_idle_time_range[0], staying_idle_time_range[1]))
+
+func _wait_and_stand():
+	_grazing_timer.stop()
+	_grazing_timer.start(randf_range(grazing_time_range[0], grazing_time_range[1]))
+	
 func _graze_somewhere_else():
-	print("graze somewhere else")
-	_idle_relocation_timer.stop()
+	_grazing_timer.stop()
 	
 	_graze_target = get_random_target()
