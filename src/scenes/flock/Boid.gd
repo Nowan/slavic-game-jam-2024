@@ -18,10 +18,10 @@ var _width = ProjectSettings.get_setting("display/window/size/viewport_width")
 var _height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
 var _flock: Array[Sheep] = []
-var _graze_target: Vector2 = Vector2.INF
-var _velocity: Vector2
+@export var _graze_target: Vector2 = Vector2.INF
+@export var _velocity: Vector2
 
-var _status: FlockTypes.BoidStatus
+@export var _status: FlockTypes.BoidStatus
 
 var _dogs_fleeing_from: Array[Dog] = []
 var _barks_fleeting_from: Array = []
@@ -39,6 +39,8 @@ func _ready():
 	
 	set_status(FlockTypes.BoidStatus.IDLE)
 	_graze_target = get_random_target()
+	
+	print(str($MultiplayerSynchronizer.replication_config.get_properties()))
 	#mouse_follow_force = 0
 	#_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * max_speed
 	#_mouse_target = get_random_target()

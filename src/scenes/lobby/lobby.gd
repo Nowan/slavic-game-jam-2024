@@ -4,6 +4,7 @@ extends Control
 # Not present on the list of registered or common ports as of May 2024:
 # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
 const DEFAULT_PORT = 8910
+const MAX_PLAYERS = 10
 
 @onready var address: LineEdit = $Address
 @onready var host_button: Button = $HostButton
@@ -12,6 +13,10 @@ const DEFAULT_PORT = 8910
 @onready var status_fail: Label = $StatusFail
 @onready var port_forward_label: Label = $PortForward
 @onready var find_public_ip_button: LinkButton = $FindPublicIP
+
+var players = {}
+var player_info = {"name": "Name"}
+var players_loaded = 0
 
 var peer: ENetMultiplayerPeer
 
@@ -23,6 +28,8 @@ func _ready() -> void:
 		# a Godot binary (editor or export template) with the `--headless`
 		# command-line argument.
 		_on_host_pressed()
+	else:
+		_connect_to_server()
 		
 	# Connect all the callbacks related to networking.
 	multiplayer.peer_connected.connect(_player_connected)
@@ -31,19 +38,49 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_connected_fail)
 	multiplayer.server_disconnected.connect(_server_disconnected)
 
-#region Network callbacks from SceneTree
-# Callback from SceneTree.
-func _player_connected(_id: int) -> void:
-	# Someone connected, start the game!
+# When the server decides to start the game from a UI scene,
+# do Lobby.load_game.rpc(filepath)
+# @rpc("call_local", "reliable")
+func load_game():
 	var main: Node2D = load("res://src/scenes/main/MainScene.tscn").instantiate()
 	# Connect deferred so we can safely erase it from the callback.
 	# main.game_finished.connect(_end_game, CONNECT_DEFERRED)
 
 	get_tree().get_root().add_child(main)
 	hide()
+	
+	if not multiplayer.is_server():
+		player_loaded.rpc_id(1)
+	
+# Every peer will call this when they have loaded the game scene.
+@rpc("any_peer", "reliable")
+func player_loaded():
+	players_loaded += 1
+	print("loaded " + str(players_loaded) + " out of " + str(players.size()))
+	if players_loaded == players.size():
+		# $/root/Game.start_game()
+		print("load game!")
+		load_game()
+		players_loaded = 0
+	
+#region Network callbacks from SceneTree
+# Callback from SceneTree.
+func _player_connected(_id: int) -> void:
+	if _id == 1 or multiplayer.is_server():
+		return
+	
+	print("Registring " + str(_id))
+	_register_player.rpc_id(_id, player_info)
 
+@rpc("any_peer", "reliable")
+func _register_player(new_player_info):
+	var new_player_id = multiplayer.get_remote_sender_id()
+	players[new_player_id] = new_player_info
+	# player_connected.emit(new_player_id, new_player_info)
 
 func _player_disconnected(_id: int) -> void:
+	players.erase(_id)
+	
 	if multiplayer.is_server():
 		_end_game("Client disconnected.")
 	else:
@@ -52,8 +89,12 @@ func _player_disconnected(_id: int) -> void:
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_ok() -> void:
-	pass # This function is not needed for this project.
-
+	var peer_id = multiplayer.get_unique_id()
+	print("connected ok, I am " + str(peer_id))
+	players[peer_id] = player_info
+	_register_player.rpc_id(1, player_info)
+	# load_game()
+	# player_connected.emit(peer_id, player_info)
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail() -> void:
@@ -96,7 +137,7 @@ func _set_status(text: String, is_ok: bool) -> void:
 func _on_host_pressed() -> void:
 	peer = ENetMultiplayerPeer.new()
 	# Set a maximum of 1 peer, since Pong is a 2-player game.
-	var err := peer.create_server(DEFAULT_PORT, 1)
+	var err := peer.create_server(DEFAULT_PORT, MAX_PLAYERS)
 	if err != OK:
 		# Is another server running?
 		_set_status("Can't host, address in use.",false)
@@ -114,20 +155,25 @@ func _on_host_pressed() -> void:
 	find_public_ip_button.visible = true
 
 
-func _on_join_pressed() -> void:
+func _connect_to_server():
 	var ip := address.get_text()
 	if not ip.is_valid_ip_address():
 		_set_status("IP address is invalid.", false)
 		return
 
 	peer = ENetMultiplayerPeer.new()
-	peer.create_client(ip, DEFAULT_PORT)
+	var error = peer.create_client(ip, DEFAULT_PORT)
+	if error:
+		return error
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.set_multiplayer_peer(peer)
 
 	_set_status("Connecting...", true)
 	get_window().title = ProjectSettings.get_setting("application/config/name") + ": Client"
 #endregion
+
+func _on_join_pressed():
+	load_game()
 
 func _on_find_public_ip_pressed() -> void:
 	OS.shell_open("https://icanhazip.com/")
