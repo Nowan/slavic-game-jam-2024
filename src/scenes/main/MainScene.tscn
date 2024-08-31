@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
-[ext_resource type="PackedScene" uid="uid://bvillbq0e0oqg" path="res://src/scenes/sheep/Sheep.tscn" id="3_e26ju"]
+[ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
 [ext_resource type="PackedScene" uid="uid://bfrr7ra767c2r" path="res://src/scenes/rock1/rock_1.tscn" id="4_ods2q"]
 [ext_resource type="PackedScene" uid="uid://c8k732tosm3hi" path="res://src/scenes/rock2/rock_2.tscn" id="5_o74at"]
 [ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="6_r3s50"]
@@ -31,10 +31,11 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(927, 861)
 
 [node name="Dog" parent="." instance=ExtResource("1_7h8kt")]
-position = Vector2(841, 309)
+position = Vector2(1232, 876)
 
-[node name="Sheep" parent="." instance=ExtResource("3_e26ju")]
-position = Vector2(404, 305)
+[node name="Camera2D" type="Camera2D" parent="Dog"]
+
+[node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
 
 [node name="Rock1" parent="." instance=ExtResource("4_ods2q")]
 position = Vector2(162, 418)

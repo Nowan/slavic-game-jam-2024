@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://tcsj7rnv05k3"]
+
+[ext_resource type="Script" path="res://src/scenes/camera/anchor_2d.gd" id="1_bk5mt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oudsp"]
+size = Vector2(300, 300)
+
+[node name="Anchor2D" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_bk5mt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oudsp")
