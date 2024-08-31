@@ -44,8 +44,6 @@ move_left = "move_left_player1"
 move_up = "move_up_player1"
 move_down = "move_down_player1"
 use_power = "use_power_player1"
-speed = 500
-rotation_speed = 3.5
 
 [node name="Camera2D" type="Camera2D" parent="Player1"]
 zoom = Vector2(0.75, 0.75)
@@ -57,8 +55,6 @@ move_left = "move_left_player2"
 move_up = "move_up_player2"
 move_down = "move_down_player2"
 use_power = "use_power_player2"
-speed = 500
-rotation_speed = 3.5
 
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
 

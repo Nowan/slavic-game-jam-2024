@@ -1,8 +1,9 @@
 class_name Sheep extends CharacterBody2D
 
 @export var max_speed: = 200.0
-@export var fleeing_dog_force: = 0.05
-@export var fleeing_dog_bark_force: = 0.15
+@export var fleeing_dog_force: = 0.08
+@export var fleeing_dog_bark_force_multiplier: = 7.0
+@export var dog_bark_exhaustion_time = 2.0
 @export var grazing_force: = 0.1
 @export var staying_idle_time_range: = [4, 10]
 @export var grazing_time_range: = [2, 10]
@@ -22,7 +23,7 @@ var _velocity: Vector2
 
 var _status: FlockTypes.BoidStatus
 var _dogs_fleeing_from: Array[Player] = []
-var _points_fleeting_from: Array[Vector2] = []
+var _barks_fleeting_from: Array = []
 
 var _fleeing_stop_timer: Timer
 var _grazing_timer: Timer
@@ -45,9 +46,12 @@ func set_status(status: FlockTypes.BoidStatus):
 	_status = status
 	match _status:
 		FlockTypes.BoidStatus.IDLE:
-			_points_fleeting_from.clear()
+			_barks_fleeting_from.clear()
+			_dogs_fleeing_from.clear()
 			_wait_and_graze()
 		FlockTypes.BoidStatus.GRAZING:
+			_barks_fleeting_from.clear()
+			_dogs_fleeing_from.clear()
 			_wait_and_stand()
 	# Uncomment to have sheep setting status of all other sheep in a flock recursively
 	# for f in _flock:
@@ -58,7 +62,7 @@ func get_status():
 	return _status
 
 func flee_from_bark(dog: Player, bark_strength: float):
-	_dogs_fleeing_from.append(dog)
+	_barks_fleeting_from.append([dog.position, bark_strength, 0])
 	set_status(FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK)
 
 func _physics_process(delta):
@@ -102,12 +106,22 @@ func _physics_process_grazing(delta):
 
 func _physics_process_fleeing(delta: float):
 	var fleeing_vector = Vector2.ZERO
-	var fleeing_force = fleeing_dog_force if _status == FlockTypes.BoidStatus.FLEEING_FROM_DOG else fleeing_dog_bark_force
 
 	if _dogs_fleeing_from.size() > 0:
 		var positions_fleeing_from = _dogs_fleeing_from.map(func(dog): return dog.position)
-		fleeing_vector = global_position.direction_to(_calc_centroid(positions_fleeing_from)) * max_speed * fleeing_force * -1
+		fleeing_vector = global_position.direction_to(_calc_centroid(positions_fleeing_from)) * max_speed * fleeing_dog_force * -1
 	
+	if _barks_fleeting_from.size() > 0:
+		for bark_entry in _barks_fleeting_from:
+			var bark_position = bark_entry[0]
+			var bark_strength = bark_entry[1]
+			var bark_elapsed_time = bark_entry[2]
+			var bark_exhaustion_force = 1.0 - minf(bark_elapsed_time / dog_bark_exhaustion_time, 1.0)
+			
+			fleeing_vector += global_position.direction_to(bark_position) * bark_strength * -1 * fleeing_dog_bark_force_multiplier
+			
+			bark_entry[2] += delta
+			
 	## get cohesion, alginment, and separation vectorsw
 	var vectors = get_flock_status(_flock)
 	
