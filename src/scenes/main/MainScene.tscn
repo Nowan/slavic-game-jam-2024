@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=24 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
@@ -13,6 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://bnx0y2w4u6y05" path="res://src/scenes/hole1/hole1.tscn" id="10_ersv2"]
 [ext_resource type="Script" path="res://src/scenes/hole1/wall.gd" id="11_j7k2h"]
 [ext_resource type="AudioStream" uid="uid://rv6lsxk7hpbp" path="res://assets/music/SheepSongLevel1Loop.mp3" id="12_0f1y4"]
+[ext_resource type="AudioStream" uid="uid://ca8oikc0rw45u" path="res://assets/music/SheepSongLevel2Loop.mp3" id="13_2ef3j"]
+[ext_resource type="AudioStream" uid="uid://clq8bgy6nin2w" path="res://assets/music/SheepSongLevel3Loop.mp3" id="14_e1txp"]
+[ext_resource type="AudioStream" uid="uid://dnd32ttsadjex" path="res://assets/music/SheepSongLevel4Loop.mp3" id="15_sf3v4"]
+[ext_resource type="AudioStream" uid="uid://boqgeuiuc56hd" path="res://assets/music/SheepSongLevel5Loop.mp3" id="16_jt61n"]
+[ext_resource type="AudioStream" uid="uid://bsv2x8me26u6f" path="res://assets/music/SheepSongLevel6Loop.mp3" id="17_h4j5x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5psq"]
 size = Vector2(3804.59, 3112.12)
@@ -25,6 +30,15 @@ size = Vector2(2667.5, 1538)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8d74r"]
 size = Vector2(1914.91, 5751.52)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8pgxy"]
+streams_count = 6
+stream_0/stream = ExtResource("12_0f1y4")
+stream_1/stream = ExtResource("13_2ef3j")
+stream_2/stream = ExtResource("14_e1txp")
+stream_3/stream = ExtResource("15_sf3v4")
+stream_4/stream = ExtResource("16_jt61n")
+stream_5/stream = ExtResource("17_h4j5x")
 
 [node name="Main" type="Node2D" groups=["players"]]
 
@@ -159,9 +173,8 @@ script = ExtResource("9_imdsp")
 zoom_speed = 0.2
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_0f1y4")
+stream = SubResource("AudioStreamRandomizer_8pgxy")
 autoplay = true
-parameters/looping = true
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("11_j7k2h")
