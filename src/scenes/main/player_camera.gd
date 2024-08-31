@@ -32,7 +32,6 @@ func _process(delta):
 	else:
 		z = clamp(screen_size.y / r.size.y, min_zoom, max_zoom)
 	
-	print(z)
 	zoom = lerp(zoom, Vector2.ONE * z, zoom_speed)
 	
 func _calc_centroid(points: Array) -> Vector2:
@@ -42,8 +41,8 @@ func _calc_centroid(points: Array) -> Vector2:
 	
 	return centroid / points.size()
 	
-func _calc_furthest_distance(players: Array) -> int:
-	var furthest_distance: int
+func _calc_furthest_distance(players: Array) -> float:
+	var furthest_distance: float
 	
 	for player: Vector2 in players:
 		for other_player: Vector2 in players:

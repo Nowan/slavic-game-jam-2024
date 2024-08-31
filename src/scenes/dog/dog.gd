@@ -5,7 +5,8 @@ extends CharacterBody2D
 @export var move_left = "ui_left"
 @export var move_up = "ui_up"
 @export var move_down = "ui_down"
-@export var use_power = "ui_accept"
+@export var use_bark = "ui_accept"
+@export var use_dash = "ui_cancel"
 
 @export var speed = 500
 @export var rotation_speed = 3.5
@@ -36,9 +37,12 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	if Input.is_action_just_pressed(use_power):
+	if Input.is_action_just_pressed(use_bark):
 		for sheep in _sheep_in_bark_cone:
 			sheep.flee_from_bark(self)
+	
+	if Input.is_action_just_pressed(use_dash):
+		self.speed *= 2
 	
 
 func _on_bark_cone_area_body_entered(body: Node2D) -> void:
