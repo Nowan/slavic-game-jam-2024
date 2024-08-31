@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=8 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
@@ -7,12 +7,29 @@
 [ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="6_r3s50"]
 [ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="7_a2hia"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_usp8x"]
+size = Vector2(1013, 4153)
+
 [node name="Main" type="Node2D"]
 
-[node name="Dog" parent="." instance=ExtResource("1_7h8kt")]
+[node name="Player1" parent="." instance=ExtResource("1_7h8kt")]
 position = Vector2(1232, 876)
+move_right = "move_right_player1"
+move_left = "move_left_player1"
+move_up = "move_up_player1"
+move_down = "move_down_player1"
+use_power = "use_power_player1"
 
-[node name="Camera2D" type="Camera2D" parent="Dog"]
+[node name="Camera2D" type="Camera2D" parent="Player1"]
+zoom = Vector2(0.75, 0.75)
+
+[node name="Player2" parent="." instance=ExtResource("1_7h8kt")]
+position = Vector2(1230, 408)
+move_right = "move_right_player2"
+move_left = "move_left_player2"
+move_up = "move_up_player2"
+move_down = "move_down_player2"
+use_power = "use_power_player2"
 
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
 
@@ -31,3 +48,13 @@ scale = Vector2(0.7, 0.7)
 [node name="Rock4" parent="." instance=ExtResource("7_a2hia")]
 position = Vector2(666, 2382)
 scale = Vector2(0.5, 0.5)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-516.5, 1524.5)
+shape = SubResource("RectangleShape2D_usp8x")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(3100, 1546)
+shape = SubResource("RectangleShape2D_usp8x")

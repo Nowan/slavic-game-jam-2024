@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bvillbq0e0oqg"]
 
 [ext_resource type="Script" path="res://src/scenes/flock/Boid.gd" id="1_vrejd"]
-[ext_resource type="Texture2D" uid="uid://bd2q2iw2i61pf" path="res://assets/Sheep/placeholder.png" id="2_bbuec"]
+[ext_resource type="Texture2D" uid="uid://b1ctic1gjet45" path="res://assets/Sheep/sheep.png" id="2_m7w4x"]
 [ext_resource type="Script" path="res://src/scenes/flock/ViewRadius.gd" id="3_nljcv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xtgww"]
@@ -17,7 +17,7 @@ script = ExtResource("1_vrejd")
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0.0284538, -0.238901)
 scale = Vector2(0.251141, 0.251711)
-texture = ExtResource("2_bbuec")
+texture = ExtResource("2_m7w4x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.19361)
