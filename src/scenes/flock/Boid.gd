@@ -119,7 +119,7 @@ func _physics_process_fleeing(delta: float):
 			var bark_elapsed_time = bark_entry[2]
 			var bark_exhaustion_force = 1.0 - minf(bark_elapsed_time / dog_bark_exhaustion_time, 1.0)
 			
-			fleeing_vector += global_position.direction_to(bark_position) * bark_strength * -1 * fleeing_dog_bark_force_multiplier
+			fleeing_vector += global_position.direction_to(bark_position) * bark_strength * -1 * fleeing_dog_bark_force_multiplier * bark_exhaustion_force
 			
 			bark_entry[2] += delta
 			
