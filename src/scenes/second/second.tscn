@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://coh4uq2g684cr"]
+
+[ext_resource type="Texture2D" uid="uid://deyhvtl365vs6" path="res://assets/Map/level_1.png" id="1_rddo3"]
+[ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="2_mh1xx"]
+[ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="3_rfbdf"]
+[ext_resource type="PackedScene" uid="uid://bvillbq0e0oqg" path="res://src/scenes/sheep/Sheep.tscn" id="4_c7y18"]
+[ext_resource type="PackedScene" uid="uid://bfrr7ra767c2r" path="res://src/scenes/rock1/rock_1.tscn" id="5_ouqtj"]
+[ext_resource type="PackedScene" uid="uid://c8k732tosm3hi" path="res://src/scenes/rock2/rock_2.tscn" id="6_hbi55"]
+[ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="7_g02g3"]
+[ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="8_be5kj"]
+
+[node name="Second" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 2654.0
+offset_bottom = 5319.0
+texture = ExtResource("1_rddo3")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Win Area" parent="." instance=ExtResource("2_mh1xx")]
+position = Vector2(927, 861)
+
+[node name="Dog" parent="." instance=ExtResource("3_rfbdf")]
+position = Vector2(841, 309)
+
+[node name="Sheep" parent="." instance=ExtResource("4_c7y18")]
+position = Vector2(404, 305)
+
+[node name="Rock1" parent="." instance=ExtResource("5_ouqtj")]
+position = Vector2(162, 418)
+scale = Vector2(0.5, 0.5)
+
+[node name="Rock2" parent="." instance=ExtResource("6_hbi55")]
+position = Vector2(1870, 1053)
+scale = Vector2(0.5, 0.5)
+
+[node name="Rock3" parent="." instance=ExtResource("7_g02g3")]
+position = Vector2(256, 1800)
+scale = Vector2(0.7, 0.7)
+
+[node name="Rock4" parent="." instance=ExtResource("8_be5kj")]
+position = Vector2(996, 1307)
+scale = Vector2(0.5, 0.5)

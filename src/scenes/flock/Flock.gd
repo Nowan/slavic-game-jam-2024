@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var boids: int = 20
+@export var boids: int = 100
 @export var Boid: PackedScene
 
 var _width = ProjectSettings.get_setting("display/window/size/viewport_width")
@@ -13,5 +13,3 @@ func _ready():
 		
 		boid.position = Vector2(randf_range(0, 100), randf_range(0, 100))
 		add_child(boid)
-		
-		
