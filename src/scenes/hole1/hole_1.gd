@@ -12,11 +12,11 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	#body.queue_free()
-	if (body is Dog):
+	#if (body is Dog):
 		#WinArea.deadPlayers += 1
 		#remove_from_group("players")
-		pass
-	elif (body.is_in_group("sheep")):
+	if (body.is_in_group("sheep")):
+		body.queue_free()
 		WinArea.deadSheeps += 1
 		
 	if (WinArea.deadPlayers == WinArea.INITIAL_PLAYER_NUMBER):
