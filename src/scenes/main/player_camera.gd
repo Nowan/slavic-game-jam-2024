@@ -58,4 +58,4 @@ func _on_level_changed(level: TextureRect) -> void:
 	limit_bottom = level.size.y
 
 func _get_players():
-	get_parent().get_children().filter(func(child): return "Player" in child.name)
+	return get_parent().get_children().filter(func(child): return "Player" in child.name)
