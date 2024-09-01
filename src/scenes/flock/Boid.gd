@@ -30,7 +30,6 @@ var _fleeing_stop_timer: Timer
 var _grazing_timer: Timer
 
 func _ready():
-	randomize()
 	_fleeing_stop_timer = get_node("FleeingStopTimer")
 	_grazing_timer = get_node("GrazingTimer")
 	
@@ -39,6 +38,7 @@ func _ready():
 	
 	set_status(FlockTypes.BoidStatus.IDLE)
 	_graze_target = get_random_target()
+	
 	#mouse_follow_force = 0
 	#_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * max_speed
 	#_mouse_target = get_random_target()
@@ -184,7 +184,6 @@ func get_flock_status(flock: Array):
 
 
 func get_random_target():
-	randomize()
 	return Vector2(randf_range(0, _width), randf_range(0, _height))
 
 
