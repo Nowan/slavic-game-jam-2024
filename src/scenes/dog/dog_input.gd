@@ -34,31 +34,41 @@ func _ready() -> void:
 	if not multiplayer.has_multiplayer_peer():
 		var dog = get_parent()
 		
-		if dog.name == "0":
-			move_right = "move_right_player1"
-			move_left = "move_left_player1"
-			move_up = "move_up_player1"
-			move_down = "move_down_player1"
-			use_bark = "bark_player1"
-			use_dash = "dash_player1"
+		move_right = "move_right_%s" % dog.player_device
+		move_left = "move_left_%s" % dog.player_device
+		move_up = "move_up_%s" % dog.player_device
+		move_down = "move_down_%s" % dog.player_device
+		use_bark = "use_bark_%s" % dog.player_device
+		use_dash = "use_dash_%s" % dog.player_device
 		
-		if dog.name == "1":
-			move_right = "move_right_player2"
-			move_left = "move_left_player2"
-			move_up = "move_up_player2"
-			move_down = "move_down_player2"
-			use_bark = "bark_player2"
-			use_dash = "dash_player2"
-			
-		if dog.name == "2":
-			move_right = "move_right_player3"
-			move_left = "move_left_player3"
-			move_up = "move_up_player3"
-			move_down = "move_down_player3"
-			use_bark = "bark_player3"
-			use_dash = "dash_player3"
+		
+		#if dog.name == "0":
+			#move_right = "move_right_1"
+			#move_left = "move_left_1"
+			#move_up = "move_up_1"
+			#move_down = "move_down_1"
+			#use_bark = "use_bark_1"
+			#use_dash = "use_dash_1"
+		#
+		#if dog.name == "1":
+			#move_right = "move_right_2"
+			#move_left = "move_left_2"
+			#move_up = "move_up_2"
+			#move_down = "move_down_2"
+			#use_bark = "use_bark_2"
+			#use_dash = "use_dash_2"
+			#
+		#if dog.name == "2":
+			#move_right = "move_right_3"
+			#move_left = "move_left_3"
+			#move_up = "move_up_3"
+			#move_down = "move_down_3"
+			#use_bark = "use_bark_3"
+			#use_dash = "use_dash_3"
 		
 		return
+		
+	_add_multiplayer_device_mapping()
 	
 	# Only process for the local player.
 	# Both frame and physics, in case someone decides to switch where the
@@ -93,3 +103,77 @@ func _physics_process(delta: float) -> void:
 			_dash_pressed()
 		else:
 			_dash_pressed.rpc()
+
+func _add_multiplayer_device_mapping() -> void:
+	print("Mapping controller!")
+	
+	InputMap.add_action(move_right, 0.2)
+	InputMap.add_action(move_left, 0.2)
+	InputMap.add_action(move_up, 0.2)
+	InputMap.add_action(move_down, 0.2)
+	InputMap.add_action(use_bark, 0.2)
+	InputMap.add_action(use_dash, 0.2)
+	
+	var move_right_event_joypad = InputEventJoypadMotion.new()
+	move_right_event_joypad.device = 0
+	move_right_event_joypad.axis = JOY_AXIS_LEFT_X
+	move_right_event_joypad.axis_value = 1.0
+	
+	var move_left_event_joypad = InputEventJoypadMotion.new()
+	move_left_event_joypad.device = 0
+	move_left_event_joypad.axis = JOY_AXIS_LEFT_X
+	move_left_event_joypad.axis_value = -1.0
+
+	var move_down_event_joypad = InputEventJoypadMotion.new()
+	move_down_event_joypad.device = 0
+	move_down_event_joypad.axis = JOY_AXIS_LEFT_Y
+	move_down_event_joypad.axis_value = 1.0
+	
+	var move_up_event_joypad = InputEventJoypadMotion.new()
+	move_up_event_joypad.device = 0
+	move_up_event_joypad.axis = JOY_AXIS_LEFT_Y
+	move_up_event_joypad.axis_value = -1.0
+	
+	var use_bark_event_joypad = InputEventJoypadButton.new()
+	use_bark_event_joypad.device = 0
+	use_bark_event_joypad.button_index = JOY_BUTTON_RIGHT_SHOULDER
+	
+	var use_dash_event_joypad = InputEventJoypadButton.new()
+	use_dash_event_joypad.device = 0
+	use_dash_event_joypad.button_index = JOY_BUTTON_LEFT_SHOULDER
+	
+	var move_right_event_keyboard = InputEventKey.new()
+	move_right_event_keyboard.physical_keycode = KEY_D
+	
+	var move_left_event_keyboard = InputEventKey.new()
+	move_left_event_keyboard.physical_keycode = KEY_A
+
+	var move_down_event_keyboard = InputEventKey.new()
+	move_down_event_keyboard.physical_keycode = KEY_S
+	
+	var move_up_event_keyboard = InputEventKey.new()
+	move_up_event_keyboard.physical_keycode = KEY_W
+	
+	var use_bark_event_keyboard = InputEventKey.new()
+	use_bark_event_keyboard.physical_keycode = KEY_SPACE
+	
+	var use_dash_event_keyboard = InputEventKey.new()
+	use_dash_event_keyboard.physical_keycode = KEY_SHIFT
+		
+	InputMap.action_add_event(move_right, move_right_event_joypad)
+	InputMap.action_add_event(move_right, move_right_event_keyboard)
+	
+	InputMap.action_add_event(move_left, move_left_event_joypad)
+	InputMap.action_add_event(move_left, move_left_event_keyboard)
+	
+	InputMap.action_add_event(move_up, move_up_event_joypad)
+	InputMap.action_add_event(move_up, move_up_event_keyboard)
+	
+	InputMap.action_add_event(move_down, move_down_event_joypad)
+	InputMap.action_add_event(move_down, move_down_event_keyboard)
+	
+	InputMap.action_add_event(use_bark, use_bark_event_joypad)
+	InputMap.action_add_event(use_bark, use_bark_event_keyboard)
+	
+	InputMap.action_add_event(use_dash, use_dash_event_joypad)
+	InputMap.action_add_event(use_dash, use_dash_event_keyboard)

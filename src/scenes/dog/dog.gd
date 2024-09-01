@@ -12,6 +12,8 @@ class_name Dog extends CharacterBody2D
 		player = id
 		# Give authority over the player input to the appropriate peer.
 		$PlayerInput.set_multiplayer_authority(id)
+		
+@export var player_device: int
 
 # Player synchronized input.
 @onready var input = $PlayerInput
