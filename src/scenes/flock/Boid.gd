@@ -71,6 +71,10 @@ func flee_from_bark(dog: Dog, bark_strength: float):
 	_barks_fleeting_from.append([dog.position, bark_strength, 0])
 	set_status(FlockTypes.BoidStatus.FLEEING)
 
+func die_from_fall():
+	$AnimationPlayer.play("death_ravine_fall")
+	$AnimationPlayer.connect("animation_finished", queue_free)
+
 func _physics_process(delta):
 	match _status:
 		FlockTypes.BoidStatus.IDLE:
@@ -144,7 +148,7 @@ func _physics_process_fleeing(delta: float):
 	
 	look_at(position + _velocity)
 
-	DebugDraw2d.line_vector(position, _velocity);
+	#DebugDraw2d.line_vector(position, _velocity);
 	
 	set_velocity(_velocity)
 	move_and_slide()
