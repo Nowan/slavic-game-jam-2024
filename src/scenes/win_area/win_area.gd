@@ -36,6 +36,7 @@ func _on_body_entered(body: Node2D) -> void:
 		currentSheepsInWinArea += 1
 		sheep.set_collision_mask_value(6, true)
 		sheep.set_collision_layer_value(6, true)
+		_show_win_indicator_above_body(body)
 		
 		$SheepEnteredSoundPlayer.play()
 		
@@ -53,8 +54,6 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		root.get_parent().remove_child(root)
 		emit_signal("level_changed", get_parent().get_node("ParallaxBackground/ParallaxLayer/TextureRect"))
-	else:
-		_show_win_indicator_above_body(body)
 
 
 func _on_body_exited(body: Node2D) -> void:

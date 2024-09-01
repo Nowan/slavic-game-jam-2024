@@ -46,11 +46,15 @@ radius = 609.099
 radius = 337.334
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8pgxy"]
+playback_mode = 1
 streams_count = 4
 stream_0/stream = ExtResource("15_jhhdn")
 stream_1/stream = ExtResource("16_wgg3w")
+stream_1/weight = 2.0
 stream_2/stream = ExtResource("17_yyx24")
+stream_2/weight = 3.0
 stream_3/stream = ExtResource("18_gsa14")
+stream_3/weight = 3.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_306cr"]
 size = Vector2(2576, 327)
@@ -231,7 +235,7 @@ position = Vector2(1617, 4523)
 shape = SubResource("RectangleShape2D_306cr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WinningSheepConstraints"]
-polygon = PackedVector2Array(-208, 4699, 577, 4696, 362, 6773, 2593, 6779, 2796, 6775, 2589, 4689, 3661, 4689, 3665, 7910, -647, 7923, -713, 4686)
+polygon = PackedVector2Array(-208, 4699, 561, 4695, 362, 6773, 2593, 6779, 2796, 6775, 2669, 4695, 3661, 4689, 3665, 7910, -647, 7923, -713, 4686)
 
 [node name="fence" type="Sprite2D" parent="."]
 position = Vector2(1469, 45)
