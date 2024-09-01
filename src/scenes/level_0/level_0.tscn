@@ -1,26 +1,24 @@
-[gd_scene load_steps=27 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=25 format=3 uid="uid://d3nfw6bamspff"]
 
-[ext_resource type="Script" path="res://src/scenes/main/main_scene.gd" id="1_j3gyg"]
-[ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
-[ext_resource type="Script" path="res://src/scenes/sheep_death_zone/SheepDeathZone.gd" id="3_k38ll"]
-[ext_resource type="PackedScene" uid="uid://hkwyik1xh0ca" path="res://src/scenes/sheep_death_zone/SheepDeathIndicator.tscn" id="4_fk0vj"]
-[ext_resource type="PackedScene" uid="uid://bfrr7ra767c2r" path="res://src/scenes/rock1/rock_1.tscn" id="4_ods2q"]
-[ext_resource type="PackedScene" uid="uid://c8k732tosm3hi" path="res://src/scenes/rock2/rock_2.tscn" id="5_o74at"]
-[ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="6_r3s50"]
-[ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="7_a2hia"]
-[ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="7_hvpbq"]
-[ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="8_24hfu"]
-[ext_resource type="PackedScene" uid="uid://w1a8o7373ynb" path="res://src/scenes/win_area/SheepWinIndicator.tscn" id="8_ji6eb"]
-[ext_resource type="Script" path="res://src/scenes/main/player_camera.gd" id="9_imdsp"]
-[ext_resource type="PackedScene" uid="uid://d0wfoh36p2b2h" path="res://src/scenes/hud/hud.tscn" id="9_sfbme"]
-[ext_resource type="AudioStream" uid="uid://rv6lsxk7hpbp" path="res://assets/music/SheepSongLevel1Loop.mp3" id="12_0f1y4"]
-[ext_resource type="AudioStream" uid="uid://ca8oikc0rw45u" path="res://assets/music/SheepSongLevel2Loop.mp3" id="13_2ef3j"]
-[ext_resource type="AudioStream" uid="uid://clq8bgy6nin2w" path="res://assets/music/SheepSongLevel3Loop.mp3" id="14_e1txp"]
-[ext_resource type="AudioStream" uid="uid://dnd32ttsadjex" path="res://assets/music/SheepSongLevel4Loop.mp3" id="15_sf3v4"]
-[ext_resource type="AudioStream" uid="uid://boqgeuiuc56hd" path="res://assets/music/SheepSongLevel5Loop.mp3" id="16_jt61n"]
-[ext_resource type="AudioStream" uid="uid://bsv2x8me26u6f" path="res://assets/music/SheepSongLevel6Loop.mp3" id="17_h4j5x"]
-[ext_resource type="Texture2D" uid="uid://cs5swffsnhmyt" path="res://assets/Map/big_ravine_1.png" id="19_6vayv"]
-[ext_resource type="Texture2D" uid="uid://dqtn0t1515yi8" path="res://assets/Map/big_ravine_2.png" id="20_5c4ad"]
+[ext_resource type="Script" path="res://src/scenes/level_0/main_scene.gd" id="1_dlhjl"]
+[ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="2_1tq1r"]
+[ext_resource type="Texture2D" uid="uid://cs5swffsnhmyt" path="res://assets/Map/big_ravine_1.png" id="3_6c253"]
+[ext_resource type="Texture2D" uid="uid://m34b6rlue5yi" path="res://assets/Map/level_0_loop.jpg" id="3_8jhvr"]
+[ext_resource type="Script" path="res://src/scenes/sheep_death_zone/SheepDeathZone.gd" id="4_e0m0x"]
+[ext_resource type="PackedScene" uid="uid://hkwyik1xh0ca" path="res://src/scenes/sheep_death_zone/SheepDeathIndicator.tscn" id="5_56bnh"]
+[ext_resource type="Texture2D" uid="uid://dqtn0t1515yi8" path="res://assets/Map/big_ravine_2.png" id="6_qaimy"]
+[ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="7_yeelv"]
+[ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="8_xskhn"]
+[ext_resource type="PackedScene" uid="uid://bfrr7ra767c2r" path="res://src/scenes/rock1/rock_1.tscn" id="9_wte63"]
+[ext_resource type="PackedScene" uid="uid://c8k732tosm3hi" path="res://src/scenes/rock2/rock_2.tscn" id="10_dus66"]
+[ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="11_uim12"]
+[ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="12_lnc0u"]
+[ext_resource type="PackedScene" uid="uid://d0wfoh36p2b2h" path="res://src/scenes/hud/hud.tscn" id="13_mgxwt"]
+[ext_resource type="Script" path="res://src/scenes/level_0/player_camera.gd" id="14_6rwiu"]
+[ext_resource type="AudioStream" uid="uid://cla0k7i1jchcm" path="res://assets/music/Level1.mp3" id="15_jhhdn"]
+[ext_resource type="AudioStream" uid="uid://dpllkqc6femxn" path="res://assets/music/Level3.mp3" id="16_wgg3w"]
+[ext_resource type="AudioStream" uid="uid://csquwewdfvr5b" path="res://assets/music/Level4.mp3" id="17_yyx24"]
+[ext_resource type="AudioStream" uid="uid://igt8ywmqjsot" path="res://assets/music/Level5.mp3" id="18_gsa14"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fid64"]
 radius = 552.58
@@ -32,19 +30,17 @@ radius = 609.099
 radius = 337.334
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8pgxy"]
-streams_count = 6
-stream_0/stream = ExtResource("12_0f1y4")
-stream_1/stream = ExtResource("13_2ef3j")
-stream_2/stream = ExtResource("14_e1txp")
-stream_3/stream = ExtResource("15_sf3v4")
-stream_4/stream = ExtResource("16_jt61n")
-stream_5/stream = ExtResource("17_h4j5x")
+streams_count = 4
+stream_0/stream = ExtResource("15_jhhdn")
+stream_1/stream = ExtResource("16_wgg3w")
+stream_2/stream = ExtResource("17_yyx24")
+stream_3/stream = ExtResource("18_gsa14")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_306cr"]
 size = Vector2(2576, 327)
 
 [node name="Main" type="Node2D" groups=["players"]]
-script = ExtResource("1_j3gyg")
+script = ExtResource("1_dlhjl")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -55,13 +51,13 @@ offset_left = -1.0
 offset_top = -1.0
 offset_right = 2654.0
 offset_bottom = 5319.0
-texture = ExtResource("7_hvpbq")
+texture = ExtResource("2_1tq1r")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Grass" type="Sprite2D" parent="."]
 texture_repeat = 2
-texture = ExtResource("7_hvpbq")
+texture = ExtResource("3_8jhvr")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 3000, 6100)
@@ -70,7 +66,7 @@ region_rect = Rect2(0, 0, 3000, 6100)
 
 [node name="RavineTop" type="Sprite2D" parent="Ravines"]
 position = Vector2(395, 3052)
-texture = ExtResource("19_6vayv")
+texture = ExtResource("3_6c253")
 
 [node name="Edge" type="StaticBody2D" parent="Ravines/RavineTop"]
 collision_layer = 8
@@ -80,8 +76,8 @@ collision_mask = 17
 polygon = PackedVector2Array(-511, -3040, -511, -3546, 2803, -3553, 2806, -3059)
 
 [node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineTop" node_paths=PackedStringArray("ui_indicators_parent")]
-script = ExtResource("3_k38ll")
-DeathIndicator = ExtResource("4_fk0vj")
+script = ExtResource("4_e0m0x")
+DeathIndicator = ExtResource("5_56bnh")
 ui_indicators_parent = NodePath("../../../UiIndicatorsParent")
 
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineTop/SheepDeathArea"]
@@ -90,7 +86,7 @@ polygon = PackedVector2Array(-511, -3040, -511, -3546, 2803, -3553, 2806, -3059)
 
 [node name="RavineLeft" type="Sprite2D" parent="Ravines"]
 position = Vector2(395, 3052)
-texture = ExtResource("19_6vayv")
+texture = ExtResource("3_6c253")
 
 [node name="Edge" type="StaticBody2D" parent="Ravines/RavineLeft"]
 collision_layer = 8
@@ -100,8 +96,8 @@ collision_mask = 17
 polygon = PackedVector2Array(-395, -3052, -196, -3052, -196, -2745, -119, -2697, -95, -2608, -188, -2362, -124, -2240, 37, -2091, 138, -1833, 136, -1695, 75, -1189, -86, -1086, -133, -922, -108, -648, 31, -247, 169, -181, 153, -80, 325, 287, 334, 473, 281, 689, 284, 967, 272, 1372, 183, 1652, 85, 1881, 31, 2139, -173, 2550, -127, 2809, -130, 3053, -393, 3052)
 
 [node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineLeft" node_paths=PackedStringArray("ui_indicators_parent")]
-script = ExtResource("3_k38ll")
-DeathIndicator = ExtResource("4_fk0vj")
+script = ExtResource("4_e0m0x")
+DeathIndicator = ExtResource("5_56bnh")
 ui_indicators_parent = NodePath("../../../UiIndicatorsParent")
 
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineLeft/SheepDeathArea"]
@@ -110,7 +106,7 @@ polygon = PackedVector2Array(-395, -3052, -196, -3052, -196, -2745, -119, -2697,
 
 [node name="RavineRight" type="Sprite2D" parent="Ravines"]
 position = Vector2(2733, 3051)
-texture = ExtResource("20_5c4ad")
+texture = ExtResource("6_qaimy")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Ravines/RavineRight"]
 collision_layer = 8
@@ -119,21 +115,20 @@ collision_layer = 8
 polygon = PackedVector2Array(395, -3050, 27, -3051, 11, -2861, 69, -2663, 70, -1969, 260, -1471, 95, -1224, 162, -910, 76, -673, 62, -497, 15, -348, -32, -290, -16, -251, 55, -221, 175, -75, 179, 124, 150, 75, 131, 229, 67, 396, 45, 587, -6, 742, -40, 783, -26, 827, 35, 850, 124, 949, 133, 1114, 33, 1155, 17, 1220, 12, 1309, -61, 1497, -76, 1668, -129, 1844, -182, 1903, -157, 1931, -91, 1956, 28, 2101, 109, 2288, 192, 2373, 132, 2582, 104, 2955, 66, 3053, 395, 3053)
 
 [node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineRight" node_paths=PackedStringArray("ui_indicators_parent")]
-script = ExtResource("3_k38ll")
-DeathIndicator = ExtResource("4_fk0vj")
+script = ExtResource("4_e0m0x")
+DeathIndicator = ExtResource("5_56bnh")
 ui_indicators_parent = NodePath("../../../UiIndicatorsParent")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ravines/RavineRight/SheepDeathArea"]
 position = Vector2(63, 0)
 polygon = PackedVector2Array(395, -3050, 27, -3051, 11, -2861, 69, -2663, 70, -1969, 260, -1471, 95, -1224, 162, -910, 76, -673, 62, -497, 15, -348, -32, -290, -16, -251, 55, -221, 175, -75, 179, 124, 150, 75, 131, 229, 67, 396, 45, 587, -6, 742, -40, 783, -26, 827, 35, 850, 124, 949, 133, 1114, 33, 1155, 17, 1220, 12, 1309, -61, 1497, -76, 1668, -129, 1844, -182, 1903, -157, 1931, -91, 1956, 28, 2101, 109, 2288, 192, 2373, 132, 2582, 104, 2955, 66, 3053, 395, 3053)
 
-[node name="Win Area" parent="." node_paths=PackedStringArray("ui_indicators_parent") instance=ExtResource("8_24hfu")]
+[node name="Win Area" parent="." node_paths=PackedStringArray("ui_indicators_parent") instance=ExtResource("7_yeelv")]
 position = Vector2(1577, 5900)
 scale = Vector2(4.23239, 2.15131)
-WinIndicator = ExtResource("8_ji6eb")
 ui_indicators_parent = NodePath("../UiIndicatorsParent")
 
-[node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
+[node name="Flock" parent="." instance=ExtResource("8_xskhn")]
 
 [node name="SpawnArea1" type="Area2D" parent="Flock"]
 position = Vector2(1198, 741)
@@ -155,27 +150,27 @@ position = Vector2(2297, 762)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flock/SpawnArea3"]
 shape = SubResource("CircleShape2D_g4sey")
 
-[node name="Rock1" parent="." instance=ExtResource("4_ods2q")]
+[node name="Rock1" parent="." instance=ExtResource("9_wte63")]
 position = Vector2(473, 560)
 scale = Vector2(0.5, 0.5)
 
-[node name="Rock2" parent="." instance=ExtResource("5_o74at")]
+[node name="Rock2" parent="." instance=ExtResource("10_dus66")]
 position = Vector2(1870, 1053)
 scale = Vector2(0.5, 0.5)
 
-[node name="Rock3" parent="." instance=ExtResource("6_r3s50")]
+[node name="Rock3" parent="." instance=ExtResource("11_uim12")]
 position = Vector2(700, 2479)
 scale = Vector2(0.7, 0.7)
 
-[node name="Rock5" parent="." instance=ExtResource("6_r3s50")]
+[node name="Rock5" parent="." instance=ExtResource("11_uim12")]
 position = Vector2(1721, 2674)
 scale = Vector2(0.7, 0.7)
 
-[node name="Rock4" parent="." instance=ExtResource("7_a2hia")]
+[node name="Rock4" parent="." instance=ExtResource("12_lnc0u")]
 position = Vector2(996, 1307)
 scale = Vector2(0.5, 0.5)
 
-[node name="HUD" parent="." instance=ExtResource("9_sfbme")]
+[node name="HUD" parent="." instance=ExtResource("13_mgxwt")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2815, 876)
@@ -184,7 +179,7 @@ limit_left = 0
 limit_top = 0
 limit_right = 3100
 limit_bottom = 6100
-script = ExtResource("9_imdsp")
+script = ExtResource("14_6rwiu")
 zoom_speed = 0.2
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

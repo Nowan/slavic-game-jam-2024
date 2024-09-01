@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwfsvlmdytkq4"]
 
 [ext_resource type="Script" path="res://src/scenes/win_area/win_area.gd" id="1_7kr7e"]
-[ext_resource type="PackedScene" uid="uid://w1a8o7373ynb" path="res://src/scenes/win_area/SheepWinIndicator.tscn" id="2_vk0t7"]
+[ext_resource type="PackedScene" path="res://src/scenes/win_area/SheepWinIndicator.tscn" id="2_vk0t7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vk7e"]
 size = Vector2(2629, 2376)

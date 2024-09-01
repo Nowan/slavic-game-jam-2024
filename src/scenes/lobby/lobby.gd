@@ -45,11 +45,12 @@ func _ready() -> void:
 # do Lobby.load_game.rpc(filepath)
 # @rpc("call_local", "reliable")
 func load_game():
-	var main: Node2D = load("res://src/scenes/main/MainScene.tscn").instantiate()
+	var main: Node2D = load("res://src/scenes/level_0/level_0.tscn").instantiate()
 	# Connect deferred so we can safely erase it from the callback.
 	# main.game_finished.connect(_end_game, CONNECT_DEFERRED)
 
 	get_tree().get_root().add_child(main)
+	$MusicPlayer.stop()
 	hide()
 	
 	if not multiplayer.has_multiplayer_peer():
@@ -211,6 +212,7 @@ func _connect_to_server():
 #endregion
 
 func _on_join_pressed():
+	$GameNamePlayer.play()
 	# XXX(mlazowik): CURSED CONDITIONAL LOGIC, DO NOT EDIT BUTTON TEXT
 	# (or edit and also edit the ifs here and the logic that updates the text
 	if online_button.text == "Online":
@@ -227,5 +229,6 @@ func load_game_all_clients():
 	load_game()
 
 func _on_local_join_pressed():
+	$GameNamePlayer.play()
 	multiplayer.set_multiplayer_peer(null)
 	load_game()

@@ -40,7 +40,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if (currentSheepsInWinArea + deadSheeps == SHEEPS_INITIAL_NUMBER 
 	#&& currentPlayersInWinArea + deadPlayers == INITIAL_PLAYER_NUMBER
 	):
-		get_tree().change_scene_to_file("res://src/scenes/second/second.tscn")
+		currentLevel += 1
+		get_tree().change_scene_to_file("res://src/scenes/level_" + str(currentLevel) + "/level_" + str(currentLevel) + ".tscn")
 		emit_signal("level_changed", get_parent().get_node("ParallaxBackground/ParallaxLayer/TextureRect"))
 
 
