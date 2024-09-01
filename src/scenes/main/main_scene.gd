@@ -12,7 +12,7 @@ func _ready() -> void:
 	if not multiplayer.has_multiplayer_peer():
 		add_local_player(0)
 		add_local_player(1)
-		add_local_player(2)
+		#add_local_player(2)
 		return
 		
 	if not multiplayer.is_server():
@@ -73,39 +73,65 @@ func _add_local_device_mapping(device: int) -> void:
 	InputMap.add_action(use_bark, 0.2)
 	InputMap.add_action(use_dash, 0.2)
 	
-	var move_right_event = InputEventJoypadMotion.new()
-	move_right_event.device = device
-	move_right_event.axis = JOY_AXIS_LEFT_X
-	move_right_event.axis_value = 1.0
+	var move_right_event_joypad = InputEventJoypadMotion.new()
+	move_right_event_joypad.device = device
+	move_right_event_joypad.axis = JOY_AXIS_LEFT_X
+	move_right_event_joypad.axis_value = 1.0
 	
-	var move_left_event = InputEventJoypadMotion.new()
-	move_left_event.device = device
-	move_left_event.axis = JOY_AXIS_LEFT_X
-	move_left_event.axis_value = -1.0
+	var move_left_event_joypad = InputEventJoypadMotion.new()
+	move_left_event_joypad.device = device
+	move_left_event_joypad.axis = JOY_AXIS_LEFT_X
+	move_left_event_joypad.axis_value = -1.0
 
-	var move_down_event = InputEventJoypadMotion.new()
-	move_down_event.device = device
-	move_down_event.axis = JOY_AXIS_LEFT_Y
-	move_down_event.axis_value = 1.0
+	var move_down_event_joypad = InputEventJoypadMotion.new()
+	move_down_event_joypad.device = device
+	move_down_event_joypad.axis = JOY_AXIS_LEFT_Y
+	move_down_event_joypad.axis_value = 1.0
 	
-	var move_up_event = InputEventJoypadMotion.new()
-	move_up_event.device = device
-	move_up_event.axis = JOY_AXIS_LEFT_Y
-	move_up_event.axis_value = -1.0
+	var move_up_event_joypad = InputEventJoypadMotion.new()
+	move_up_event_joypad.device = device
+	move_up_event_joypad.axis = JOY_AXIS_LEFT_Y
+	move_up_event_joypad.axis_value = -1.0
 	
-	var use_bark_event = InputEventJoypadButton.new()
-	use_bark_event.device = device
-	use_bark_event.button_index = JOY_BUTTON_RIGHT_SHOULDER
+	var use_bark_event_joypad = InputEventJoypadButton.new()
+	use_bark_event_joypad.device = device
+	use_bark_event_joypad.button_index = JOY_BUTTON_RIGHT_SHOULDER
 	
-	var use_dash_event = InputEventJoypadButton.new()
-	use_dash_event.device = device
-	use_dash_event.button_index = JOY_BUTTON_LEFT_SHOULDER
+	var use_dash_event_joypad = InputEventJoypadButton.new()
+	use_dash_event_joypad.device = device
+	use_dash_event_joypad.button_index = JOY_BUTTON_LEFT_SHOULDER
+	
+	if device == 0:
+		var move_right_event_keyboard = InputEventKey.new()
+		move_right_event_keyboard.physical_keycode = KEY_D
 		
-	InputMap.action_add_event(move_right, move_right_event)
-	InputMap.action_add_event(move_left, move_left_event)
-	InputMap.action_add_event(move_up, move_up_event)
-	InputMap.action_add_event(move_down, move_down_event)
-	InputMap.action_add_event(use_bark, use_bark_event)
-	InputMap.action_add_event(use_dash, use_dash_event)
+		var move_left_event_keyboard = InputEventKey.new()
+		move_left_event_keyboard.physical_keycode = KEY_A
+
+		var move_down_event_keyboard = InputEventKey.new()
+		move_down_event_keyboard.physical_keycode = KEY_S
+		
+		var move_up_event_keyboard = InputEventKey.new()
+		move_up_event_keyboard.physical_keycode = KEY_W
+		
+		var use_bark_event_keyboard = InputEventKey.new()
+		use_bark_event_keyboard.physical_keycode = KEY_SPACE
+		
+		var use_dash_event_keyboard = InputEventKey.new()
+		use_dash_event_keyboard.physical_keycode = KEY_SHIFT
+		
+		InputMap.action_add_event(move_right, move_right_event_keyboard)
+		InputMap.action_add_event(move_left, move_left_event_keyboard)
+		InputMap.action_add_event(move_up, move_up_event_keyboard)
+		InputMap.action_add_event(move_down, move_down_event_keyboard)
+		InputMap.action_add_event(use_bark, use_bark_event_keyboard)
+		InputMap.action_add_event(use_dash, use_dash_event_keyboard)
+		
+	InputMap.action_add_event(move_right, move_right_event_joypad)
+	InputMap.action_add_event(move_left, move_left_event_joypad)
+	InputMap.action_add_event(move_up, move_up_event_joypad)
+	InputMap.action_add_event(move_down, move_down_event_joypad)
+	InputMap.action_add_event(use_bark, use_bark_event_joypad)
+	InputMap.action_add_event(use_dash, use_dash_event_joypad)
 	
 	print("Added device mapping for device %s" % device)

@@ -41,31 +41,6 @@ func _ready() -> void:
 		use_bark = "use_bark_%s" % dog.player_device
 		use_dash = "use_dash_%s" % dog.player_device
 		
-		
-		#if dog.name == "0":
-			#move_right = "move_right_1"
-			#move_left = "move_left_1"
-			#move_up = "move_up_1"
-			#move_down = "move_down_1"
-			#use_bark = "use_bark_1"
-			#use_dash = "use_dash_1"
-		#
-		#if dog.name == "1":
-			#move_right = "move_right_2"
-			#move_left = "move_left_2"
-			#move_up = "move_up_2"
-			#move_down = "move_down_2"
-			#use_bark = "use_bark_2"
-			#use_dash = "use_dash_2"
-			#
-		#if dog.name == "2":
-			#move_right = "move_right_3"
-			#move_left = "move_left_3"
-			#move_up = "move_up_3"
-			#move_down = "move_down_3"
-			#use_bark = "use_bark_3"
-			#use_dash = "use_dash_3"
-		
 		return
 		
 	_add_multiplayer_device_mapping()
@@ -105,8 +80,6 @@ func _physics_process(delta: float) -> void:
 			_dash_pressed.rpc()
 
 func _add_multiplayer_device_mapping() -> void:
-	print("Mapping controller!")
-	
 	InputMap.add_action(move_right, 0.2)
 	InputMap.add_action(move_left, 0.2)
 	InputMap.add_action(move_up, 0.2)
