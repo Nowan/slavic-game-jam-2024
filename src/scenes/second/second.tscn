@@ -1,15 +1,46 @@
-[gd_scene load_steps=9 format=3 uid="uid://coh4uq2g684cr"]
+[gd_scene load_steps=25 format=3 uid="uid://coh4uq2g684cr"]
 
-[ext_resource type="Texture2D" uid="uid://deyhvtl365vs6" path="res://assets/Map/level_1.png" id="1_rddo3"]
+[ext_resource type="Script" path="res://src/scenes/main/main_scene.gd" id="1_1nyeh"]
+[ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="1_c04cv"]
+[ext_resource type="Texture2D" uid="uid://cs5swffsnhmyt" path="res://assets/Map/big_ravine_1.png" id="2_7fe6j"]
 [ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="2_mh1xx"]
-[ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="3_rfbdf"]
-[ext_resource type="PackedScene" uid="uid://bvillbq0e0oqg" path="res://src/scenes/sheep/Sheep.tscn" id="4_c7y18"]
+[ext_resource type="Script" path="res://src/scenes/sheep_death_zone/SheepDeathZone.gd" id="3_sulwq"]
+[ext_resource type="PackedScene" uid="uid://hkwyik1xh0ca" path="res://src/scenes/sheep_death_zone/SheepDeathIndicator.tscn" id="4_tfi4a"]
 [ext_resource type="PackedScene" uid="uid://bfrr7ra767c2r" path="res://src/scenes/rock1/rock_1.tscn" id="5_ouqtj"]
+[ext_resource type="Texture2D" uid="uid://dqtn0t1515yi8" path="res://assets/Map/big_ravine_2.png" id="5_phtls"]
 [ext_resource type="PackedScene" uid="uid://c8k732tosm3hi" path="res://src/scenes/rock2/rock_2.tscn" id="6_hbi55"]
+[ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="7_6bca3"]
 [ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="7_g02g3"]
 [ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="8_be5kj"]
+[ext_resource type="PackedScene" uid="uid://d0wfoh36p2b2h" path="res://src/scenes/hud/hud.tscn" id="12_1eo88"]
+[ext_resource type="Script" path="res://src/scenes/main/player_camera.gd" id="13_hpa8b"]
+[ext_resource type="AudioStream" uid="uid://rv6lsxk7hpbp" path="res://assets/music/SheepSongLevel1Loop.mp3" id="14_gfdxy"]
+[ext_resource type="AudioStream" uid="uid://ca8oikc0rw45u" path="res://assets/music/SheepSongLevel2Loop.mp3" id="15_ot4s8"]
+[ext_resource type="AudioStream" uid="uid://clq8bgy6nin2w" path="res://assets/music/SheepSongLevel3Loop.mp3" id="16_d53hy"]
+[ext_resource type="AudioStream" uid="uid://dnd32ttsadjex" path="res://assets/music/SheepSongLevel4Loop.mp3" id="17_8r1yy"]
+[ext_resource type="AudioStream" uid="uid://boqgeuiuc56hd" path="res://assets/music/SheepSongLevel5Loop.mp3" id="18_m1ueb"]
+[ext_resource type="AudioStream" uid="uid://bsv2x8me26u6f" path="res://assets/music/SheepSongLevel6Loop.mp3" id="19_jhc51"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i6ngw"]
+radius = 552.58
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_70bwy"]
+radius = 609.099
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_84aqs"]
+radius = 337.334
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hcpc8"]
+streams_count = 6
+stream_0/stream = ExtResource("14_gfdxy")
+stream_1/stream = ExtResource("15_ot4s8")
+stream_2/stream = ExtResource("16_d53hy")
+stream_3/stream = ExtResource("17_8r1yy")
+stream_4/stream = ExtResource("18_m1ueb")
+stream_5/stream = ExtResource("19_jhc51")
 
 [node name="Second" type="Node2D"]
+script = ExtResource("1_1nyeh")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -20,21 +51,103 @@ offset_left = -1.0
 offset_top = -1.0
 offset_right = 2654.0
 offset_bottom = 5319.0
-texture = ExtResource("1_rddo3")
+texture = ExtResource("1_c04cv")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="Grass" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("1_c04cv")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 3000, 6100)
+
+[node name="Ravines" type="Node2D" parent="."]
+
+[node name="RavineTop" type="Sprite2D" parent="Ravines"]
+position = Vector2(395, 3052)
+texture = ExtResource("2_7fe6j")
+
+[node name="Edge" type="StaticBody2D" parent="Ravines/RavineTop"]
+collision_layer = 8
+collision_mask = 17
+
+[node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineTop/Edge"]
+polygon = PackedVector2Array(-511, -3040, -511, -3546, 2803, -3553, 2806, -3059)
+
+[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineTop"]
+script = ExtResource("3_sulwq")
+DeathIndicator = ExtResource("4_tfi4a")
+
+[node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineTop/SheepDeathArea"]
+position = Vector2(4, -105)
+polygon = PackedVector2Array(-511, -3040, -511, -3546, 2803, -3553, 2806, -3059)
+
+[node name="RavineLeft" type="Sprite2D" parent="Ravines"]
+position = Vector2(395, 3052)
+texture = ExtResource("2_7fe6j")
+
+[node name="Edge" type="StaticBody2D" parent="Ravines/RavineLeft"]
+collision_layer = 8
+collision_mask = 17
+
+[node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineLeft/Edge"]
+polygon = PackedVector2Array(-395, -3052, -196, -3052, -196, -2745, -119, -2697, -95, -2608, -188, -2362, -124, -2240, 37, -2091, 138, -1833, 136, -1695, 75, -1189, -86, -1086, -133, -922, -108, -648, 31, -247, 169, -181, 153, -80, 325, 287, 334, 473, 281, 689, 284, 967, 272, 1372, 183, 1652, 85, 1881, 31, 2139, -173, 2550, -127, 2809, -130, 3053, -393, 3052)
+
+[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineLeft"]
+script = ExtResource("3_sulwq")
+DeathIndicator = ExtResource("4_tfi4a")
+
+[node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineLeft/SheepDeathArea"]
+position = Vector2(-106, 0)
+polygon = PackedVector2Array(-395, -3052, -196, -3052, -196, -2745, -119, -2697, -95, -2608, -188, -2362, -124, -2240, 37, -2091, 138, -1833, 136, -1695, 75, -1189, -86, -1086, -133, -922, -108, -648, 31, -247, 169, -181, 153, -80, 325, 287, 334, 473, 281, 689, 284, 967, 272, 1372, 183, 1652, 85, 1881, 31, 2139, -173, 2550, -127, 2809, -130, 3053, -393, 3052)
+
+[node name="RavineRight" type="Sprite2D" parent="Ravines"]
+position = Vector2(2733, 3051)
+texture = ExtResource("5_phtls")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ravines/RavineRight"]
+collision_layer = 8
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ravines/RavineRight/StaticBody2D"]
+polygon = PackedVector2Array(395, -3050, 27, -3051, 11, -2861, 69, -2663, 70, -1969, 260, -1471, 95, -1224, 162, -910, 76, -673, 62, -497, 15, -348, -32, -290, -16, -251, 55, -221, 175, -75, 179, 124, 150, 75, 131, 229, 67, 396, 45, 587, -6, 742, -40, 783, -26, 827, 35, 850, 124, 949, 133, 1114, 33, 1155, 17, 1220, 12, 1309, -61, 1497, -76, 1668, -129, 1844, -182, 1903, -157, 1931, -91, 1956, 28, 2101, 109, 2288, 192, 2373, 132, 2582, 104, 2955, 66, 3053, 395, 3053)
+
+[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineRight"]
+script = ExtResource("3_sulwq")
+DeathIndicator = ExtResource("4_tfi4a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ravines/RavineRight/SheepDeathArea"]
+position = Vector2(63, 0)
+polygon = PackedVector2Array(395, -3050, 27, -3051, 11, -2861, 69, -2663, 70, -1969, 260, -1471, 95, -1224, 162, -910, 76, -673, 62, -497, 15, -348, -32, -290, -16, -251, 55, -221, 175, -75, 179, 124, 150, 75, 131, 229, 67, 396, 45, 587, -6, 742, -40, 783, -26, 827, 35, 850, 124, 949, 133, 1114, 33, 1155, 17, 1220, 12, 1309, -61, 1497, -76, 1668, -129, 1844, -182, 1903, -157, 1931, -91, 1956, 28, 2101, 109, 2288, 192, 2373, 132, 2582, 104, 2955, 66, 3053, 395, 3053)
+
 [node name="Win Area" parent="." instance=ExtResource("2_mh1xx")]
-position = Vector2(927, 861)
+position = Vector2(1577, 5900)
+scale = Vector2(4.23239, 2.15131)
 
-[node name="Dog" parent="." instance=ExtResource("3_rfbdf")]
-position = Vector2(841, 309)
+[node name="Flock" parent="." instance=ExtResource("7_6bca3")]
 
-[node name="Sheep" parent="." instance=ExtResource("4_c7y18")]
-position = Vector2(404, 305)
+[node name="SpawnArea1" type="Area2D" parent="Flock"]
+position = Vector2(1198, 741)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flock/SpawnArea1"]
+position = Vector2(45, -37)
+shape = SubResource("CircleShape2D_i6ngw")
+
+[node name="SpawnArea2" type="Area2D" parent="Flock"]
+position = Vector2(1756, 1837)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flock/SpawnArea2"]
+position = Vector2(224, 81)
+shape = SubResource("CircleShape2D_70bwy")
+
+[node name="SpawnArea3" type="Area2D" parent="Flock"]
+position = Vector2(2297, 762)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flock/SpawnArea3"]
+shape = SubResource("CircleShape2D_84aqs")
 
 [node name="Rock1" parent="." instance=ExtResource("5_ouqtj")]
-position = Vector2(162, 418)
+position = Vector2(473, 560)
 scale = Vector2(0.5, 0.5)
 
 [node name="Rock2" parent="." instance=ExtResource("6_hbi55")]
@@ -42,9 +155,41 @@ position = Vector2(1870, 1053)
 scale = Vector2(0.5, 0.5)
 
 [node name="Rock3" parent="." instance=ExtResource("7_g02g3")]
-position = Vector2(256, 1800)
+position = Vector2(700, 2479)
+scale = Vector2(0.7, 0.7)
+
+[node name="Rock5" parent="." instance=ExtResource("7_g02g3")]
+position = Vector2(1721, 2674)
 scale = Vector2(0.7, 0.7)
 
 [node name="Rock4" parent="." instance=ExtResource("8_be5kj")]
 position = Vector2(996, 1307)
 scale = Vector2(0.5, 0.5)
+
+[node name="HUD" parent="." instance=ExtResource("12_1eo88")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2815, 876)
+zoom = Vector2(0.8, 0.8)
+limit_left = 0
+limit_top = 0
+limit_right = 3100
+limit_bottom = 6100
+script = ExtResource("13_hpa8b")
+zoom_speed = 0.2
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_hcpc8")
+autoplay = true
+
+[node name="UiIndicatorsParent" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/scenes/dog/Dog.tscn")
+spawn_path = NodePath("../Players")
+
+[node name="Players" type="Node2D" parent="."]
+
+[connection signal="body_entered" from="Ravines/RavineTop/SheepDeathArea" to="Ravines/RavineTop/SheepDeathArea" method="_on_body_entered"]
+[connection signal="body_entered" from="Ravines/RavineLeft/SheepDeathArea" to="Ravines/RavineLeft/SheepDeathArea" method="_on_body_entered"]
+[connection signal="body_entered" from="Ravines/RavineRight/SheepDeathArea" to="Ravines/RavineRight/SheepDeathArea" method="_on_body_entered"]

@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://f85s2avde6r4"]
+[gd_scene load_steps=6 format=3 uid="uid://f85s2avde6r4"]
 
 [ext_resource type="Script" path="res://src/scenes/lobby/lobby.gd" id="1"]
+[ext_resource type="Script" path="res://src/scenes/lobby/lobby_main.gd" id="1_1dxwt"]
+[ext_resource type="Texture2D" uid="uid://ck0xhgbwso61b" path="res://assets/menu/menu_background.jpg" id="1_h4ob2"]
+[ext_resource type="Texture2D" uid="uid://cuwm16ugkpddi" path="res://assets/menu/logo.png" id="3_m8k8n"]
+[ext_resource type="Texture2D" uid="uid://1ucfk21hr17g" path="res://assets/menu/start.png" id="4_6wbdp"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -17,38 +21,25 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
+script = ExtResource("1_1dxwt")
 
-[node name="Title" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -110.0
-offset_top = -156.0
-offset_right = 110.0
-offset_bottom = -116.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "Come Baark"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(320, 198)
+scale = Vector2(0.885185, 0.744444)
+texture = ExtResource("1_h4ob2")
 
 [node name="LobbyPanel" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -110.0
-offset_top = -73.0
-offset_right = 110.0
-offset_bottom = 73.0
+offset_left = -100.0
+offset_top = 201.0
+offset_right = 120.0
+offset_bottom = 347.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2
@@ -115,5 +106,21 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Local"
 
+[node name="logo" type="Sprite2D" parent="."]
+position = Vector2(340, -42)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_m8k8n")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = -169.0
+offset_top = 223.0
+offset_right = 1331.0
+offset_bottom = 1045.0
+scale = Vector2(0.7, 0.7)
+texture_normal = ExtResource("4_6wbdp")
+stretch_mode = 0
+
 [connection signal="pressed" from="LobbyPanel/PlayButton" to="LobbyPanel" method="_on_join_pressed"]
 [connection signal="pressed" from="LobbyPanel/LocalButton" to="LobbyPanel" method="_on_local_join_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
