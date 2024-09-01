@@ -34,12 +34,12 @@ func _ready() -> void:
 	if not multiplayer.has_multiplayer_peer():
 		var dog = get_parent()
 		
-		move_right = "move_right_%s" % dog.player_device
-		move_left = "move_left_%s" % dog.player_device
-		move_up = "move_up_%s" % dog.player_device
-		move_down = "move_down_%s" % dog.player_device
-		use_bark = "use_bark_%s" % dog.player_device
-		use_dash = "use_dash_%s" % dog.player_device
+		#move_right = "move_right_%s" % dog.player_device
+		#move_left = "move_left_%s" % dog.player_device
+		#move_up = "move_up_%s" % dog.player_device
+		#move_down = "move_down_%s" % dog.player_device
+		#use_bark = "use_bark_%s" % dog.player_device
+		#use_dash = "use_dash_%s" % dog.player_device
 		
 		
 		#if dog.name == "0":
