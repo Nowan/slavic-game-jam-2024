@@ -1,13 +1,12 @@
 extends Control
 
-const SERVER_IP = "188.245.152.157"
 # Default game server port. Can be any number between 1024 and 49151.
 # Not present on the list of registered or common ports as of May 2024:
 # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
 const DEFAULT_PORT = 8910
 const MAX_PLAYERS = 10
 
-@onready var status_text: LineEdit = $Status
+@onready var address: LineEdit = $Address
 @onready var online_button: Button = $OnlineButton
 @onready var local_button: Button = $LocalButton
 @onready var status_ok: Label = $StatusOk
@@ -200,8 +199,13 @@ func _on_host_pressed() -> void:
 
 
 func _connect_to_server():
+	var ip := address.get_text()
+	if not ip.is_valid_ip_address():
+		_set_status("IP address is invalid.", false)
+		return
+	
 	peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(SERVER_IP, DEFAULT_PORT)
+	var error = peer.create_client(ip, DEFAULT_PORT)
 	if error:
 		return error
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)

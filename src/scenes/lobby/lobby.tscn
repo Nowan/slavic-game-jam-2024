@@ -31,7 +31,6 @@ scale = Vector2(0.885185, 0.744444)
 texture = ExtResource("1_h4ob2")
 
 [node name="LobbyPanel" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -56,9 +55,9 @@ offset_right = 77.0
 offset_bottom = 29.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
-text = "Status:"
+text = "Server IP:"
 
-[node name="Status" type="LineEdit" parent="LobbyPanel"]
+[node name="Address" type="LineEdit" parent="LobbyPanel"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 37.0
@@ -66,6 +65,7 @@ offset_right = 210.0
 offset_bottom = 68.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+text = "188.245.152.157"
 
 [node name="OnlineButton" type="Button" parent="LobbyPanel"]
 layout_mode = 0
@@ -122,6 +122,7 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_m8k8n")
 
 [node name="TextureButton" type="TextureButton" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -169.0
 offset_top = 223.0
