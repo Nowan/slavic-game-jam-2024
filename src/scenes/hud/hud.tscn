@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0wfoh36p2b2h"]
+[gd_scene load_steps=4 format=3 uid="uid://d0wfoh36p2b2h"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_tt4ig"]
 [ext_resource type="Texture2D" uid="uid://chl7o8ga4hxh8" path="res://assets/hud/sheep_alive.png" id="2_tpmbw"]
 [ext_resource type="Texture2D" uid="uid://d3j260dyalab3" path="res://assets/hud/sheep_collected.png" id="3_ebkrf"]
-[ext_resource type="Texture2D" uid="uid://b7ax3dkkl0ijq" path="res://assets/hud/sheep_dead.png" id="4_4kouv"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_tt4ig")
@@ -23,26 +22,13 @@ texture = ExtResource("2_tpmbw")
 
 [node name="WinSheeps" type="Label" parent="."]
 offset_left = 1481.0
-offset_top = 368.0
+offset_top = 193.0
 offset_right = 1738.0
-offset_bottom = 497.0
+offset_bottom = 322.0
 theme_override_font_sizes/font_size = 70
 horizontal_alignment = 2
 
 [node name="WinSheepsSprite" type="Sprite2D" parent="."]
-position = Vector2(1836, 407)
+position = Vector2(1836, 232)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_ebkrf")
-
-[node name="DeadShips" type="Label" parent="."]
-offset_left = 1575.0
-offset_top = 212.0
-offset_right = 1726.0
-offset_bottom = 339.0
-theme_override_font_sizes/font_size = 70
-horizontal_alignment = 2
-
-[node name="DeadSheepsSprite" type="Sprite2D" parent="."]
-position = Vector2(1834, 245)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("4_4kouv")

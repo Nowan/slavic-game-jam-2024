@@ -10,5 +10,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var alive_sheeps := str(WinArea.SHEEPS_INITIAL_NUMBER - WinArea.deadSheeps)
 	$AliveSheeps.text = str(alive_sheeps + "/" + str(WinArea.SHEEPS_INITIAL_NUMBER))
-	$WinSheeps.text = str(str(WinArea.currentSheepsInWinArea) + "/" + alive_sheeps)
-	$DeadShips.text = str(WinArea.deadSheeps)
+	$WinSheeps.text = str(str(WinArea.currentSheepsInWinArea))
