@@ -44,7 +44,32 @@ texture = ExtResource("7_hvpbq")
 stretch_mode = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="Grass" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("7_hvpbq")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 3000, 6100)
+
 [node name="Ravines" type="Node2D" parent="."]
+
+[node name="RavineTop" type="Sprite2D" parent="Ravines"]
+position = Vector2(395, 3052)
+texture = ExtResource("19_6vayv")
+
+[node name="Edge" type="StaticBody2D" parent="Ravines/RavineTop"]
+collision_layer = 8
+collision_mask = 17
+
+[node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineTop/Edge"]
+polygon = PackedVector2Array(-511, -3040, -511, -3546, 2803, -3553, 2806, -3059)
+
+[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineTop"]
+script = ExtResource("3_k38ll")
+
+[node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineTop/SheepDeathArea"]
+position = Vector2(4, -105)
+polygon = PackedVector2Array(-511, -3040, -511, -3546, 2803, -3553, 2806, -3059)
 
 [node name="RavineLeft" type="Sprite2D" parent="Ravines"]
 position = Vector2(395, 3052)
@@ -82,7 +107,8 @@ position = Vector2(63, 0)
 polygon = PackedVector2Array(395, -3050, 27, -3051, 11, -2861, 69, -2663, 70, -1969, 260, -1471, 95, -1224, 162, -910, 76, -673, 62, -497, 15, -348, -32, -290, -16, -251, 55, -221, 175, -75, 179, 124, 150, 75, 131, 229, 67, 396, 45, 587, -6, 742, -40, 783, -26, 827, 35, 850, 124, 949, 133, 1114, 33, 1155, 17, 1220, 12, 1309, -61, 1497, -76, 1668, -129, 1844, -182, 1903, -157, 1931, -91, 1956, 28, 2101, 109, 2288, 192, 2373, 132, 2582, 104, 2955, 66, 3053, 395, 3053)
 
 [node name="Win Area" parent="." instance=ExtResource("8_24hfu")]
-position = Vector2(404, 4044)
+position = Vector2(1577, 5900)
+scale = Vector2(4.23239, 2.15131)
 
 [node name="Player1" parent="." instance=ExtResource("1_7h8kt")]
 position = Vector2(326, 198)
@@ -136,13 +162,12 @@ scale = Vector2(0.5, 0.5)
 [node name="HUD" parent="." instance=ExtResource("9_sfbme")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-position = Vector2(1232, 876)
+position = Vector2(2815, 876)
 zoom = Vector2(0.8, 0.8)
 limit_left = 0
 limit_top = 0
-limit_right = 2650
-limit_bottom = 5300
+limit_right = 3100
+limit_bottom = 6100
 script = ExtResource("9_imdsp")
 zoom_speed = 0.2
 
@@ -150,5 +175,6 @@ zoom_speed = 0.2
 stream = SubResource("AudioStreamRandomizer_8pgxy")
 autoplay = true
 
+[connection signal="body_entered" from="Ravines/RavineTop/SheepDeathArea" to="Ravines/RavineTop/SheepDeathArea" method="_on_body_entered"]
 [connection signal="body_entered" from="Ravines/RavineLeft/SheepDeathArea" to="Ravines/RavineLeft/SheepDeathArea" method="_on_body_entered"]
 [connection signal="body_entered" from="Ravines/RavineRight/SheepDeathArea" to="Ravines/RavineRight/SheepDeathArea" method="_on_body_entered"]

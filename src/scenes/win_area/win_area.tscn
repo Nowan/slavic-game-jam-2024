@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwfsvlmdytkq4"]
+[gd_scene load_steps=3 format=3 uid="uid://dwfsvlmdytkq4"]
 
-[ext_resource type="Texture2D" uid="uid://bd2q2iw2i61pf" path="res://assets/Sheep/placeholder.png" id="1_4dmv0"]
 [ext_resource type="Script" path="res://src/scenes/win_area/win_area.gd" id="1_7kr7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vk7e"]
@@ -11,13 +10,10 @@ collision_layer = 0
 script = ExtResource("1_7kr7e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(993, 448)
 shape = SubResource("RectangleShape2D_4vk7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(991.5, 487)
 scale = Vector2(4.43827, 2.33745)
-texture = ExtResource("1_4dmv0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
