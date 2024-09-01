@@ -1,11 +1,7 @@
 extends Node2D
 
-const PlayerResource = preload("res://src/scenes/dog/Dog.tscn")
 const FIRST_DOG_INITAL_POSITION = Vector2(320, 200)
 const DOG_INITIAL_POSITION_OFFSET = Vector2(130, 0)
-
-var device_list: Array
-var mapped_devices: Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
