@@ -45,16 +45,20 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	if input.barking:
+	if input.bark_pressed:
 		_bark_cone_area.monitoring = true
 		_bark_cone_area.monitorable = true
+		
+	input.bark_pressed = false
 	
-	if input.dashing:
+	if input.dash_pressed:
 		if _dash_ready == true:
 			self.speed *= 2
 			$DashDuration.start()
 			$DashCooldown.start()
 			_dash_ready = false
+			
+	input.dash_pressed = false
 		
 	if input.barking:
 		_bark_pressed_time += delta
@@ -62,7 +66,7 @@ func _physics_process(delta):
 	var bark_strength = min(_bark_pressed_time / bark_full_charge_time, 1)
 	_bark_cone.max_distance = bark_min_distance + (bark_max_distance - bark_min_distance) * bark_strength if bark_strength else 0;
 	
-	if input.barking:
+	if input.bark_released:
 		for sheep in _sheep_in_bark_cone:
 			sheep.flee_from_bark(self, bark_strength)
 		_bark_cone_area.monitoring = false
@@ -72,6 +76,7 @@ func _physics_process(delta):
 		$AudioStreamPlayer2D.play()
 		print(bark_strength)
 		
+	input.bark_released = false
 
 
 func _on_bark_cone_area_body_entered(body: Node2D) -> void:
