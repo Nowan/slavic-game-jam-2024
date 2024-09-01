@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=34 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="Script" path="res://src/scenes/level_0/main_scene.gd" id="1_dlhjl"]
 [ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="2_1tq1r"]
@@ -25,6 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://dpllkqc6femxn" path="res://assets/music/Level3.mp3" id="16_wgg3w"]
 [ext_resource type="AudioStream" uid="uid://csquwewdfvr5b" path="res://assets/music/Level4.mp3" id="17_yyx24"]
 [ext_resource type="AudioStream" uid="uid://igt8ywmqjsot" path="res://assets/music/Level5.mp3" id="18_gsa14"]
+[ext_resource type="Texture2D" uid="uid://n2benbipgfx" path="res://assets/Map/beginning_fence.png" id="26_ffwcy"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5ixg7"]
 streams_count = 6
@@ -53,6 +54,9 @@ stream_3/stream = ExtResource("18_gsa14")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_306cr"]
 size = Vector2(2576, 327)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eju17"]
+size = Vector2(1997.69, 70)
 
 [node name="Main" type="Node2D" groups=["players"]]
 script = ExtResource("1_dlhjl")
@@ -148,7 +152,7 @@ polygon = PackedVector2Array(395, -3050, 27, -3051, 11, -2861, 69, -2663, 70, -1
 stream = SubResource("AudioStreamRandomizer_5ixg7")
 
 [node name="Win Area" parent="." node_paths=PackedStringArray("ui_indicators_parent") instance=ExtResource("7_yeelv")]
-position = Vector2(1577, 5900)
+position = Vector2(-903, 5965)
 scale = Vector2(4.23239, 2.15131)
 ui_indicators_parent = NodePath("../UiIndicatorsParent")
 
@@ -228,6 +232,17 @@ shape = SubResource("RectangleShape2D_306cr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WinningSheepConstraints"]
 polygon = PackedVector2Array(-208, 4699, 577, 4696, 362, 6773, 2593, 6779, 2796, 6775, 2589, 4689, 3661, 4689, 3665, 7910, -647, 7923, -713, 4686)
+
+[node name="fence" type="Sprite2D" parent="."]
+position = Vector2(1469, 45)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("26_ffwcy")
+
+[node name="Area2D" type="StaticBody2D" parent="fence"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fence/Area2D"]
+position = Vector2(10.3844, 1.92307)
+shape = SubResource("RectangleShape2D_eju17")
 
 [connection signal="body_entered" from="Ravines/RavineTop/SheepDeathArea" to="Ravines/RavineTop/SheepDeathArea" method="_on_body_entered"]
 [connection signal="body_entered" from="Ravines/RavineLeft/SheepDeathArea" to="Ravines/RavineLeft/SheepDeathArea" method="_on_body_entered"]
