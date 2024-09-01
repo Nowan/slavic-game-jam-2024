@@ -22,22 +22,6 @@ stream_0/stream = ExtResource("4_rmbis")
 stream_1/stream = ExtResource("5_omlth")
 stream_2/stream = ExtResource("6_h2qak")
 
-[sub_resource type="Animation" id="Animation_a3kj5"]
-resource_name = "idle"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BodyParts:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.466667, 1.03333, 1.56667),
-"transitions": PackedFloat32Array(2, 1, 1, 2),
-"update": 0,
-"values": [0.0, -0.0872665, 0.0872665, 0.0]
-}
-
 [sub_resource type="Animation" id="Animation_0pm61"]
 length = 0.001
 tracks/0/type = "value"
@@ -65,6 +49,22 @@ tracks/1/keys = {
 "values": [Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_a3kj5"]
+resource_name = "idle"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyParts:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1.03333, 1.56667),
+"transitions": PackedFloat32Array(2, 1, 1, 2),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0872665, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_uhgtv"]
 resource_name = "move"
 length = 0.4
@@ -90,7 +90,7 @@ _data = {
 }
 
 [node name="Sheep" type="CharacterBody2D" groups=["sheep"]]
-collision_layer = 17
+collision_layer = 25
 script = ExtResource("1_vrejd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
