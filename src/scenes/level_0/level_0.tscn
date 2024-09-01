@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=32 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="Script" path="res://src/scenes/level_0/main_scene.gd" id="1_dlhjl"]
 [ext_resource type="Texture2D" uid="uid://bhhvro6lsa6kq" path="res://assets/Map/level_0_loop.png" id="2_1tq1r"]
@@ -7,11 +7,17 @@
 [ext_resource type="Script" path="res://src/scenes/sheep_death_zone/SheepDeathZone.gd" id="4_e0m0x"]
 [ext_resource type="PackedScene" uid="uid://hkwyik1xh0ca" path="res://src/scenes/sheep_death_zone/SheepDeathIndicator.tscn" id="5_56bnh"]
 [ext_resource type="Texture2D" uid="uid://dqtn0t1515yi8" path="res://assets/Map/big_ravine_2.png" id="6_qaimy"]
+[ext_resource type="AudioStream" uid="uid://wmav2vbhed8i" path="res://assets/sfx/Dead1.mp3" id="7_fgmpi"]
 [ext_resource type="PackedScene" uid="uid://dwfsvlmdytkq4" path="res://src/scenes/win_area/win_area.tscn" id="7_yeelv"]
+[ext_resource type="AudioStream" uid="uid://jxs37yfdcfj7" path="res://assets/sfx/Dead2.mp3" id="8_txl6n"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="8_xskhn"]
+[ext_resource type="AudioStream" uid="uid://c1a005uhygplt" path="res://assets/sfx/Dead3.mp3" id="9_k1gu3"]
 [ext_resource type="PackedScene" uid="uid://bfrr7ra767c2r" path="res://src/scenes/rock1/rock_1.tscn" id="9_wte63"]
+[ext_resource type="AudioStream" uid="uid://rxo1mi6idegp" path="res://assets/sfx/Dead4.mp3" id="10_aybh7"]
 [ext_resource type="PackedScene" uid="uid://c8k732tosm3hi" path="res://src/scenes/rock2/rock_2.tscn" id="10_dus66"]
 [ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="11_uim12"]
+[ext_resource type="AudioStream" uid="uid://bwgo5samjbs1o" path="res://assets/sfx/Dead5.mp3" id="11_up7rj"]
+[ext_resource type="AudioStream" uid="uid://c1gkb4130cjt1" path="res://assets/sfx/Dead6.mp3" id="12_c8rdg"]
 [ext_resource type="PackedScene" uid="uid://dc12g1frjraup" path="res://src/scenes/rock4/rock_4.tscn" id="12_lnc0u"]
 [ext_resource type="PackedScene" uid="uid://d0wfoh36p2b2h" path="res://src/scenes/hud/hud.tscn" id="13_mgxwt"]
 [ext_resource type="Script" path="res://src/scenes/level_0/player_camera.gd" id="14_6rwiu"]
@@ -19,6 +25,15 @@
 [ext_resource type="AudioStream" uid="uid://dpllkqc6femxn" path="res://assets/music/Level3.mp3" id="16_wgg3w"]
 [ext_resource type="AudioStream" uid="uid://csquwewdfvr5b" path="res://assets/music/Level4.mp3" id="17_yyx24"]
 [ext_resource type="AudioStream" uid="uid://igt8ywmqjsot" path="res://assets/music/Level5.mp3" id="18_gsa14"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5ixg7"]
+streams_count = 6
+stream_0/stream = ExtResource("7_fgmpi")
+stream_1/stream = ExtResource("8_txl6n")
+stream_2/stream = ExtResource("9_k1gu3")
+stream_3/stream = ExtResource("10_aybh7")
+stream_4/stream = ExtResource("11_up7rj")
+stream_5/stream = ExtResource("12_c8rdg")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fid64"]
 radius = 552.58
@@ -84,6 +99,9 @@ ui_indicators_parent = NodePath("../../../UiIndicatorsParent")
 position = Vector2(4, -105)
 polygon = PackedVector2Array(-511, -3040, -511, -3546, 2803, -3553, 2806, -3059)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ravines/RavineTop/SheepDeathArea"]
+stream = SubResource("AudioStreamRandomizer_5ixg7")
+
 [node name="RavineLeft" type="Sprite2D" parent="Ravines"]
 position = Vector2(395, 3052)
 texture = ExtResource("3_6c253")
@@ -104,6 +122,9 @@ ui_indicators_parent = NodePath("../../../UiIndicatorsParent")
 position = Vector2(-106, 0)
 polygon = PackedVector2Array(-395, -3052, -196, -3052, -196, -2745, -119, -2697, -95, -2608, -188, -2362, -124, -2240, 37, -2091, 138, -1833, 136, -1695, 75, -1189, -86, -1086, -133, -922, -108, -648, 31, -247, 169, -181, 153, -80, 325, 287, 334, 473, 281, 689, 284, 967, 272, 1372, 183, 1652, 85, 1881, 31, 2139, -173, 2550, -127, 2809, -130, 3053, -393, 3052)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ravines/RavineLeft/SheepDeathArea"]
+stream = SubResource("AudioStreamRandomizer_5ixg7")
+
 [node name="RavineRight" type="Sprite2D" parent="Ravines"]
 position = Vector2(2733, 3051)
 texture = ExtResource("6_qaimy")
@@ -122,6 +143,9 @@ ui_indicators_parent = NodePath("../../../UiIndicatorsParent")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ravines/RavineRight/SheepDeathArea"]
 position = Vector2(63, 0)
 polygon = PackedVector2Array(395, -3050, 27, -3051, 11, -2861, 69, -2663, 70, -1969, 260, -1471, 95, -1224, 162, -910, 76, -673, 62, -497, 15, -348, -32, -290, -16, -251, 55, -221, 175, -75, 179, 124, 150, 75, 131, 229, 67, 396, 45, 587, -6, 742, -40, 783, -26, 827, 35, 850, 124, 949, 133, 1114, 33, 1155, 17, 1220, 12, 1309, -61, 1497, -76, 1668, -129, 1844, -182, 1903, -157, 1931, -91, 1956, 28, 2101, 109, 2288, 192, 2373, 132, 2582, 104, 2955, 66, 3053, 395, 3053)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Ravines/RavineRight/SheepDeathArea"]
+stream = SubResource("AudioStreamRandomizer_5ixg7")
 
 [node name="Win Area" parent="." node_paths=PackedStringArray("ui_indicators_parent") instance=ExtResource("7_yeelv")]
 position = Vector2(1577, 5900)
