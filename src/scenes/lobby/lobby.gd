@@ -14,7 +14,7 @@ const MAX_PLAYERS = 10
 @onready var status_fail: Label = $StatusFail
 
 var players = {}
-var player_info = {"name": "Name"}
+var player_info = {"playing": false}
 var players_loaded = 0
 var server_seed = 0
 
@@ -63,6 +63,9 @@ func load_game():
 # Every peer will call this when they have loaded the game scene.
 @rpc("any_peer", "reliable")
 func player_loaded():
+	var player_id = multiplayer.get_remote_sender_id()
+	players[player_id]["playing"] = true
+	
 	players_loaded += 1
 	print("loaded " + str(players_loaded) + " out of " + str(players.size()))
 	if players_loaded == players.size():
@@ -75,6 +78,9 @@ func player_loaded():
 # Callback from SceneTree.
 func _player_connected(_id: int) -> void:
 	if multiplayer.is_server():
+		if _is_game_started():
+			handle_game_already_in_progress.rpc_id(_id)
+		
 		set_client_seed.rpc_id(_id, server_seed)
 	
 	if _id == 1 or multiplayer.is_server():
@@ -82,6 +88,13 @@ func _player_connected(_id: int) -> void:
 	
 	print("Registring " + str(_id))
 	_register_player.rpc_id(_id, player_info)
+
+@rpc("reliable")
+func handle_game_already_in_progress():
+	multiplayer.set_multiplayer_peer(null)
+	# TODO(mlazowik): auto retry?
+	play_button.disabled = true
+	_set_status("Game already in progress. Try closing the program and opening it later, or play in local mode.", false)
 
 @rpc("reliable")
 func set_client_seed(server_seed: int):
@@ -96,12 +109,14 @@ func _register_player(new_player_info):
 	# player_connected.emit(new_player_id, new_player_info)	
 
 func _player_disconnected(_id: int) -> void:
+	var playing = _id == 1 or players[_id]["playing"]
+	
 	players.erase(_id)
 	
 	if not multiplayer.is_server():
 		_set_status(str(players.size()) + " players ready", true)
 		
-	if not _is_game_started():
+	if not _is_game_started() or not playing:
 		return
 	
 	if _id == 1:
@@ -137,17 +152,19 @@ func _end_game(with_error: String = "") -> void:
 	# TODO(mlazowik): better end handling
 	get_tree().quit()
 	
-	# print(get_tree().get_root().get_tree_string())
-	if _is_game_started:
-		# Erase immediately, otherwise network might show
-		# errors (this is why we connected deferred above).
-		get_node(^"/root/Main").free()
-		show()
-
-	multiplayer.set_multiplayer_peer(null)  # Remove peer.
-	play_button.set_disabled(false)
-
-	_set_status(with_error, false)
+	return
+	
+	## print(get_tree().get_root().get_tree_string())
+	#if _is_game_started:
+		## Erase immediately, otherwise network might show
+		## errors (this is why we connected deferred above).
+		#get_node(^"/root/Main").free()
+		#show()
+#
+	#multiplayer.set_multiplayer_peer(null)  # Remove peer.
+	#play_button.set_disabled(false)
+#
+	#_set_status(with_error, false)
 
 
 func _is_game_started() -> bool:
