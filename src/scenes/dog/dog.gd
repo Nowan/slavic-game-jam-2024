@@ -82,7 +82,7 @@ func _physics_process(delta):
 		_bark_cone_area.monitoring = false
 		_bark_cone_area.monitorable = false
 		_bark_pressed_time = 0
-		$AudioStreamPlayer2D.volume_db = bark_strength * 10
+		$AudioStreamPlayer2D.volume_db = bark_strength * 15
 		$AudioStreamPlayer2D.play()
 		print(bark_strength)
 		

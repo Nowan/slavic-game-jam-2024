@@ -23,9 +23,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(str(currentSheepsInWinArea) + " " + str(deadSheeps) + " " 
-	+ str(SHEEPS_INITIAL_NUMBER) + " " + str(currentPlayersInWinArea) + " " 
-	+ str(deadPlayers) + " " + str(INITIAL_PLAYER_NUMBER))
+	pass
+	#print(str(currentSheepsInWinArea) + " " + str(deadSheeps) + " " 
+	#+ str(SHEEPS_INITIAL_NUMBER) + " " + str(currentPlayersInWinArea) + " " 
+	#+ str(deadPlayers) + " " + str(INITIAL_PLAYER_NUMBER))
 
 func _on_body_entered(body: Node2D) -> void:
 	if (body is Dog):
@@ -36,11 +37,13 @@ func _on_body_entered(body: Node2D) -> void:
 		sheep.set_collision_mask_value(6, true)
 		sheep.set_collision_layer_value(6, true)
 		_show_win_indicator_above_body(sheep)
+		$SheepEnteredSoundPlayer.play()
 		
 	if (currentSheepsInWinArea + deadSheeps == SHEEPS_INITIAL_NUMBER 
 	#&& currentPlayersInWinArea + deadPlayers == INITIAL_PLAYER_NUMBER
 	):
 		currentLevel += 1
+		$WinSoundPlayer.play()
 		get_tree().change_scene_to_file("res://src/scenes/level_" + str(currentLevel) + "/level_" + str(currentLevel) + ".tscn")
 		emit_signal("level_changed", get_parent().get_node("ParallaxBackground/ParallaxLayer/TextureRect"))
 

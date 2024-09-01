@@ -18,6 +18,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if (body.is_in_group("sheep")):
 		body.queue_free()
 		WinArea.deadSheeps += 1
+		$DeathSfxPlayer.play()
 		
 	if (WinArea.deadPlayers == WinArea.INITIAL_PLAYER_NUMBER):
 		get_tree().quit()

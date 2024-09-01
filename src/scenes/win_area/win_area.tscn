@@ -1,10 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwfsvlmdytkq4"]
+[gd_scene load_steps=10 format=3 uid="uid://dwfsvlmdytkq4"]
 
 [ext_resource type="Script" path="res://src/scenes/win_area/win_area.gd" id="1_7kr7e"]
 [ext_resource type="PackedScene" path="res://src/scenes/win_area/SheepWinIndicator.tscn" id="2_vk0t7"]
+[ext_resource type="AudioStream" uid="uid://cxncxn28lxr0o" path="res://assets/sfx/Win.mp3" id="3_i2b3f"]
+[ext_resource type="AudioStream" uid="uid://dt64sdu5x86gg" path="res://assets/sfx/Win1.mp3" id="4_or0d1"]
+[ext_resource type="AudioStream" uid="uid://bp0snpuy3gbfe" path="res://assets/sfx/Win2.mp3" id="5_bbwt3"]
+[ext_resource type="AudioStream" uid="uid://cvbwqmnjfhsht" path="res://assets/sfx/Win3.mp3" id="6_fshbc"]
+[ext_resource type="AudioStream" uid="uid://cuvjrxcfq1fe6" path="res://assets/sfx/Win4Wee.mp3" id="7_aje80"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vk7e"]
 size = Vector2(2629, 2376)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6j3cb"]
+streams_count = 4
+stream_0/stream = ExtResource("4_or0d1")
+stream_1/stream = ExtResource("5_bbwt3")
+stream_2/stream = ExtResource("6_fshbc")
+stream_3/stream = ExtResource("7_aje80")
 
 [node name="Win Area" type="Area2D"]
 collision_layer = 0
@@ -17,6 +29,12 @@ shape = SubResource("RectangleShape2D_4vk7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4.43827, 2.33745)
+
+[node name="WinSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_i2b3f")
+
+[node name="SheepEnteredSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_6j3cb")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
