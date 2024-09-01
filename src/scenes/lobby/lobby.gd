@@ -9,6 +9,7 @@ const MAX_PLAYERS = 10
 
 @onready var status_text: LineEdit = $Status
 @onready var play_button: Button = $PlayButton
+@onready var local_button: Button = $LocalButton
 @onready var status_ok: Label = $StatusOk
 @onready var status_fail: Label = $StatusFail
 
@@ -53,6 +54,9 @@ func load_game():
 	get_tree().get_root().add_child(main)
 	hide()
 	
+	if not multiplayer.has_multiplayer_peer():
+		return
+	
 	if not multiplayer.is_server():
 		player_loaded.rpc_id(1)
 	
@@ -89,10 +93,16 @@ func _register_player(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info
 	_set_status(str(players.size()) + " players ready", true)
-	# player_connected.emit(new_player_id, new_player_info)
+	# player_connected.emit(new_player_id, new_player_info)	
 
 func _player_disconnected(_id: int) -> void:
 	players.erase(_id)
+	
+	if not multiplayer.is_server():
+		_set_status(str(players.size()) + " players ready", true)
+		
+	if not _is_game_started():
+		return
 	
 	if _id == 1:
 		_end_game("Server disconnected.")
@@ -128,7 +138,7 @@ func _end_game(with_error: String = "") -> void:
 	get_tree().quit()
 	
 	# print(get_tree().get_root().get_tree_string())
-	if has_node("/root/Main"):
+	if _is_game_started:
 		# Erase immediately, otherwise network might show
 		# errors (this is why we connected deferred above).
 		get_node(^"/root/Main").free()
@@ -139,6 +149,9 @@ func _end_game(with_error: String = "") -> void:
 
 	_set_status(with_error, false)
 
+
+func _is_game_started() -> bool:
+	return has_node("/root/Main")
 
 func _set_status(text: String, is_ok: bool) -> void:
 	# Simple way to show status.
@@ -185,4 +198,8 @@ func load_game_all_clients():
 	if multiplayer.is_server():
 		return
 	
+	load_game()
+
+func _on_local_join_pressed():
+	multiplayer.set_multiplayer_peer(null)
 	load_game()

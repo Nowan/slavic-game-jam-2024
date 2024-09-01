@@ -31,6 +31,35 @@ func _dash_pressed():
 	dash_pressed = true
 
 func _ready() -> void:
+	if not multiplayer.has_multiplayer_peer():
+		var dog = get_parent()
+		
+		if dog.name == "0":
+			move_right = "move_right_player1"
+			move_left = "move_left_player1"
+			move_up = "move_up_player1"
+			move_down = "move_down_player1"
+			use_bark = "bark_player1"
+			use_dash = "dash_player1"
+		
+		if dog.name == "1":
+			move_right = "move_right_player2"
+			move_left = "move_left_player2"
+			move_up = "move_up_player2"
+			move_down = "move_down_player2"
+			use_bark = "bark_player2"
+			use_dash = "dash_player2"
+			
+		if dog.name == "2":
+			move_right = "move_right_player3"
+			move_left = "move_left_player3"
+			move_up = "move_up_player3"
+			move_down = "move_down_player3"
+			use_bark = "bark_player3"
+			use_dash = "dash_player3"
+		
+		return
+	
 	# Only process for the local player.
 	# Both frame and physics, in case someone decides to switch where the
 	# input is handled.
@@ -48,10 +77,19 @@ func _physics_process(delta: float) -> void:
 	barking = Input.is_action_pressed(use_bark)
 	
 	if Input.is_action_just_pressed(use_bark):
-		_bark_pressed.rpc()
+		if not multiplayer.has_multiplayer_peer():
+			_bark_pressed()
+		else:
+			_bark_pressed.rpc()
 	
 	if Input.is_action_just_released(use_bark):
-		_bark_released.rpc()
+		if not multiplayer.has_multiplayer_peer():
+			_bark_released()
+		else:
+			_bark_released.rpc()
 	
 	if Input.is_action_just_pressed(use_dash):
-		_dash_pressed.rpc()
+		if not multiplayer.has_multiplayer_peer():
+			_dash_pressed()
+		else:
+			_dash_pressed.rpc()

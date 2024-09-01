@@ -9,6 +9,12 @@ func _ready() -> void:
 	# if needed
 	# Engine.set_physics_ticks_per_second(10)
 		
+	if not multiplayer.has_multiplayer_peer():
+		add_local_player(0)
+		add_local_player(1)
+		add_local_player(2)
+		return
+		
 	if not multiplayer.is_server():
 		return
 		
@@ -24,6 +30,12 @@ func _ready() -> void:
 func add_player(id: int, index: int):
 	var dog = preload("res://src/scenes/dog/Dog.tscn").instantiate()
 	dog.player = id
+	dog.position = FIRST_DOG_INITAL_POSITION + index * DOG_INITIAL_POSITION_OFFSET
+	dog.name = str(index)
+	$Players.add_child(dog, true)
+	
+func add_local_player(index: int):
+	var dog = preload("res://src/scenes/dog/Dog.tscn").instantiate()
 	dog.position = FIRST_DOG_INITAL_POSITION + index * DOG_INITIAL_POSITION_OFFSET
 	dog.name = str(index)
 	$Players.add_child(dog, true)
