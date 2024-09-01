@@ -55,6 +55,7 @@ move_right={
 2d_physics/layer_3="anchors"
 2d_physics/layer_4="dogs"
 2d_physics/layer_5="sheep"
+2d_physics/layer_6="winning_sheep"
 2d_physics/size/mode=0
 2d_physics/size/viewport_height=2000
 2d_physics/size/viewport_width=2000

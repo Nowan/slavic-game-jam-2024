@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=26 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main_scene.gd" id="1_j3gyg"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
@@ -38,6 +38,9 @@ stream_2/stream = ExtResource("14_e1txp")
 stream_3/stream = ExtResource("15_sf3v4")
 stream_4/stream = ExtResource("16_jt61n")
 stream_5/stream = ExtResource("17_h4j5x")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_306cr"]
+size = Vector2(2576, 327)
 
 [node name="Main" type="Node2D" groups=["players"]]
 script = ExtResource("1_j3gyg")
@@ -192,6 +195,17 @@ _spawnable_scenes = PackedStringArray("res://src/scenes/dog/Dog.tscn")
 spawn_path = NodePath("../Players")
 
 [node name="Players" type="Node2D" parent="."]
+
+[node name="WinningSheepConstraints" type="StaticBody2D" parent="."]
+collision_layer = 32
+collision_mask = 33
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinningSheepConstraints"]
+position = Vector2(1617, 4523)
+shape = SubResource("RectangleShape2D_306cr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WinningSheepConstraints"]
+polygon = PackedVector2Array(-208, 4699, 577, 4696, 362, 6773, 2593, 6779, 2796, 6775, 2589, 4689, 3661, 4689, 3665, 7910, -647, 7923, -713, 4686)
 
 [connection signal="body_entered" from="Ravines/RavineTop/SheepDeathArea" to="Ravines/RavineTop/SheepDeathArea" method="_on_body_entered"]
 [connection signal="body_entered" from="Ravines/RavineLeft/SheepDeathArea" to="Ravines/RavineLeft/SheepDeathArea" method="_on_body_entered"]
