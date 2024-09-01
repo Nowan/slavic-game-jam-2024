@@ -10,9 +10,17 @@ func _ready() -> void:
 	# Engine.set_physics_ticks_per_second(10)
 		
 	if not multiplayer.has_multiplayer_peer():
+		# keyboard
 		add_local_player(0)
-		add_local_player(1)
-		#add_local_player(2)
+		
+		for controller_id in Input.get_connected_joypads():
+			if controller_id == 0:
+				# first controller is an alternative to keyboard
+				continue
+			
+			print(controller_id)
+			add_local_player(controller_id)
+		
 		return
 		
 	if not multiplayer.is_server():
