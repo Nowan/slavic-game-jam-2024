@@ -13,6 +13,8 @@ static var deadSheeps := 0
 static var currentPlayersInWinArea := 0
 static var currentSheepsInWinArea := 0
 
+static var currentLevel := 0;
+
 signal level_changed(level: TextureRect)
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +23,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	print(str(currentSheepsInWinArea) + " " + str(deadSheeps) + " " 
+	+ str(SHEEPS_INITIAL_NUMBER) + " " + str(currentPlayersInWinArea) + " " 
+	+ str(deadPlayers) + " " + str(INITIAL_PLAYER_NUMBER))
 
 func _on_body_entered(body: Node2D) -> void:
 	if (body is Dog):
@@ -33,7 +37,9 @@ func _on_body_entered(body: Node2D) -> void:
 		sheep.set_collision_layer_value(6, true)
 		_show_win_indicator_above_body(sheep)
 		
-	if (currentSheepsInWinArea + deadSheeps == SHEEPS_INITIAL_NUMBER && currentPlayersInWinArea + deadPlayers == INITIAL_PLAYER_NUMBER):
+	if (currentSheepsInWinArea + deadSheeps == SHEEPS_INITIAL_NUMBER 
+	#&& currentPlayersInWinArea + deadPlayers == INITIAL_PLAYER_NUMBER
+	):
 		get_tree().change_scene_to_file("res://src/scenes/second/second.tscn")
 		emit_signal("level_changed", get_parent().get_node("ParallaxBackground/ParallaxLayer/TextureRect"))
 

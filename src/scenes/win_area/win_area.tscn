@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://w1a8o7373ynb" path="res://src/scenes/win_area/SheepWinIndicator.tscn" id="2_vk0t7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vk7e"]
-size = Vector2(1262, 1126)
+size = Vector2(2629, 2376)
 
 [node name="Win Area" type="Area2D"]
 collision_layer = 0
@@ -12,6 +12,7 @@ script = ExtResource("1_7kr7e")
 WinIndicator = ExtResource("2_vk0t7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(683.5, 625)
 shape = SubResource("RectangleShape2D_4vk7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
