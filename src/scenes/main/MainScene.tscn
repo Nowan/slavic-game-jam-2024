@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=25 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main_scene.gd" id="1_j3gyg"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
@@ -20,6 +20,15 @@
 [ext_resource type="AudioStream" uid="uid://bsv2x8me26u6f" path="res://assets/music/SheepSongLevel6Loop.mp3" id="17_h4j5x"]
 [ext_resource type="Texture2D" uid="uid://cs5swffsnhmyt" path="res://assets/Map/big_ravine_1.png" id="19_6vayv"]
 [ext_resource type="Texture2D" uid="uid://dqtn0t1515yi8" path="res://assets/Map/big_ravine_2.png" id="20_5c4ad"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fid64"]
+radius = 552.58
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1x4un"]
+radius = 609.099
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4sey"]
+radius = 337.334
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8pgxy"]
 streams_count = 6
@@ -119,6 +128,26 @@ position = Vector2(1577, 5900)
 scale = Vector2(4.23239, 2.15131)
 
 [node name="Flock" parent="." instance=ExtResource("3_7h8jx")]
+
+[node name="SpawnArea1" type="Area2D" parent="Flock"]
+position = Vector2(1198, 741)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flock/SpawnArea1"]
+position = Vector2(45, -37)
+shape = SubResource("CircleShape2D_fid64")
+
+[node name="SpawnArea2" type="Area2D" parent="Flock"]
+position = Vector2(1756, 1837)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flock/SpawnArea2"]
+position = Vector2(224, 81)
+shape = SubResource("CircleShape2D_1x4un")
+
+[node name="SpawnArea3" type="Area2D" parent="Flock"]
+position = Vector2(2297, 762)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flock/SpawnArea3"]
+shape = SubResource("CircleShape2D_g4sey")
 
 [node name="Rock1" parent="." instance=ExtResource("4_ods2q")]
 position = Vector2(473, 560)
