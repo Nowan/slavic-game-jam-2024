@@ -47,13 +47,17 @@ func set_status(status: FlockTypes.BoidStatus):
 	_status = status
 	match _status:
 		FlockTypes.BoidStatus.IDLE:
+			$AnimationPlayer.play("idle")
 			_barks_fleeting_from.clear()
 			_dogs_fleeing_from.clear()
 			_wait_and_graze()
 		FlockTypes.BoidStatus.GRAZING:
+			$AnimationPlayer.play("move")
 			_barks_fleeting_from.clear()
 			_dogs_fleeing_from.clear()
 			_wait_and_stand()
+		FlockTypes.BoidStatus.FLEEING:
+			$AnimationPlayer.play("move")
 	# Uncomment to have sheep setting status of all other sheep in a flock recursively
 	# for f in _flock:
 		# if (f != self && f.get_status() != status):
@@ -65,7 +69,7 @@ func get_status():
 func flee_from_bark(dog: Dog, bark_strength: float):
 	$AudioStreamPlayer2D.play()
 	_barks_fleeting_from.append([dog.position, bark_strength, 0])
-	set_status(FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK)
+	set_status(FlockTypes.BoidStatus.FLEEING)
 
 func _physics_process(delta):
 	match _status:
@@ -73,9 +77,7 @@ func _physics_process(delta):
 			_physics_process_idle(delta)
 		FlockTypes.BoidStatus.GRAZING:
 			_physics_process_grazing(delta)
-		FlockTypes.BoidStatus.FLEEING_FROM_DOG:
-			_physics_process_fleeing(delta)
-		FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK:
+		FlockTypes.BoidStatus.FLEEING:
 			_physics_process_fleeing(delta)
 
 func _physics_process_idle(delta):
@@ -96,7 +98,6 @@ func _physics_process_grazing(delta):
 	
 	if _velocity.length() > 1:
 		look_at(position + _velocity)
-		rotate(-PI * 0.5)
 
 	#DebugDraw2d.line_vector(position, _velocity);
 	
@@ -142,9 +143,8 @@ func _physics_process_fleeing(delta: float):
 	_velocity = (_velocity + acceleration).limit_length(max_speed)
 	
 	look_at(position + _velocity)
-	rotate(-PI * 0.5)
 
-	#DebugDraw2d.line_vector(position, _velocity);
+	DebugDraw2d.line_vector(position, _velocity);
 	
 	set_velocity(_velocity)
 	move_and_slide()
@@ -187,8 +187,7 @@ func get_random_target():
 func _on_flock_view_body_entered(body: Node2D) -> void:
 	if body.is_in_group("dog"):
 		_dogs_fleeing_from.append(body)
-		if (_status != FlockTypes.BoidStatus.FLEEING_FROM_DOG_BARK):
-			set_status(FlockTypes.BoidStatus.FLEEING_FROM_DOG)
+		set_status(FlockTypes.BoidStatus.FLEEING)
 		_fleeing_stop_timer.stop()
 	elif body.is_in_group("sheep") && self != body:
 		_flock.append(body)

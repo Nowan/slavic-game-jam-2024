@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvillbq0e0oqg"]
+[gd_scene load_steps=14 format=3 uid="uid://bvillbq0e0oqg"]
 
 [ext_resource type="Script" path="res://src/scenes/flock/Boid.gd" id="1_vrejd"]
 [ext_resource type="Texture2D" uid="uid://b1ctic1gjet45" path="res://assets/Sheep/sheep.png" id="2_m7w4x"]
@@ -22,14 +22,76 @@ stream_0/stream = ExtResource("4_rmbis")
 stream_1/stream = ExtResource("5_omlth")
 stream_2/stream = ExtResource("6_h2qak")
 
+[sub_resource type="Animation" id="Animation_a3kj5"]
+resource_name = "idle"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyParts:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1.03333, 1.56667),
+"transitions": PackedFloat32Array(2, 1, 1, 2),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0872665, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_0pm61"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyParts:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodyParts:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uhgtv"]
+resource_name = "move"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyParts:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(0.535887, 2.82842, -0.25),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hsf4u"]
+_data = {
+"RESET": SubResource("Animation_0pm61"),
+"idle": SubResource("Animation_a3kj5"),
+"move": SubResource("Animation_uhgtv")
+}
+
 [node name="Sheep" type="CharacterBody2D" groups=["sheep"]]
 collision_layer = 17
 script = ExtResource("1_vrejd")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, 10)
-scale = Vector2(0.251141, 0.251711)
-texture = ExtResource("2_m7w4x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.19361)
@@ -50,6 +112,21 @@ script = ExtResource("3_nljcv")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_7lqkc")
 volume_db = -15.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hsf4u")
+}
+
+[node name="BodyParts" type="Node2D" parent="."]
+
+[node name="Rotation" type="Node2D" parent="BodyParts"]
+rotation = -1.5708
+
+[node name="Sprite" type="Sprite2D" parent="BodyParts/Rotation"]
+position = Vector2(0, 10)
+scale = Vector2(0.251141, 0.251711)
+texture = ExtResource("2_m7w4x")
 
 [connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
 [connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]
