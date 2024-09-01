@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bvillbq0e0oqg"]
+[gd_scene load_steps=26 format=3 uid="uid://bvillbq0e0oqg"]
 
 [ext_resource type="Script" path="res://src/scenes/flock/Boid.gd" id="1_vrejd"]
 [ext_resource type="Texture2D" uid="uid://b1ctic1gjet45" path="res://assets/Sheep/sheep.png" id="2_m7w4x"]
@@ -11,6 +11,10 @@
 [ext_resource type="AudioStream" uid="uid://cc4b4ncnhsp60" path="res://assets/sfx/Normal3.mp3" id="8_bkq5e"]
 [ext_resource type="AudioStream" uid="uid://lv5lnobmguws" path="res://assets/sfx/Normal4.mp3" id="9_3d76c"]
 [ext_resource type="AudioStream" uid="uid://biiekc22it76d" path="res://assets/sfx/NormalHeyy.mp3" id="10_iys8d"]
+[ext_resource type="AudioStream" uid="uid://dt64sdu5x86gg" path="res://assets/sfx/Win1.mp3" id="12_hjoxj"]
+[ext_resource type="AudioStream" uid="uid://bp0snpuy3gbfe" path="res://assets/sfx/Win2.mp3" id="13_087do"]
+[ext_resource type="AudioStream" uid="uid://cvbwqmnjfhsht" path="res://assets/sfx/Win3.mp3" id="14_oeg6v"]
+[ext_resource type="AudioStream" uid="uid://cuvjrxcfq1fe6" path="res://assets/sfx/Win4Wee.mp3" id="15_1tyoy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xtgww"]
 radius = 47.0
@@ -169,6 +173,13 @@ _data = {
 "move": SubResource("Animation_uhgtv")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vsmrk"]
+streams_count = 4
+stream_0/stream = ExtResource("12_hjoxj")
+stream_1/stream = ExtResource("13_087do")
+stream_2/stream = ExtResource("14_oeg6v")
+stream_3/stream = ExtResource("15_1tyoy")
+
 [node name="Sheep" type="CharacterBody2D" groups=["sheep"]]
 collision_layer = 25
 script = ExtResource("1_vrejd")
@@ -209,6 +220,9 @@ rotation = -1.5708
 position = Vector2(0, 10)
 scale = Vector2(0.251141, 0.251711)
 texture = ExtResource("2_m7w4x")
+
+[node name="SheepEnteredSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_vsmrk")
 
 [connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
 [connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]

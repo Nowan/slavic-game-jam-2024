@@ -38,7 +38,7 @@ func _on_body_entered(body: Node2D) -> void:
 		sheep.set_collision_layer_value(6, true)
 		_show_win_indicator_above_body(body)
 		
-		$SheepEnteredSoundPlayer.play()
+		sheep.playWin()
 		
 	if (currentSheepsInWinArea + deadSheeps == SHEEPS_INITIAL_NUMBER 
 	#&& currentPlayersInWinArea + deadPlayers == INITIAL_PLAYER_NUMBER
