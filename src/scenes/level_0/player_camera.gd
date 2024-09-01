@@ -10,7 +10,10 @@ extends Camera2D
 @onready var screen_size = get_viewport_rect().size
 
 func _ready() -> void:
+	var bg = get_parent().get_node("Grass").get_rect()
 	zoom = Vector2.ONE * max_zoom
+	limit_right = bg.size.x
+	limit_bottom = bg.size.y
 
 func _process(delta):
 	var players = _get_players()
