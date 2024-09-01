@@ -8,7 +8,7 @@ const DEFAULT_PORT = 8910
 const MAX_PLAYERS = 10
 
 @onready var status_text: LineEdit = $Status
-@onready var play_button: Button = $PlayButton
+@onready var online_button: Button = $OnlineButton
 @onready var local_button: Button = $LocalButton
 @onready var status_ok: Label = $StatusOk
 @onready var status_fail: Label = $StatusFail
@@ -33,8 +33,6 @@ func _ready() -> void:
 		seed(server_seed)
 		
 		_on_host_pressed()
-	else:
-		_connect_to_server()
 		
 	# Connect all the callbacks related to networking.
 	multiplayer.peer_connected.connect(_player_connected)
@@ -93,7 +91,7 @@ func _player_connected(_id: int) -> void:
 func handle_game_already_in_progress():
 	multiplayer.set_multiplayer_peer(null)
 	# TODO(mlazowik): auto retry?
-	play_button.disabled = true
+	online_button.disabled = true
 	_set_status("Game already in progress. Try closing the program and opening it later, or play in local mode.", false)
 
 @rpc("reliable")
@@ -105,6 +103,7 @@ func set_client_seed(server_seed: int):
 func _register_player(new_player_info):
 	var new_player_id = multiplayer.get_remote_sender_id()
 	players[new_player_id] = new_player_info
+	online_button.disabled = false
 	_set_status(str(players.size()) + " players ready", true)
 	# player_connected.emit(new_player_id, new_player_info)	
 
@@ -129,16 +128,20 @@ func _connected_ok() -> void:
 	var peer_id = multiplayer.get_unique_id()
 	print("connected ok, I am " + str(peer_id))
 	players[peer_id] = player_info
+	_set_status("Waiting for more players", true)
 	_register_player.rpc_id(1, player_info)
+	# TODO(mlazowik): uncomment before release?
+	# online_button.disabled = true
+	online_button.text = "Play"
 	# load_game()
-	# player_connected.emit(peer_id, player_info)
+	# player_connected.emit(peer_id, player_info) 
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail() -> void:
 	_set_status("Couldn't connect.", false)
 
 	multiplayer.set_multiplayer_peer(null)  # Remove peer.
-	play_button.set_disabled(false)
+	online_button.set_disabled(false)
 
 
 func _server_disconnected() -> void:
@@ -208,7 +211,13 @@ func _connect_to_server():
 #endregion
 
 func _on_join_pressed():
-	load_game_all_clients.rpc()
+	# XXX(mlazowik): CURSED CONDITIONAL LOGIC, DO NOT EDIT BUTTON TEXT
+	# (or edit and also edit the ifs here and the logic that updates the text
+	if online_button.text == "Online":
+		_connect_to_server()
+		
+	if online_button.text == "Play":
+		load_game_all_clients.rpc()
 	
 @rpc("reliable", "call_local", "any_peer")
 func load_game_all_clients():
