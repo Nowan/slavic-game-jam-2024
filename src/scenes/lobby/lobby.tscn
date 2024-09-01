@@ -106,6 +106,7 @@ size_flags_vertical = 0
 horizontal_alignment = 1
 
 [node name="LocalButton" type="Button" parent="LobbyPanel"]
+layout_mode = 0
 offset_left = 23.0
 offset_top = 77.0
 offset_right = 103.0
