@@ -30,7 +30,6 @@ var _fleeing_stop_timer: Timer
 var _grazing_timer: Timer
 
 func _ready():
-	randomize()
 	_fleeing_stop_timer = get_node("FleeingStopTimer")
 	_grazing_timer = get_node("GrazingTimer")
 	
@@ -181,7 +180,6 @@ func get_flock_status(flock: Array):
 
 
 func get_random_target():
-	randomize()
 	return Vector2(randf_range(0, _width), randf_range(0, _height))
 
 

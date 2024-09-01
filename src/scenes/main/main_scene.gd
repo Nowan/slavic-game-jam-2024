@@ -20,6 +20,7 @@ func _ready() -> void:
 		add_player(id, index)
 		index += 1
 
+
 func add_player(id: int, index: int):
 	var dog = preload("res://src/scenes/dog/Dog.tscn").instantiate()
 	dog.player = id

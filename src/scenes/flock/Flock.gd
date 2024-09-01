@@ -9,7 +9,6 @@ var _height = ProjectSettings.get_setting("display/window/size/viewport_height")
 func _ready():
 	var sheeps: Array[Sheep] = []
 	for _i in range(boids):
-		randomize()
 		var boid = Boid.instantiate()
 		
 		boid.position = Vector2(randf_range(500, 2300), randf_range(500, 2000))

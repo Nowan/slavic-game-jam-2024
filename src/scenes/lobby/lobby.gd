@@ -15,6 +15,7 @@ const MAX_PLAYERS = 10
 var players = {}
 var player_info = {"name": "Name"}
 var players_loaded = 0
+var server_seed = 0
 
 var peer: ENetMultiplayerPeer
 
@@ -26,6 +27,10 @@ func _ready() -> void:
 		# Using this check, you can start a dedicated server by running
 		# a Godot binary (editor or export template) with the `--headless`
 		# command-line argument.
+		
+		server_seed = randi()
+		seed(server_seed)
+		
 		_on_host_pressed()
 	else:
 		_connect_to_server()
@@ -65,11 +70,19 @@ func player_loaded():
 #region Network callbacks from SceneTree
 # Callback from SceneTree.
 func _player_connected(_id: int) -> void:
+	if multiplayer.is_server():
+		set_client_seed.rpc_id(_id, server_seed)
+	
 	if _id == 1 or multiplayer.is_server():
 		return
 	
 	print("Registring " + str(_id))
 	_register_player.rpc_id(_id, player_info)
+
+@rpc("reliable")
+func set_client_seed(server_seed: int):
+	print("Got seed from server: " + str(server_seed))
+	seed(server_seed)
 
 @rpc("any_peer", "reliable")
 func _register_player(new_player_info):
