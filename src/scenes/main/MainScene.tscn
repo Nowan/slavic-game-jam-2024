@@ -1,6 +1,5 @@
 [gd_scene load_steps=25 format=3 uid="uid://d3nfw6bamspff"]
 
-
 [ext_resource type="Script" path="res://src/scenes/main/main_scene.gd" id="1_j3gyg"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
 [ext_resource type="Script" path="res://src/scenes/sheep_death_zone/SheepDeathZone.gd" id="3_k38ll"]
