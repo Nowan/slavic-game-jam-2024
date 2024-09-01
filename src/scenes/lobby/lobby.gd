@@ -20,6 +20,7 @@ var players_loaded = 0
 
 var peer: ENetMultiplayerPeer
 
+# TODO(mlazowik): do not require server restart after each game
 func _ready() -> void:
 	if DisplayServer.get_name() == "headless":
 		# Run your server startup code here...
