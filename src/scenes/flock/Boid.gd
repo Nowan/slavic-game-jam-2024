@@ -18,10 +18,10 @@ var _width = ProjectSettings.get_setting("display/window/size/viewport_width")
 var _height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
 var _flock: Array[Sheep] = []
-@export var _graze_target: Vector2 = Vector2.INF
-@export var _velocity: Vector2
+var _graze_target: Vector2 = Vector2.INF
+var _velocity: Vector2
 
-@export var _status: FlockTypes.BoidStatus
+var _status: FlockTypes.BoidStatus
 
 var _dogs_fleeing_from: Array[Dog] = []
 var _barks_fleeting_from: Array = []
