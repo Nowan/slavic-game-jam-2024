@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ljg8b5p34ome"
-path="res://.godot/imported/placeholder.png-ee5d3b019288e6a7d73a3059c46e0e5c.ctex"
+uid="uid://bk0spaehs6br0"
+path="res://.godot/imported/legs2.png-3bfb5f599d2b5087e7a0ae7367fe4f5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Dog/placeholder.png"
-dest_files=["res://.godot/imported/placeholder.png-ee5d3b019288e6a7d73a3059c46e0e5c.ctex"]
+source_file="res://assets/Dog/legs2.png"
+dest_files=["res://.godot/imported/legs2.png-3bfb5f599d2b5087e7a0ae7367fe4f5a.ctex"]
 
 [params]
 

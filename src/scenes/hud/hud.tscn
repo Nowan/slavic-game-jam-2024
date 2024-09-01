@@ -9,40 +9,40 @@
 script = ExtResource("1_tt4ig")
 
 [node name="AliveSheeps" type="Label" parent="."]
-offset_left = 1497.0
-offset_top = 54.0
-offset_right = 1811.0
-offset_bottom = 197.0
+offset_left = 1418.0
+offset_top = 55.0
+offset_right = 1732.0
+offset_bottom = 198.0
 theme_override_font_sizes/font_size = 70
 horizontal_alignment = 2
 
 [node name="AliveSheepsSprite" type="Sprite2D" parent="."]
-position = Vector2(1913, 89)
+position = Vector2(1834, 90)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_tpmbw")
 
 [node name="WinSheeps" type="Label" parent="."]
-offset_left = 1560.0
-offset_top = 367.0
-offset_right = 1817.0
-offset_bottom = 496.0
+offset_left = 1481.0
+offset_top = 368.0
+offset_right = 1738.0
+offset_bottom = 497.0
 theme_override_font_sizes/font_size = 70
 horizontal_alignment = 2
 
 [node name="WinSheepsSprite" type="Sprite2D" parent="."]
-position = Vector2(1915, 406)
+position = Vector2(1836, 407)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_ebkrf")
 
 [node name="DeadShips" type="Label" parent="."]
-offset_left = 1654.0
-offset_top = 211.0
-offset_right = 1805.0
-offset_bottom = 338.0
+offset_left = 1575.0
+offset_top = 212.0
+offset_right = 1726.0
+offset_bottom = 339.0
 theme_override_font_sizes/font_size = 70
 horizontal_alignment = 2
 
 [node name="DeadSheepsSprite" type="Sprite2D" parent="."]
-position = Vector2(1913, 244)
+position = Vector2(1834, 245)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_4kouv")

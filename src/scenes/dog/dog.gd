@@ -27,39 +27,47 @@ var _bark_pressed_time: float = 0.0
 var _dash_ready: bool
 
 func _ready():
-	_bark_cone = get_node("Sprite2D/BarkCone")
-	_bark_cone_area = get_node("Sprite2D/BarkCone/BarkConeArea")
+	_bark_cone = get_node("Body/BarkCone")
+	_bark_cone_area = get_node("Body/BarkCone/BarkConeArea")
 	_bark_cone_area.monitoring = false
 	_bark_cone_area.monitorable = false
 	_dash_ready = true
 	add_to_group("players")
 	
-func rotate_sprite(angle) -> void:
-	$Sprite2D.rotation = angle
-	$DogHitbox.rotation = angle
+#func rotate_sprite(angle) -> void:
+	#$Sprite2D.rotation = angle
+	#$DogHitbox.rotation = angle
 
 func _physics_process(delta):
 	velocity = speed * input.direction
+
 	if input.direction != Vector2.ZERO:
-		rotate_sprite(velocity.angle() - PI / 2)
-	
+		$Body.rotation = velocity.angle() - PI / 2
+
 	move_and_slide()
+
+	if input.direction == Vector2.ZERO:
+		$AnimationPlayer.play("idle")
+		$AnimationPlayer.speed_scale = 1
+	else:
+		$AnimationPlayer.play("run")
+		$AnimationPlayer.speed_scale = 1 if $DashDuration.time_left == 0 else 2
 	
 	if input.bark_pressed:
 		_bark_cone_area.monitoring = true
 		_bark_cone_area.monitorable = true
-		
+
 	input.bark_pressed = false
-	
+
 	if input.dash_pressed:
 		if _dash_ready == true:
 			self.speed *= 2
 			$DashDuration.start()
 			$DashCooldown.start()
 			_dash_ready = false
-			
+
 	input.dash_pressed = false
-		
+
 	if input.barking:
 		_bark_pressed_time += delta
 	
