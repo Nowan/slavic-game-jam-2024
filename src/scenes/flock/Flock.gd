@@ -14,7 +14,7 @@ func _ready():
 		
 		boid.position = Vector2(randf_range(500, 2300), randf_range(500, 2000))
 		boid.rotation = randf_range(0, PI * 2)
-		add_child(boid)
+		add_child(boid, true)
 		sheeps.append(boid)
 	
 	for sheep in sheeps:

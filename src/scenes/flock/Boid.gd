@@ -40,7 +40,6 @@ func _ready():
 	set_status(FlockTypes.BoidStatus.IDLE)
 	_graze_target = get_random_target()
 	
-	print(str($MultiplayerSynchronizer.replication_config.get_properties()))
 	#mouse_follow_force = 0
 	#_velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * max_speed
 	#_mouse_target = get_random_target()

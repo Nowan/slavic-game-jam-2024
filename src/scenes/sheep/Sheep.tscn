@@ -24,19 +24,19 @@ stream_2/stream = ExtResource("6_h2qak")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ovoex"]
 properties/0/path = NodePath(".:position")
-properties/0/spawn = true
+properties/0/spawn = false
 properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
+properties/1/spawn = false
 properties/1/replication_mode = 1
 properties/2/path = NodePath(".:_velocity")
-properties/2/spawn = true
+properties/2/spawn = false
 properties/2/replication_mode = 1
 properties/3/path = NodePath(".:_graze_target")
-properties/3/spawn = true
+properties/3/spawn = false
 properties/3/replication_mode = 1
 properties/4/path = NodePath(".:_status")
-properties/4/spawn = true
+properties/4/spawn = false
 properties/4/replication_mode = 1
 
 [node name="Sheep" type="CharacterBody2D" groups=["sheep"]]
