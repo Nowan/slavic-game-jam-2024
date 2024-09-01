@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://d3nfw6bamspff"]
+[gd_scene load_steps=22 format=3 uid="uid://d3nfw6bamspff"]
 
 [ext_resource type="PackedScene" uid="uid://mwmynyrns760" path="res://src/scenes/dog/Dog.tscn" id="1_7h8kt"]
 [ext_resource type="PackedScene" uid="uid://cj714i0x5xo5e" path="res://src/scenes/flock/Flock.tscn" id="3_7h8jx"]
 [ext_resource type="Script" path="res://src/scenes/sheep_death_zone/SheepDeathZone.gd" id="3_k38ll"]
+[ext_resource type="PackedScene" uid="uid://hkwyik1xh0ca" path="res://src/scenes/sheep_death_zone/SheepDeathIndicator.tscn" id="4_fk0vj"]
 [ext_resource type="PackedScene" uid="uid://bfrr7ra767c2r" path="res://src/scenes/rock1/rock_1.tscn" id="4_ods2q"]
 [ext_resource type="PackedScene" uid="uid://c8k732tosm3hi" path="res://src/scenes/rock2/rock_2.tscn" id="5_o74at"]
 [ext_resource type="PackedScene" uid="uid://doyu0730pwqv4" path="res://src/scenes/rock3/rock_3.tscn" id="6_r3s50"]
@@ -64,8 +65,10 @@ collision_mask = 17
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineTop/Edge"]
 polygon = PackedVector2Array(-511, -3040, -511, -3546, 2803, -3553, 2806, -3059)
 
-[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineTop"]
+[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineTop" node_paths=PackedStringArray("ui_indicators_parent")]
 script = ExtResource("3_k38ll")
+DeathIndicator = ExtResource("4_fk0vj")
+ui_indicators_parent = NodePath("../../../UiIndicatorsParent")
 
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineTop/SheepDeathArea"]
 position = Vector2(4, -105)
@@ -82,8 +85,10 @@ collision_mask = 17
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineLeft/Edge"]
 polygon = PackedVector2Array(-395, -3052, -196, -3052, -196, -2745, -119, -2697, -95, -2608, -188, -2362, -124, -2240, 37, -2091, 138, -1833, 136, -1695, 75, -1189, -86, -1086, -133, -922, -108, -648, 31, -247, 169, -181, 153, -80, 325, 287, 334, 473, 281, 689, 284, 967, 272, 1372, 183, 1652, 85, 1881, 31, 2139, -173, 2550, -127, 2809, -130, 3053, -393, 3052)
 
-[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineLeft"]
+[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineLeft" node_paths=PackedStringArray("ui_indicators_parent")]
 script = ExtResource("3_k38ll")
+DeathIndicator = ExtResource("4_fk0vj")
+ui_indicators_parent = NodePath("../../../UiIndicatorsParent")
 
 [node name="Polygon2D" type="CollisionPolygon2D" parent="Ravines/RavineLeft/SheepDeathArea"]
 position = Vector2(-106, 0)
@@ -99,8 +104,10 @@ collision_layer = 8
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ravines/RavineRight/StaticBody2D"]
 polygon = PackedVector2Array(395, -3050, 27, -3051, 11, -2861, 69, -2663, 70, -1969, 260, -1471, 95, -1224, 162, -910, 76, -673, 62, -497, 15, -348, -32, -290, -16, -251, 55, -221, 175, -75, 179, 124, 150, 75, 131, 229, 67, 396, 45, 587, -6, 742, -40, 783, -26, 827, 35, 850, 124, 949, 133, 1114, 33, 1155, 17, 1220, 12, 1309, -61, 1497, -76, 1668, -129, 1844, -182, 1903, -157, 1931, -91, 1956, 28, 2101, 109, 2288, 192, 2373, 132, 2582, 104, 2955, 66, 3053, 395, 3053)
 
-[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineRight"]
+[node name="SheepDeathArea" type="Area2D" parent="Ravines/RavineRight" node_paths=PackedStringArray("ui_indicators_parent")]
 script = ExtResource("3_k38ll")
+DeathIndicator = ExtResource("4_fk0vj")
+ui_indicators_parent = NodePath("../../../UiIndicatorsParent")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ravines/RavineRight/SheepDeathArea"]
 position = Vector2(63, 0)
@@ -174,6 +181,8 @@ zoom_speed = 0.2
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_8pgxy")
 autoplay = true
+
+[node name="UiIndicatorsParent" type="Node2D" parent="."]
 
 [connection signal="body_entered" from="Ravines/RavineTop/SheepDeathArea" to="Ravines/RavineTop/SheepDeathArea" method="_on_body_entered"]
 [connection signal="body_entered" from="Ravines/RavineLeft/SheepDeathArea" to="Ravines/RavineLeft/SheepDeathArea" method="_on_body_entered"]
