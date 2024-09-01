@@ -165,4 +165,11 @@ func _connect_to_server():
 #endregion
 
 func _on_join_pressed():
+	load_game_all_clients.rpc()
+	
+@rpc("reliable", "call_local", "any_peer")
+func load_game_all_clients():
+	if multiplayer.is_server():
+		return
+	
 	load_game()
